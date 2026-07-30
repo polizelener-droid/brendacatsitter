@@ -53,17 +53,17 @@ export const HeaderNav: React.FC = () => {
             href="#"
             id="brand-logo-link"
             onClick={(e) => handleNavClick(e, '#')}
-            className="flex items-center gap-2.5 group"
+            className="flex items-center gap-2 sm:gap-2.5 group min-w-0"
           >
-            <div className="w-10 h-10 rounded-full bg-[#0E9F8F] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform border border-[#8FE0D8]">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full bg-[#0E9F8F] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform border border-[#8FE0D8]">
               <Cat className="w-5 h-5 text-white" />
             </div>
-            <div>
-              <span className="text-xl font-bold tracking-tight text-[#132E35] block leading-none font-display">
+            <div className="min-w-0">
+              <span className="text-lg sm:text-xl font-bold tracking-tight text-[#132E35] block leading-none font-display truncate">
                 Brenda <span className="text-[#0B8276] italic font-serif">Cat Sitter</span>
               </span>
               <span className="text-xs text-[#3B5259] font-medium flex items-center gap-1 mt-0.5">
-                <Heart className="w-3 h-3 text-[#0E9F8F] fill-[#0E9F8F]" /> Cuidado a Domicilio
+                <Heart className="w-3 h-3 text-[#0E9F8F] fill-[#0E9F8F] shrink-0" /> Cuidado a Domicilio
               </span>
             </div>
           </a>
@@ -100,7 +100,7 @@ export const HeaderNav: React.FC = () => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
-            className="lg:hidden p-2 rounded-xl text-[#132E35] bg-white border border-[#CCE7E5] hover:bg-[#E0F2F1] transition-colors shadow-2xs"
+            className="lg:hidden p-2 rounded-xl text-[#132E35] bg-white border border-[#CCE7E5] hover:bg-[#E0F2F1] transition-colors shadow-2xs shrink-0"
             aria-label="Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

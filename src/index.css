@@ -4,6 +4,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
+    overflow-x: hidden;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -16,6 +17,7 @@
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     background-color: #F2F9F8;
     color: #132E35;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, .font-display {

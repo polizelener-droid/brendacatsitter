@@ -8,7 +8,6 @@ import {
   Pause,
   Play,
   Heart,
-  Instagram,
 } from 'lucide-react';
 
 export const TestimonialsSection: React.FC = () => {
@@ -130,13 +129,13 @@ export const TestimonialsSection: React.FC = () => {
 
         {/* CAROUSEL VIEW */}
         <div
-          className="overflow-hidden py-2 -mx-2 px-2"
+          className="overflow-hidden py-2"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
           <div
-            className="flex transition-transform duration-500 ease-out gap-4"
+            className="flex transition-transform duration-500 ease-out"
             style={{
               transform: `translateX(-${currentIndex * (100 / cardsPerPage)}%)`,
             }}
@@ -144,7 +143,7 @@ export const TestimonialsSection: React.FC = () => {
             {TESTIMONIALS.map((item) => (
               <div
                 key={item.id}
-                className="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)] shrink-0 flex flex-col"
+                className="w-full sm:w-1/2 lg:w-1/3 shrink-0 flex flex-col px-2"
               >
                 <div className="bg-white p-6 rounded-2xl border border-[#CCE7E5] shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between h-full group">
                   
@@ -206,30 +205,6 @@ export const TestimonialsSection: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Pagination & Indicators */}
-        <div className="flex items-center justify-between mt-6 px-1">
-          <span className="text-xs font-medium text-[#3B5259]">
-            Reseñas {currentIndex + 1} - {Math.min(currentIndex + cardsPerPage, total)} de {total}
-          </span>
-
-          <div className="flex items-center gap-1.5">
-            {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                aria-label={`Ver página ${idx + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  currentIndex === idx ? 'w-6 bg-[#0E9F8F]' : 'w-2 bg-[#CCE7E5] hover:bg-[#B2DDD9]'
-                }`}
-              />
-            ))}
-          </div>
-
-          <span className="text-xs text-[#3B5259] flex items-center gap-1">
-            <Instagram className="w-3.5 h-3.5 text-[#0E9F8F]" /> Verificadas
-          </span>
         </div>
 
       </div>

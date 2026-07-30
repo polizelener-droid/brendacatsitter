@@ -37,10 +37,10 @@ export const CoverageSection: React.FC = () => {
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#132E35] bg-[#E0F2F1] hover:bg-[#D0EBE8] px-6 py-3 rounded-full transition-all border border-[#B2DDD9] shadow-2xs hover:scale-102"
+            className="inline-flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#132E35] bg-[#E0F2F1] hover:bg-[#D0EBE8] px-5 py-3 rounded-full transition-all border border-[#B2DDD9] shadow-2xs hover:scale-102 max-w-full"
           >
-            <MessageCircle className="w-4 h-4 text-[#0E9F8F]" />
-            <span>Consultar disponibilidad para mi zona por WhatsApp</span>
+            <MessageCircle className="w-4 h-4 text-[#0E9F8F] shrink-0" />
+            <span className="text-center">Consultar disponibilidad para mi zona por WhatsApp</span>
           </a>
         </div>
 

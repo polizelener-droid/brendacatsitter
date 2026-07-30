@@ -65,7 +65,7 @@ export const CatGallerySection: React.FC = () => {
   };
 
   return (
-    <section id="fotos" className="py-10 sm:py-12 bg-[#F2F9F8] border-t border-[#CCE7E5]">
+    <section id="fotos" className="py-10 sm:py-12 bg-[#F2F9F8] border-t border-[#CCE7E5] overflow-x-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Clean Header */}
@@ -104,21 +104,21 @@ export const CatGallerySection: React.FC = () => {
 
         {/* CAROUSEL VIEW */}
         {viewMode === 'carousel' ? (
-          <div className="max-w-sm mx-auto">
+          <div className="max-w-sm mx-auto w-full px-8 sm:px-10">
             <div className="relative flex items-center justify-center py-1">
               
               {/* Prev Button */}
               <button
                 onClick={handlePrev}
                 aria-label="Anterior foto"
-                className="absolute left-0 sm:-left-5 z-20 w-9 h-9 rounded-full bg-white border border-[#CCE7E5] text-[#132E35] shadow-sm flex items-center justify-center hover:bg-[#E0F2F1] active:scale-95 transition-all"
+                className="absolute -left-8 sm:-left-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#CCE7E5] text-[#132E35] shadow-sm flex items-center justify-center hover:bg-[#E0F2F1] active:scale-95 transition-all"
               >
                 <ChevronLeft className="w-5 h-5 text-[#132E35]" />
               </button>
 
               {/* Main Photo Card */}
               <div
-                className="w-full bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-[#CCE7E5] group relative cursor-pointer"
+                className="w-full min-w-0 bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-[#CCE7E5] group relative cursor-pointer"
                 onClick={() => openLightbox(currentIndex)}
               >
                 <div className="relative aspect-[3/4] max-h-[52vh] mx-auto rounded-xl overflow-hidden bg-[#E8F4F2]">
@@ -144,7 +144,7 @@ export const CatGallerySection: React.FC = () => {
               <button
                 onClick={handleNext}
                 aria-label="Siguiente foto"
-                className="absolute right-0 sm:-right-5 z-20 w-9 h-9 rounded-full bg-white border border-[#CCE7E5] text-[#132E35] shadow-sm flex items-center justify-center hover:bg-[#E0F2F1] active:scale-95 transition-all"
+                className="absolute -right-8 sm:-right-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#CCE7E5] text-[#132E35] shadow-sm flex items-center justify-center hover:bg-[#E0F2F1] active:scale-95 transition-all"
               >
                 <ChevronRight className="w-5 h-5 text-[#132E35]" />
               </button>

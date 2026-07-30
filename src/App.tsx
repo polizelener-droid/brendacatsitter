@@ -13,7 +13,7 @@ import { Footer } from './components/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50/70 via-rose-50/40 to-white text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
+    <div className="min-h-screen overflow-x-hidden bg-gradient-to-b from-pink-50/70 via-rose-50/40 to-white text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
       <HeaderNav />
       <main>
         <HeroSection />

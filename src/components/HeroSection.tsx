@@ -11,44 +11,44 @@ export const HeroSection: React.FC = () => {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Simple Warm Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E0F2F1] border border-[#B2DDD9] text-[#0B8276] text-xs sm:text-sm font-bold mb-5 shadow-2xs">
+        <div className="inline-flex max-w-full items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-[#E0F2F1] border border-[#B2DDD9] text-[#0B8276] text-[11px] sm:text-sm font-bold mb-5 shadow-2xs text-balance">
           <span>Servicio de Cuidado de Gatos Exclusivo a Domicilio</span>
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#132E35] tracking-tight leading-[1.12] mb-5 font-display">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#132E35] tracking-tight leading-[1.12] mb-5 font-display text-balance">
           Cuidadora de gatos <span className="text-[#0B8276] font-serif italic">a domicilio</span>
         </h1>
 
         {/* Description */}
-        <p className="text-base sm:text-lg text-[#3B5259] mb-7 max-w-2xl mx-auto leading-relaxed font-normal">
+        <p className="text-base sm:text-lg text-[#3B5259] mb-7 max-w-2xl mx-auto leading-relaxed font-normal text-pretty">
           Visitas personalizadas de <strong className="text-[#132E35] font-bold">45 minutos dedicados</strong> para que tu gato conserve su paz, rutinas y territorio mientras viajás. Comida fresca, mimos, juego y reportes detallados en vivo.
         </p>
 
         {/* Direct WhatsApp Primary CTA Button */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 w-full">
           <a
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             id="hero-whatsapp-cta"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold px-8 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all border border-emerald-300/40"
+            className="w-full sm:w-auto max-w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold px-5 sm:px-8 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all border border-emerald-300/40"
           >
-            <WhatsAppIcon className="w-5 h-5 fill-white" />
-            <span>Hablar con Brenda por WhatsApp</span>
+            <WhatsAppIcon className="w-5 h-5 fill-white shrink-0" />
+            <span className="text-center">Hablar con Brenda por WhatsApp</span>
           </a>
         </div>
 
         {/* Quick Service Highlights */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-7">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-[#CCE7E5] text-xs font-bold text-[#132E35] shadow-2xs">
-            <Clock className="w-3.5 h-3.5 text-[#0E9F8F]" /> 45 min de atención exclusiva
+        <div className="flex flex-wrap justify-center gap-2 mb-7">
+          <span className="inline-flex max-w-full items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#CCE7E5] text-xs font-bold text-[#132E35] shadow-2xs">
+            <Clock className="w-3.5 h-3.5 text-[#0E9F8F] shrink-0" /> 45 min de atención exclusiva
           </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-[#CCE7E5] text-xs font-bold text-[#132E35] shadow-2xs">
-            <Camera className="w-3.5 h-3.5 text-[#0E9F8F]" /> Fotos y videos en vivo
+          <span className="inline-flex max-w-full items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#CCE7E5] text-xs font-bold text-[#132E35] shadow-2xs">
+            <Camera className="w-3.5 h-3.5 text-[#0E9F8F] shrink-0" /> Fotos y videos en vivo
           </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-[#CCE7E5] text-xs font-bold text-[#132E35] shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#0E9F8F]" /> Higiene de litera impecable
+          <span className="inline-flex max-w-full items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#CCE7E5] text-xs font-bold text-[#132E35] shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#0E9F8F] shrink-0" /> Higiene de litera impecable
           </span>
         </div>
 
