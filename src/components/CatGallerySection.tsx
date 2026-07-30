@@ -15,8 +15,12 @@ export const CatGallerySection: React.FC = () => {
 
   useEffect(() => {
     if (dragState.current.active) return;
+    const track = thumbsRef.current;
     const el = thumbBtnRefs.current[currentIndex];
-    el?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    if (!track || !el) return;
+
+    const left = el.offsetLeft - track.clientWidth / 2 + el.offsetWidth / 2;
+    track.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
   }, [currentIndex]);
 
   const handlePrev = () => {
