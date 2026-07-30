@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Cat, Menu, X, Heart } from 'lucide-react';
-import { CONTACT_INFO } from '../data/catData';
-import { WhatsAppIcon } from './WhatsAppIcon';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const HeaderNav: React.FC = () => {
@@ -33,10 +31,8 @@ export const HeaderNav: React.FC = () => {
     { name: 'Clientes Felices', href: '#fotos' },
     { name: 'Testimonios', href: '#resenas' },
     { name: 'Cobertura', href: '#cobertura' },
-    { name: 'Redes Sociales', href: '#contacto' },
+    { name: 'Contacto', href: '#contacto' },
   ];
-
-  const waLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(CONTACT_INFO.whatsappBaseMessage)}`;
 
   return (
     <header
@@ -47,7 +43,7 @@ export const HeaderNav: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           {/* Brand Logo */}
           <a
             href="#"
@@ -82,20 +78,6 @@ export const HeaderNav: React.FC = () => {
             ))}
           </nav>
 
-          {/* WhatsApp CTA Button */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              id="header-whatsapp-btn"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 border border-emerald-400/40"
-            >
-              <WhatsAppIcon className="w-4 h-4 fill-white" />
-              <span>Consultar WhatsApp</span>
-            </a>
-          </div>
-
           {/* Mobile menu trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -121,17 +103,6 @@ export const HeaderNav: React.FC = () => {
                   {link.name}
                 </a>
               ))}
-              <div className="pt-2 mt-1 border-t border-[#CCE7E5]">
-                <a
-                  href={waLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-2.5 rounded-xl text-sm font-bold shadow-sm border border-emerald-300/40"
-                >
-                  <WhatsAppIcon className="w-4 h-4 fill-white" />
-                  Consultar Tarifas por WhatsApp
-                </a>
-              </div>
             </div>
           </div>
         )}

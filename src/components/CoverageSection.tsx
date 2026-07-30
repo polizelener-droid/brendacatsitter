@@ -1,10 +1,8 @@
 import React from 'react';
-import { COVERAGE_NEIGHBORHOODS, CONTACT_INFO } from '../data/catData';
-import { MapPin, CheckCircle2, MessageCircle } from 'lucide-react';
+import { COVERAGE_NEIGHBORHOODS } from '../data/catData';
+import { CheckCircle2 } from 'lucide-react';
 
 export const CoverageSection: React.FC = () => {
-  const waLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent('Hola Brenda! Quería consultar si tenés cobertura para mi gato en mi zona:')}`;
-
   return (
     <section id="cobertura" className="py-14 bg-[#F2F9F8] border-t border-[#CCE7E5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,12 +12,12 @@ export const CoverageSection: React.FC = () => {
             Zonas de Cobertura
           </h2>
           <p className="text-[#3B5259] text-xs sm:text-sm max-w-xl mx-auto leading-relaxed font-normal">
-            Atención a domicilio en los siguientes barrios. Si tu zona está cerca, consultame directamente por WhatsApp.
+            Atención a domicilio en estos barrios. Si tu zona está cerca, escribinme y lo vemos juntos.
           </p>
         </div>
 
         {/* Badges Grid */}
-        <div className="flex flex-wrap justify-center gap-2.5 max-w-4xl mx-auto mb-8">
+        <div className="flex flex-wrap justify-center gap-2.5 max-w-4xl mx-auto">
           {COVERAGE_NEIGHBORHOODS.map((barrio, idx) => (
             <div
               key={idx}
@@ -29,19 +27,6 @@ export const CoverageSection: React.FC = () => {
               <span>{barrio}</span>
             </div>
           ))}
-        </div>
-
-        {/* Custom Area CTA */}
-        <div className="text-center">
-          <a
-            href={waLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#132E35] bg-[#E0F2F1] hover:bg-[#D0EBE8] px-5 py-3 rounded-full transition-all border border-[#B2DDD9] shadow-2xs hover:scale-102 max-w-full"
-          >
-            <MessageCircle className="w-4 h-4 text-[#0E9F8F] shrink-0" />
-            <span className="text-center">Consultar disponibilidad para mi zona por WhatsApp</span>
-          </a>
         </div>
 
       </div>

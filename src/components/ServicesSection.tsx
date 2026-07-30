@@ -1,7 +1,6 @@
 import React from 'react';
 import { Utensils, Sparkles, Heart, Camera, Clock, Home, Check, Calendar, Key, CreditCard, AlertCircle, Info } from 'lucide-react';
-import { SERVICES, SERVICE_RATES, ServiceItem, CONTACT_INFO } from '../data/catData';
-import { WhatsAppIcon } from './WhatsAppIcon';
+import { SERVICES, SERVICE_RATES, ServiceItem } from '../data/catData';
 
 const iconMap: Record<string, React.ReactNode> = {
   Clock: <Clock className="w-6 h-6 text-[#0E9F8F]" />,
@@ -13,8 +12,6 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export const ServicesSection: React.FC = () => {
-  const waLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(CONTACT_INFO.whatsappBaseMessage)}`;
-
   return (
     <section id="servicios" className="py-12 sm:py-16 bg-[#F2F9F8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,30 +62,17 @@ export const ServicesSection: React.FC = () => {
           
           <div className="relative z-10">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-5 border-b border-[#CCE7E5]">
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#132E35] font-display">
-                  Tarifas de las Visitas
-                </h3>
-                <p className="text-xs sm:text-sm text-[#3B5259] mt-1 font-medium">
-                  {SERVICE_RATES.periodNotice} • {SERVICE_RATES.duration}
-                </p>
-              </div>
-
-              <a
-                href={waLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="self-start md:self-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-6 py-3 rounded-full text-xs sm:text-sm transition-all shadow-sm hover:shadow-md shrink-0 flex items-center gap-2 border border-emerald-300/40"
-              >
-                <WhatsAppIcon className="w-4 h-4 fill-white" />
-                <span>Reservar fechas por WhatsApp</span>
-              </a>
+            <div className="mb-8 pb-5 border-b border-[#CCE7E5]">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#132E35] font-display">
+                Tarifas de las Visitas
+              </h3>
+              <p className="text-xs sm:text-sm text-[#3B5259] mt-1 font-medium">
+                {SERVICE_RATES.periodNotice} • {SERVICE_RATES.duration}
+              </p>
             </div>
 
             {/* Rates Grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-              {/* Mon - Fri */}
               <div className="bg-white/95 p-5 rounded-2xl border border-[#CCE7E5] shadow-2xs">
                 <div className="flex items-center gap-2 text-[#0B8276] text-xs font-bold mb-1.5">
                   <Calendar className="w-4 h-4" /> Lunes a Viernes
@@ -97,7 +81,6 @@ export const ServicesSection: React.FC = () => {
                 <p className="text-xs text-[#3B5259] mt-1">Por visita de 45 minutos</p>
               </div>
 
-              {/* Saturday */}
               <div className="bg-white/95 p-5 rounded-2xl border border-[#CCE7E5] shadow-2xs">
                 <div className="flex items-center gap-2 text-[#0B8276] text-xs font-bold mb-1.5">
                   <Calendar className="w-4 h-4" /> Sábados
@@ -106,7 +89,6 @@ export const ServicesSection: React.FC = () => {
                 <p className="text-xs text-[#3B5259] mt-1">Por visita de 45 minutos</p>
               </div>
 
-              {/* Sunday & Holidays */}
               <div className="bg-white/95 p-5 rounded-2xl border border-[#CCE7E5] shadow-2xs">
                 <div className="flex items-center gap-2 text-[#0B8276] text-xs font-bold mb-1.5">
                   <Calendar className="w-4 h-4" /> Domingos y Feriados
@@ -115,7 +97,6 @@ export const ServicesSection: React.FC = () => {
                 <p className="text-xs text-[#3B5259] mt-1">Por visita de 45 minutos</p>
               </div>
 
-              {/* Pre-visit interview */}
               <div className="bg-[#DDF2F0]/90 p-5 rounded-2xl border border-[#B2DDD9] shadow-2xs">
                 <div className="flex items-center gap-2 text-[#0B8276] text-xs font-bold mb-1.5">
                   <Home className="w-4 h-4" /> Entrevista Previa
@@ -127,8 +108,6 @@ export const ServicesSection: React.FC = () => {
 
             {/* Policies & Details Grid */}
             <div className="grid md:grid-cols-3 gap-6 pt-6 border-t border-[#CCE7E5]">
-              
-              {/* Llaves */}
               <div className="flex gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#E0F2F1] text-[#0B8276] flex items-center justify-center shrink-0 border border-[#B2DDD9] mt-0.5">
                   <Key className="w-4 h-4" />
@@ -141,7 +120,6 @@ export const ServicesSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Forma de Pago */}
               <div className="flex gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#E0F2F1] text-[#0B8276] flex items-center justify-center shrink-0 border border-[#B2DDD9] mt-0.5">
                   <CreditCard className="w-4 h-4" />
@@ -154,7 +132,6 @@ export const ServicesSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Cancelaciones */}
               <div className="flex gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#E0F2F1] text-[#0B8276] flex items-center justify-center shrink-0 border border-[#B2DDD9] mt-0.5">
                   <AlertCircle className="w-4 h-4" />
@@ -166,7 +143,6 @@ export const ServicesSection: React.FC = () => {
                   </p>
                 </div>
               </div>
-
             </div>
 
             {/* Extra Cleaning Note */}

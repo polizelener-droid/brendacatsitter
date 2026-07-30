@@ -1,12 +1,8 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
-import { CONTACT_INFO } from '../data/catData';
-import { WhatsAppIcon } from './WhatsAppIcon';
 import brendaPhoto from '../assets/images/brenda_con_gato.png';
 
 export const AboutSection: React.FC = () => {
-  const waLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent('Hola Brenda! Leí sobre vos en la web y quisiera consultar por el cuidado de mi gato.')}`;
-
   return (
     <section id="sobre-mi" className="py-14 sm:py-18 bg-[#F2F9F8] overflow-hidden border-t border-[#CCE7E5]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +43,7 @@ export const AboutSection: React.FC = () => {
             </p>
 
             {/* Core Values List */}
-            <div className="grid sm:grid-cols-2 gap-3 mb-6 text-left">
+            <div className="grid sm:grid-cols-2 gap-3 text-left">
               <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-[#CCE7E5]">
                 <CheckCircle2 className="w-4 h-4 text-[#0E9F8F] shrink-0 mt-0.5" />
                 <div>
@@ -79,20 +75,6 @@ export const AboutSection: React.FC = () => {
                   <p className="text-[11px] text-[#3B5259] mt-0.5">Cuidado prudente de tu hogar.</p>
                 </div>
               </div>
-            </div>
-
-            {/* CTA */}
-            <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3">
-              <a
-                href={waLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                id="about-whatsapp-btn"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-bold px-7 py-3 rounded-full shadow-xs hover:shadow-md transition-all border border-emerald-300/40"
-              >
-                <WhatsAppIcon className="w-4 h-4 fill-white" />
-                <span>Hablar con Brenda por WhatsApp</span>
-              </a>
             </div>
           </div>
 
