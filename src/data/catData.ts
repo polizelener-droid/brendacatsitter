@@ -1,19 +1,16 @@
-import lionelImg from '../assets/images/cat_lionel_tuxedo_1785342280552.jpg';
+import griseldaImg from '../assets/images/griselda.png';
+import sexyImg from '../assets/images/sexy.png';
+import isisImg from '../assets/images/isis.png';
+import emaImg from '../assets/images/ema.png';
+import lukeImg from '../assets/images/luke.png';
+import teraImg from '../assets/images/tera.png';
+import tiliYJuliImg from '../assets/images/tili_y_juli.png';
+import ambarYMorganImg from '../assets/images/ambar_y_morgan.png';
+import arielImg from '../assets/images/ariel.png';
+import uguriaYAgathaImg from '../assets/images/uguria_y_agatha.png';
+import lunaImg from '../assets/images/luna.png';
+import cristianoImg from '../assets/images/cristiano.png';
 import plateroImg from '../assets/images/cat_platero_1785260516733.jpg';
-import catUliImg from '../assets/images/cat_uli_photo_1785334346940.jpg';
-import cristianoImg from '../assets/images/cat_cristiano_1785260529754.jpg';
-import africaKilluaImg from '../assets/images/cat_africa_killua_1785260539813.jpg';
-import julianTiliImg from '../assets/images/julian_and_tili_1785292862809.jpg';
-import morganAmbarImg from '../assets/images/morgan_and_ambar_1785292876384.jpg';
-import agathaAuguriaImg from '../assets/images/agatha_and_auguria_1785292894719.jpg';
-import catLukeImg from '../assets/images/cat_luke_1785293155754.jpg';
-import catEmaImg from '../assets/images/cat_ema_1785293166559.jpg';
-import catSexyImg from '../assets/images/cat_sexy_1785293176709.jpg';
-import catFlashCloeImg from '../assets/images/cat_flash_cloe_1785293197055.jpg';
-import catIsisImg from '../assets/images/cat_isis_1785293206855.jpg';
-import catJingleImg from '../assets/images/cat_jingle_1785293731808.jpg';
-import catUnaImg from '../assets/images/cat_una_photo_1785332514378.jpg';
-import heroBgImg from '../assets/images/hero_cat_sitter_1785260551346.jpg';
 
 export interface CatClient {
   id: string;
@@ -65,134 +62,114 @@ export const CONTACT_INFO = {
 
 export const CAT_CLIENTS: CatClient[] = [
   {
-    id: 'platero',
-    name: 'Platero',
-    owner: '@melinataranto',
-    image: plateroImg,
+    id: 'griselda',
+    name: 'Griselda',
+    owner: 'Familia Griselda',
+    image: griseldaImg,
     story: '',
-    personality: ['Tranquilo', 'Observador', 'Mimoso', 'Sillonero', 'Súper pacífico'],
-    favoriteActivity: 'Tomar sol en la ventana',
-    visitsCount: 22,
-  },
-  {
-    id: 'uli',
-    name: 'Uli',
-    owner: 'Familia Uli',
-    image: catUliImg,
-    story: '',
-    personality: ['Atigrado elegante', 'Tranquilo', 'Atento', 'Sereno', 'Compañero'],
-    favoriteActivity: 'Observar desde el pasillo',
-    visitsCount: 15,
-  },
-  {
-    id: 'una',
-    name: 'Una',
-    owner: 'Familia Una',
-    image: catUnaImg,
-    story: '',
-    personality: ['Carey hermosa', 'Tranquila', 'Observadora', 'Dulce', 'Mimosa', 'Serena'],
-    favoriteActivity: 'Relajarse plácidamente',
-    visitsCount: 18,
-  },
-  {
-    id: 'lionel',
-    name: 'Lionel',
-    owner: 'Familia Lionel',
-    image: lionelImg,
-    story: '',
-    personality: ['Tuxedo tierno', 'Juguetón', 'Cariñoso', 'Curioso', 'Súper mimoso'],
-    favoriteActivity: 'Jugar con arbolitos y mordillos',
-    visitsCount: 14,
-  },
-  {
-    id: 'jingle',
-    name: 'Jingle',
-    owner: 'Familia Jingle',
-    image: catJingleImg,
-    story: '',
-    personality: ['Hermosa', 'Collar naranja', 'Atenta', 'Curiosa', 'Dulce', 'Expresiva'],
-    favoriteActivity: 'Observar atentamente',
-    visitsCount: 23,
-  },
-  {
-    id: 'luke',
-    name: 'Luke',
-    owner: 'Familia Luke',
-    image: catLukeImg,
-    story: '',
-    personality: ['Tranquila', 'Mimosa', 'Elegante', 'Gris diluida', 'Pacífica'],
-    favoriteActivity: 'Acurrucarse en la cama',
-    visitsCount: 19,
-  },
-  {
-    id: 'ema',
-    name: 'Ema',
-    owner: 'Familia Ema',
-    image: catEmaImg,
-    story: '',
-    personality: ['Tuxedo elegante', 'Atento', 'Sociable', 'Distinguido', 'Guardian'],
+    personality: ['Elegante', 'Gris', 'Atenta', 'Serena', 'Observadora'],
     favoriteActivity: 'Vigilar desde el sillón',
-    visitsCount: 22,
+    visitsCount: 18,
   },
   {
     id: 'sexy',
     name: 'Sexy',
     owner: 'Familia Sexy',
-    image: catSexyImg,
+    image: sexyImg,
     story: '',
     personality: ['Calicó tricolor', 'Relajada', 'Divertida', 'Solera', 'Afectuosa'],
     favoriteActivity: 'Tomar sol en la mesa',
     visitsCount: 17,
   },
   {
-    id: 'flash-cloe',
-    name: 'Flash y Cloe',
-    owner: 'Familia Flash y Cloe',
-    image: catFlashCloeImg,
-    story: '',
-    personality: ['Dúo dinámico', 'Calicó y Naranja', 'Curiosos', 'Inseparables', 'Exploradores'],
-    favoriteActivity: 'Posar juntos en la escalera',
-    visitsCount: 30,
-  },
-  {
     id: 'isis',
     name: 'Isis',
     owner: 'Familia Isis',
-    image: catIsisImg,
+    image: isisImg,
     story: '',
-    personality: ['Juguetona', 'Atigrada', 'Medias blancas', 'Agil', 'Chispita'],
-    favoriteActivity: 'Perseguir plumas',
+    personality: ['Juguetona', 'Atigrada', 'Curiosa', 'Ágil', 'Chispita'],
+    favoriteActivity: 'Perseguir juguetes',
     visitsCount: 16,
   },
   {
-    id: 'julian-tili',
-    name: 'Julián y Tili',
-    owner: 'Familia Julián y Tili',
-    image: julianTiliImg,
+    id: 'ema',
+    name: 'Ema',
+    owner: 'Familia Ema',
+    image: emaImg,
     story: '',
-    personality: ['Hermanitos', 'Atento', 'Panterita dulce', 'Compañeros', 'Tranquilos'],
-    favoriteActivity: 'Relajarse en el patio',
+    personality: ['Tuxedo elegante', 'Atenta', 'Sociable', 'Distinguida', 'Guardiana'],
+    favoriteActivity: 'Vigilar desde el sillón',
+    visitsCount: 22,
+  },
+  {
+    id: 'luke',
+    name: 'Luke',
+    owner: 'Familia Luke',
+    image: lukeImg,
+    story: '',
+    personality: ['Juguetón', 'Energético', 'Atigrado', 'Curioso', 'Aventurero'],
+    favoriteActivity: 'Jugar en el patio',
+    visitsCount: 19,
+  },
+  {
+    id: 'tera',
+    name: 'Tera',
+    owner: 'Familia Tera',
+    image: teraImg,
+    story: '',
+    personality: ['Esponjosa', 'Mimosa', 'Tranquila', 'Elegante', 'Dulce'],
+    favoriteActivity: 'Acurrucarse al sol',
+    visitsCount: 15,
+  },
+  {
+    id: 'tili-y-juli',
+    name: 'Tili y Juli',
+    owner: 'Familia Tili y Juli',
+    image: tiliYJuliImg,
+    story: '',
+    personality: ['Hermanitos', 'Compañeros', 'Tranquilos', 'Afectuosos', 'Inseparables'],
+    favoriteActivity: 'Relajarse juntos',
     visitsCount: 26,
   },
   {
-    id: 'morgan-ambar',
-    name: 'Morgan y Ámbar',
-    owner: 'Familia Morgan y Ámbar',
-    image: morganAmbarImg,
+    id: 'ambar-y-morgan',
+    name: 'Ámbar y Morgan',
+    owner: 'Familia Ámbar y Morgan',
+    image: ambarYMorganImg,
     story: '',
     personality: ['Elegantes', 'Curiosos', 'Heterocromía única', 'Misteriosos', 'Reales'],
     favoriteActivity: 'Acompañar en la mesa',
     visitsCount: 21,
   },
   {
-    id: 'agatha-auguria',
-    name: 'Ágatha y Auguria',
-    owner: 'Familia Ágatha y Auguria',
-    image: agathaAuguriaImg,
+    id: 'ariel',
+    name: 'Ariel',
+    owner: 'Familia Ariel',
+    image: arielImg,
+    story: '',
+    personality: ['Juguetón', 'Divertido', 'Atigrado', 'Travieso', 'Cariñoso'],
+    favoriteActivity: 'Morder la cuerda',
+    visitsCount: 12,
+  },
+  {
+    id: 'uguria-y-agatha',
+    name: 'Uguria y Agatha',
+    owner: 'Familia Uguria y Agatha',
+    image: uguriaYAgathaImg,
     story: '',
     personality: ['Observadoras', 'Calicó y Carey', 'Inseparables', 'Dulces', 'Curiosas'],
     favoriteActivity: 'Espiar el balcón',
     visitsCount: 28,
+  },
+  {
+    id: 'luna',
+    name: 'Luna',
+    owner: 'Familia Luna',
+    image: lunaImg,
+    story: '',
+    personality: ['Tricolor', 'Atenta', 'Elegante', 'Serena', 'Mimosa'],
+    favoriteActivity: 'Posar en la mesa',
+    visitsCount: 14,
   },
   {
     id: 'cristiano',
@@ -200,19 +177,9 @@ export const CAT_CLIENTS: CatClient[] = [
     owner: '@adru_baccaro',
     image: cristianoImg,
     story: '',
-    personality: ['Elegante', 'Comunicativo', 'Rey azabache', 'Expresivo', 'Melódico'],
+    personality: ['Elegante', 'Comunicativo', 'Tranquilo', 'Expresivo', 'Mimoso'],
     favoriteActivity: 'Masajes en las orejitas',
     visitsCount: 18,
-  },
-  {
-    id: 'africa-killua',
-    name: 'África y Killua',
-    owner: '@carla_otero14',
-    image: africaKilluaImg,
-    story: '',
-    personality: ['Inseparables', 'Energéticos', 'Súper dulces', 'Compañeros', 'Afectuosos'],
-    favoriteActivity: 'Juegos en equipo',
-    visitsCount: 30,
   },
 ];
 
