@@ -1,0 +1,6 @@
+{
+  "name": "Brenda Cat Sitter - Cuidado de Gatos a Domicilio",
+  "description": "Sitio oficial de Brenda Cat Sitter. Cuidado amoroso y personalizado de gatos a domicilio con reportes diarios, fotos, calculadora de tarifas y contacto directo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

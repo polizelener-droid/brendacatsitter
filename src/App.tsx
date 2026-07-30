@@ -1,0 +1,32 @@
+import React from 'react';
+import { HeaderNav } from './components/HeaderNav';
+import { HeroSection } from './components/HeroSection';
+import { ServicesSection } from './components/ServicesSection';
+import { AboutSection } from './components/AboutSection';
+import { WhyHomeCareSection } from './components/WhyHomeCareSection';
+import { CatGallerySection } from './components/CatGallerySection';
+import { TestimonialsSection } from './components/TestimonialsSection';
+import { CoverageSection } from './components/CoverageSection';
+import { ContactSection } from './components/ContactSection';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { Footer } from './components/Footer';
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-pink-50/70 via-rose-50/40 to-white text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
+      <HeaderNav />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <WhyHomeCareSection />
+        <CatGallerySection />
+        <TestimonialsSection />
+        <CoverageSection />
+        <ContactSection />
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
+    </div>
+  );
+}
