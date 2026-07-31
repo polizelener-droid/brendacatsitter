@@ -102,7 +102,7 @@ export const ServicesSection: React.FC = () => {
                   <Home className="w-4 h-4" /> Entrevista Previa
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-[#132E35] font-display">{SERVICE_RATES.interview}</div>
-                <p className="text-xs text-[#3B5259] font-medium mt-1">Visita presencial a domicilio</p>
+                <p className="text-xs text-[#3B5259] font-medium mt-1 leading-relaxed">{SERVICE_RATES.interviewDesc}</p>
               </div>
             </div>
 
