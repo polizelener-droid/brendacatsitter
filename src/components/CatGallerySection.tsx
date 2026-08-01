@@ -10,7 +10,13 @@ export const CatGallerySection: React.FC = () => {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const thumbsRef = useRef<HTMLDivElement>(null);
   const thumbBtnRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const dragState = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
+  const dragState = useRef({
+    active: false,
+    startX: 0,
+    scrollLeft: 0,
+    moved: false,
+    clickIndex: null as number | null,
+  });
 
   const totalCats = cats.length;
   const activeCat = cats[currentIndex] ?? cats[0];
@@ -42,30 +48,52 @@ export const CatGallerySection: React.FC = () => {
   const onThumbPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const track = thumbsRef.current;
     if (!track) return;
+
+    const btn = (e.target as HTMLElement).closest('button');
+    const clickIndex = btn
+      ? thumbBtnRefs.current.findIndex((el) => el === btn)
+      : -1;
+
     dragState.current = {
       active: true,
       startX: e.clientX,
       scrollLeft: track.scrollLeft,
       moved: false,
+      clickIndex: clickIndex >= 0 ? clickIndex : null,
     };
-    track.setPointerCapture(e.pointerId);
-    track.classList.add('cursor-grabbing');
   };
 
   const onThumbPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const track = thumbsRef.current;
     if (!track || !dragState.current.active) return;
     const dx = e.clientX - dragState.current.startX;
-    if (Math.abs(dx) > 4) dragState.current.moved = true;
-    track.scrollLeft = dragState.current.scrollLeft - dx;
+
+    if (Math.abs(dx) > 8) {
+      if (!dragState.current.moved) {
+        dragState.current.moved = true;
+        track.setPointerCapture(e.pointerId);
+        track.classList.add('cursor-grabbing');
+      }
+      track.scrollLeft = dragState.current.scrollLeft - dx;
+    }
   };
 
   const onThumbPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     const track = thumbsRef.current;
-    if (!track) return;
+    const { moved, clickIndex } = dragState.current;
+
+    if (track?.hasPointerCapture(e.pointerId)) {
+      track.releasePointerCapture(e.pointerId);
+    }
+    track?.classList.remove('cursor-grabbing');
+
+    if (!moved && clickIndex !== null) {
+      setCurrentIndex(clickIndex);
+    }
+
     dragState.current.active = false;
-    track.releasePointerCapture(e.pointerId);
-    track.classList.remove('cursor-grabbing');
+    dragState.current.moved = false;
+    dragState.current.clickIndex = null;
   };
 
   const openLightbox = (index: number) => {
@@ -185,14 +213,11 @@ export const CatGallerySection: React.FC = () => {
                     return (
                       <button
                         key={cat.id}
+                        type="button"
                         ref={(el) => {
                           thumbBtnRefs.current[idx] = el;
                         }}
-                        onClick={() => {
-                          if (dragState.current.moved) return;
-                          setCurrentIndex(idx);
-                        }}
-                        className={`relative rounded-lg overflow-hidden border-2 transition-all shrink-0 pointer-events-auto ${
+                        className={`relative rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
                           isActive
                             ? 'border-[#0E9F8F] ring-1 ring-[#E0F2F1] scale-105 z-10'
                             : 'border-transparent opacity-55 hover:opacity-100'
