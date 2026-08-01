@@ -12,6 +12,8 @@ import {
   Save,
   Upload,
   ExternalLink,
+  ChevronUp,
+  ChevronDown,
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import type { CatClient, ContactInfo, ServiceItem, ServiceRates, Testimonial } from '../data/catData';
@@ -246,6 +248,27 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
     if (error) return flash(`Error: ${error.message}`);
     setCats((prev) => prev.filter((c) => c.id !== id));
     flash('Gato eliminado');
+  };
+
+  const moveCat = async (index: number, direction: 'up' | 'down') => {
+    if (!supabase) return;
+    const target = direction === 'up' ? index - 1 : index + 1;
+    if (target < 0 || target >= cats.length) return;
+
+    const next = [...cats];
+    const [item] = next.splice(index, 1);
+    next.splice(target, 0, item);
+    setCats(next);
+
+    setSaving(true);
+    const updates = next.map((cat, i) =>
+      supabase!.from('cats').update({ sort_order: i }).eq('id', cat.id),
+    );
+    const results = await Promise.all(updates);
+    setSaving(false);
+
+    const failed = results.find((r) => r.error);
+    flash(failed?.error ? `Error: ${failed.error.message}` : 'Orden actualizado');
   };
 
   const uploadCatImage = async (catId: string, file: File) => {
@@ -502,7 +525,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
           <section className="space-y-3">
             <div className="flex items-center justify-between">
               <p className="text-sm text-[#3B5259]">
-                {cats.length} gatos. Subí una foto para que aparezcan en el sitio.
+                {cats.length} gatos. Usá ↑ ↓ para elegir cuál va primero en el sitio.
               </p>
               <button type="button" onClick={addCat} className={btnPrimary}>
                 <Plus className="w-3.5 h-3.5" /> Agregar
@@ -516,6 +539,27 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
             {cats.map((cat, idx) => (
               <div key={cat.id} className="bg-white border border-[#CCE7E5] rounded-2xl p-4 space-y-3">
                 <div className="flex gap-3 items-start">
+                  <div className="flex flex-col items-center gap-1 shrink-0 pt-1">
+                    <span className="text-[10px] font-bold text-[#3B5259]">#{idx + 1}</span>
+                    <button
+                      type="button"
+                      className={btnGhost}
+                      disabled={idx === 0 || saving}
+                      onClick={() => moveCat(idx, 'up')}
+                      aria-label="Subir"
+                    >
+                      <ChevronUp className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      className={btnGhost}
+                      disabled={idx === cats.length - 1 || saving}
+                      onClick={() => moveCat(idx, 'down')}
+                      aria-label="Bajar"
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                  </div>
                   <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#E8F4F2] shrink-0 border border-[#CCE7E5]">
                     {cat.image ? (
                       <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
