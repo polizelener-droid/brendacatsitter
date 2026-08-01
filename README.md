@@ -1,20 +1,17 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Brenda Cat Sitter
 
-# Run and deploy your AI Studio app
+Sitio web de cuidado de gatos a domicilio + panel de administración con Supabase.
 
-This contains everything you need to run your app locally.
+## Desarrollo local
 
-View your app in AI Studio: https://ai.studio/apps/babcedbb-8613-44d7-aa05-0dac26b2d368
+1. `npm install`
+2. (Opcional, para el panel admin) Configurá Supabase siguiendo [ADMIN.md](./ADMIN.md)
+3. `npm run dev` → [http://localhost:3000](http://localhost:3000)
+4. Panel: [http://localhost:3000/admin](http://localhost:3000/admin)
 
-## Run Locally
+## Scripts
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- `npm run dev` — desarrollo
+- `npm run build` — build de producción
+- `npm run preview` — preview del build
+- `npm run lint` — chequeo TypeScript

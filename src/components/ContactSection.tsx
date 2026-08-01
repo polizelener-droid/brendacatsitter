@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { CONTACT_INFO } from '../data/catData';
+import { useContent } from '../content/ContentContext';
 import { Send, CheckCircle2, Cat } from 'lucide-react';
 import { WhatsAppLogo, InstagramLogo, TikTokLogo, GmailLogo } from './SocialLogos';
 
 export const ContactSection: React.FC = () => {
+  const { contact } = useContent();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
@@ -20,7 +21,7 @@ Quiero consultar por el cuidado de mi gato:
 - Barrio / Zona: ${neighborhood || 'A confirmar'}
 - Detalle de mi(s) gato(s) y fechas: ${catInfo || 'Sin detalle adicional'}`;
 
-    const waUrl = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
     setSubmitted(true);
   };
@@ -44,7 +45,7 @@ Quiero consultar por el cuidado de mi gato:
           
           {/* WhatsApp Card */}
           <a
-            href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(CONTACT_INFO.whatsappBaseMessage)}`}
+            href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappBaseMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="card group bg-white hover:bg-[#E0F2F1]/50 border border-[#CCE7E5] hover:border-[#8FE0D8] p-4 rounded-2xl transition-all shadow-2xs hover:shadow-xs text-center flex flex-col items-center justify-between"
@@ -63,7 +64,7 @@ Quiero consultar por el cuidado de mi gato:
 
           {/* Instagram Card */}
           <a
-            href={CONTACT_INFO.instagramUrl}
+            href={contact.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="card group bg-white hover:bg-[#E0F2F1]/50 border border-[#CCE7E5] hover:border-[#8FE0D8] p-4 rounded-2xl transition-all shadow-2xs hover:shadow-xs text-center flex flex-col items-center justify-between"
@@ -76,13 +77,13 @@ Quiero consultar por el cuidado de mi gato:
               <p className="text-[10px] text-[#3B5259] mb-3">Fotos & historias</p>
             </div>
             <span className="btn btn-ghost inline-flex items-center justify-center text-[11px] font-bold text-[#132E35] bg-[#E0F2F1] group-hover:bg-[#D0EBE8] px-3 py-1.5 rounded-full border border-[#B2DDD9] transition-colors w-full">
-              @{CONTACT_INFO.instagram}
+              @{contact.instagram}
             </span>
           </a>
 
           {/* TikTok Card */}
           <a
-            href={CONTACT_INFO.tiktokUrl}
+            href={contact.tiktokUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="card group bg-white hover:bg-[#E0F2F1]/50 border border-[#CCE7E5] hover:border-[#8FE0D8] p-4 rounded-2xl transition-all shadow-2xs hover:shadow-xs text-center flex flex-col items-center justify-between"
@@ -95,13 +96,13 @@ Quiero consultar por el cuidado de mi gato:
               <p className="text-[10px] text-[#3B5259] mb-3">Videos & tips</p>
             </div>
             <span className="btn btn-ghost inline-flex items-center justify-center text-[11px] font-bold text-[#132E35] bg-[#E0F2F1] group-hover:bg-[#D0EBE8] px-3 py-1.5 rounded-full border border-[#B2DDD9] transition-colors w-full">
-              @{CONTACT_INFO.tiktok}
+              @{contact.tiktok}
             </span>
           </a>
 
           {/* Email Card */}
           <a
-            href={`mailto:${CONTACT_INFO.email}`}
+            href={`mailto:${contact.email}`}
             className="card group bg-white hover:bg-[#E0F2F1]/50 border border-[#CCE7E5] hover:border-[#8FE0D8] p-4 rounded-2xl transition-all shadow-2xs hover:shadow-xs text-center flex flex-col items-center justify-between"
           >
             <div className="flex flex-col items-center">
@@ -112,7 +113,7 @@ Quiero consultar por el cuidado de mi gato:
               <p className="text-[10px] text-[#3B5259] mb-3">Consultas formales</p>
             </div>
             <span className="btn btn-ghost inline-flex items-center justify-center text-[11px] font-bold text-[#132E35] bg-[#E0F2F1] group-hover:bg-[#D0EBE8] px-3 py-1.5 rounded-full border border-[#B2DDD9] transition-colors w-full truncate">
-              {CONTACT_INFO.email}
+              {contact.email}
             </span>
           </a>
 

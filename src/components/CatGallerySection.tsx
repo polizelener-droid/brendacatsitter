@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CAT_CLIENTS, CatClient } from '../data/catData';
+import type { CatClient } from '../data/catData';
+import { useContent } from '../content/ContentContext';
 import { ChevronLeft, ChevronRight, Maximize2, X, Grid, Camera } from 'lucide-react';
 
 export const CatGallerySection: React.FC = () => {
+  const { cats } = useContent();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -10,18 +12,24 @@ export const CatGallerySection: React.FC = () => {
   const thumbBtnRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const dragState = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
 
-  const totalCats = CAT_CLIENTS.length;
-  const activeCat = CAT_CLIENTS[currentIndex];
+  const totalCats = cats.length;
+  const activeCat = cats[currentIndex] ?? cats[0];
 
   useEffect(() => {
-    if (dragState.current.active) return;
+    setCurrentIndex(0);
+  }, [cats.length]);
+
+  useEffect(() => {
+    if (dragState.current.active || !activeCat) return;
     const track = thumbsRef.current;
     const el = thumbBtnRefs.current[currentIndex];
     if (!track || !el) return;
 
     const left = el.offsetLeft - track.clientWidth / 2 + el.offsetWidth / 2;
     track.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
-  }, [currentIndex]);
+  }, [currentIndex, activeCat]);
+
+  if (!activeCat || totalCats === 0) return null;
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? totalCats - 1 : prev - 1));
@@ -172,7 +180,7 @@ export const CatGallerySection: React.FC = () => {
                 className="overflow-x-auto cursor-grab select-none scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               >
                 <div className="flex items-center gap-1.5 px-0.5 w-max">
-                  {CAT_CLIENTS.map((cat: CatClient, idx: number) => {
+                  {cats.map((cat: CatClient, idx: number) => {
                     const isActive = idx === currentIndex;
                     return (
                       <button
@@ -207,7 +215,7 @@ export const CatGallerySection: React.FC = () => {
         ) : (
           /* GRID VIEW */
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {CAT_CLIENTS.map((cat: CatClient, idx: number) => (
+            {cats.map((cat: CatClient, idx: number) => (
               <div
                 key={cat.id}
                 onClick={() => openLightbox(idx)}
@@ -249,14 +257,14 @@ export const CatGallerySection: React.FC = () => {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                 <img
-                  src={CAT_CLIENTS[selectedPhotoIndex].image}
-                  alt={CAT_CLIENTS[selectedPhotoIndex].name}
+                  src={cats[selectedPhotoIndex].image}
+                  alt={cats[selectedPhotoIndex].name}
                   className="max-h-[75vh] w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
               <div className="mt-4 text-white font-display">
-                <h3 className="text-2xl font-bold">{CAT_CLIENTS[selectedPhotoIndex].name}</h3>
+                <h3 className="text-2xl font-bold">{cats[selectedPhotoIndex].name}</h3>
               </div>
             </div>
           </div>

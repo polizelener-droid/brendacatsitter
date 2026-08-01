@@ -47,9 +47,33 @@ export interface FaqItem {
   category: 'general' | 'visitas' | 'pagos' | 'seguridad';
 }
 
+export interface ContactInfo {
+  whatsapp: string;
+  phoneFormatted: string;
+  email: string;
+  instagram: string;
+  instagramUrl: string;
+  tiktok: string;
+  tiktokUrl: string;
+  whatsappBaseMessage: string;
+}
+
+export interface ServiceRates {
+  duration: string;
+  periodNotice: string;
+  weekday: string;
+  saturday: string;
+  sundayHoliday: string;
+  interview: string;
+  interviewDesc: string;
+  keyHandover: string;
+  paymentTerms: string;
+  cancellationPolicy: string;
+}
+
 export const HERO_IMAGE = plateroImg;
 
-export const CONTACT_INFO = {
+export const CONTACT_INFO: ContactInfo = {
   whatsapp: '5491161386748',
   phoneFormatted: '+54 9 11 6138-6748',
   email: 'brendacatsitter@gmail.com',
@@ -392,7 +416,7 @@ export const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-export const SERVICE_RATES = {
+export const SERVICE_RATES: ServiceRates = {
   duration: '45 minutos de visita dedicada',
   periodNotice: 'Tarifas por visita — vigentes hasta fin de octubre',
   weekday: '$18.000',

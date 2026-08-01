@@ -1,9 +1,10 @@
 import React from 'react';
-import { CONTACT_INFO } from '../data/catData';
+import { useContent } from '../content/ContentContext';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const FloatingWhatsApp: React.FC = () => {
-  const waLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(CONTACT_INFO.whatsappBaseMessage)}`;
+  const { contact } = useContent();
+  const waLink = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappBaseMessage)}`;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Camera, Heart, Clock, Sparkles } from 'lucide-react';
-import { CONTACT_INFO } from '../data/catData';
+import { useContent } from '../content/ContentContext';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const HeroSection: React.FC = () => {
-  const waLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(CONTACT_INFO.whatsappBaseMessage)}`;
+  const { contact } = useContent();
+  const waLink = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappBaseMessage)}`;
 
   return (
     <section className="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-[#F2F9F8] border-b border-[#CCE7E5]">

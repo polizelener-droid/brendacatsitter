@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TESTIMONIALS } from '../data/catData';
+import { useContent } from '../content/ContentContext';
 import {
   Star,
   CheckCircle,
@@ -11,12 +11,13 @@ import {
 } from 'lucide-react';
 
 export const TestimonialsSection: React.FC = () => {
+  const { testimonials } = useContent();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  const total = TESTIMONIALS.length;
+  const total = testimonials.length;
 
   // Responsive cards visible per slide in carousel
   const getCardsPerPage = () => {
@@ -140,7 +141,7 @@ export const TestimonialsSection: React.FC = () => {
               transform: `translateX(-${currentIndex * (100 / cardsPerPage)}%)`,
             }}
           >
-            {TESTIMONIALS.map((item) => (
+            {testimonials.map((item) => (
               <div
                 key={item.id}
                 className="w-full sm:w-1/2 lg:w-1/3 shrink-0 flex flex-col px-2"
