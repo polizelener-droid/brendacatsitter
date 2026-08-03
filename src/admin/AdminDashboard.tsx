@@ -34,12 +34,12 @@ const AVATAR_OPTIONS = [
 const ICON_OPTIONS = ['Clock', 'Utensils', 'Sparkles', 'Heart', 'Camera', 'Home'];
 
 const inputClass =
-  'w-full px-3 py-2 rounded-xl border border-[#CCE7E5] bg-[#F2F9F8] text-sm focus:outline-none focus:ring-2 focus:ring-[#0E9F8F]';
-const labelClass = 'block text-xs font-bold text-[#132E35] mb-1';
+  'w-full px-3 py-2 rounded-xl border border-[#e2e8dc] bg-[#e2e8dc] text-sm focus:outline-none focus:ring-2 focus:ring-[#275240]';
+const labelClass = 'block text-xs font-bold text-[#275240] mb-1';
 const btnPrimary =
-  'inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#0E9F8F] hover:bg-[#0B8276] text-white text-xs font-bold disabled:opacity-60';
+  'inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#275240] hover:bg-[#275240] text-white text-xs font-bold disabled:opacity-60';
 const btnGhost =
-  'inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-[#CCE7E5] bg-white text-[#132E35] text-xs font-bold hover:bg-[#E0F2F1]';
+  'inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-[#e2e8dc] bg-white text-[#275240] text-xs font-bold hover:bg-[#e2e8dc]';
 
 export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
   const [tab, setTab] = useState<Tab>('cats');
@@ -477,12 +477,12 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F2F9F8]">
-      <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[#CCE7E5]">
+    <div className="min-h-screen bg-[#e2e8dc]">
+      <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[#e2e8dc]">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           <div>
-            <h1 className="font-display font-bold text-[#132E35]">Panel Admin</h1>
-            <p className="text-[11px] text-[#3B5259]">{email}</p>
+            <h1 className="font-display font-bold text-[#275240]">Panel Admin</h1>
+            <p className="text-[11px] text-[#275240]">{email}</p>
           </div>
           <div className="flex items-center gap-2">
             <a href="/" target="_blank" rel="noreferrer" className={btnGhost}>
@@ -501,8 +501,8 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
               onClick={() => setTab(t.id)}
               className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-colors ${
                 tab === t.id
-                  ? 'bg-[#0E9F8F] text-white'
-                  : 'bg-white text-[#3B5259] border border-[#CCE7E5] hover:bg-[#E0F2F1]'
+                  ? 'bg-[#275240] text-white'
+                  : 'bg-white text-[#275240] border border-[#e2e8dc] hover:bg-[#e2e8dc]'
               }`}
             >
               {t.icon}
@@ -514,7 +514,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
 
       {status && (
         <div className="max-w-5xl mx-auto px-4 pt-3">
-          <div className="text-xs font-medium bg-[#E0F2F1] border border-[#B2DDD9] text-[#132E35] rounded-xl px-3 py-2">
+          <div className="text-xs font-medium bg-[#e2e8dc] border border-[#e2e8dc] text-[#275240] rounded-xl px-3 py-2">
             {status}
           </div>
         </div>
@@ -524,7 +524,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
         {tab === 'cats' && (
           <section className="space-y-3">
             <div className="flex items-center justify-between">
-              <p className="text-sm text-[#3B5259]">
+              <p className="text-sm text-[#275240]">
                 {cats.length} gatos. Usá ↑ ↓ para elegir cuál va primero en el sitio.
               </p>
               <button type="button" onClick={addCat} className={btnPrimary}>
@@ -532,15 +532,15 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
               </button>
             </div>
             {cats.length === 0 && (
-              <p className="text-xs text-[#3B5259] bg-white border border-[#CCE7E5] rounded-xl p-4">
+              <p className="text-xs text-[#275240] bg-white border border-[#e2e8dc] rounded-xl p-4">
                 Todavía no hay gatos en la base. Mientras tanto el sitio muestra los de respaldo locales.
               </p>
             )}
             {cats.map((cat, idx) => (
-              <div key={cat.id} className="bg-white border border-[#CCE7E5] rounded-2xl p-4 space-y-3">
+              <div key={cat.id} className="bg-white border border-[#e2e8dc] rounded-2xl p-4 space-y-3">
                 <div className="flex gap-3 items-start">
                   <div className="flex flex-col items-center gap-1 shrink-0 pt-1">
-                    <span className="text-[10px] font-bold text-[#3B5259]">#{idx + 1}</span>
+                    <span className="text-[10px] font-bold text-[#275240]">#{idx + 1}</span>
                     <button
                       type="button"
                       className={btnGhost}
@@ -560,11 +560,11 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
                       <ChevronDown className="w-4 h-4" />
                     </button>
                   </div>
-                  <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#E8F4F2] shrink-0 border border-[#CCE7E5]">
+                  <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#e2e8dc] shrink-0 border border-[#e2e8dc]">
                     {cat.image ? (
                       <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#0E9F8F]">
+                      <div className="w-full h-full flex items-center justify-center text-[#275240]">
                         <Cat className="w-6 h-6" />
                       </div>
                     )}
@@ -623,7 +623,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
         )}
 
         {tab === 'rates' && (
-          <section className="bg-white border border-[#CCE7E5] rounded-2xl p-4 space-y-3">
+          <section className="bg-white border border-[#e2e8dc] rounded-2xl p-4 space-y-3">
             {(
               [
                 ['periodNotice', 'Vigencia'],
@@ -668,7 +668,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
         {tab === 'testimonials' && (
           <section className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text-sm text-[#3B5259]">{testimonials.length} reseñas</p>
+              <p className="text-sm text-[#275240]">{testimonials.length} reseñas</p>
               <div className="flex gap-2">
                 {testimonials.length === 0 && (
                   <button type="button" className={btnGhost} onClick={importLocalTestimonials}>
@@ -681,7 +681,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
               </div>
             </div>
             {testimonials.map((item, idx) => (
-              <div key={item.id} className="bg-white border border-[#CCE7E5] rounded-2xl p-4 space-y-2">
+              <div key={item.id} className="bg-white border border-[#e2e8dc] rounded-2xl p-4 space-y-2">
                 <label className={labelClass}>Cita</label>
                 <textarea
                   rows={3}
@@ -768,7 +768,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
         )}
 
         {tab === 'contact' && (
-          <section className="bg-white border border-[#CCE7E5] rounded-2xl p-4 space-y-3">
+          <section className="bg-white border border-[#e2e8dc] rounded-2xl p-4 space-y-3">
             {(
               [
                 ['whatsapp', 'WhatsApp (solo números, ej. 54911…)'],
@@ -808,13 +808,13 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
         {tab === 'neighborhoods' && (
           <section className="space-y-3">
             <div className="flex justify-between items-center">
-              <p className="text-sm text-[#3B5259]">{neighborhoods.length} barrios</p>
+              <p className="text-sm text-[#275240]">{neighborhoods.length} barrios</p>
               <button type="button" className={btnPrimary} onClick={addNeighborhood}>
                 <Plus className="w-3.5 h-3.5" /> Agregar
               </button>
             </div>
             {neighborhoods.map((n) => (
-              <div key={n.id} className="flex gap-2 bg-white border border-[#CCE7E5] rounded-xl p-3">
+              <div key={n.id} className="flex gap-2 bg-white border border-[#e2e8dc] rounded-xl p-3">
                 <input
                   className={inputClass}
                   value={n.name}
@@ -836,7 +836,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
         {tab === 'services' && (
           <section className="space-y-3">
             <div className="flex flex-wrap justify-between gap-2">
-              <p className="text-sm text-[#3B5259]">{services.length} servicios</p>
+              <p className="text-sm text-[#275240]">{services.length} servicios</p>
               <div className="flex gap-2">
                 {services.length === 0 && (
                   <button type="button" className={btnGhost} onClick={importLocalServices}>
@@ -849,7 +849,7 @@ export const AdminDashboard: React.FC<{ email: string }> = ({ email }) => {
               </div>
             </div>
             {services.map((item, idx) => (
-              <div key={item.id} className="bg-white border border-[#CCE7E5] rounded-2xl p-4 space-y-2">
+              <div key={item.id} className="bg-white border border-[#e2e8dc] rounded-2xl p-4 space-y-2">
                 <div className="grid sm:grid-cols-2 gap-2">
                   <div>
                     <label className={labelClass}>Título</label>

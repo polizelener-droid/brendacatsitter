@@ -19,37 +19,37 @@ export const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F2F9F8] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#e2e8dc] flex items-center justify-center p-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-white border border-[#CCE7E5] rounded-2xl p-6 shadow-sm"
+        className="w-full max-w-sm bg-white border border-[#e2e8dc] rounded-2xl p-6 shadow-sm"
       >
         <div className="flex items-center gap-2.5 mb-5">
-          <div className="w-10 h-10 rounded-full bg-[#0E9F8F] text-white flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-[#275240] text-white flex items-center justify-center">
             <Cat className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="font-display font-bold text-[#132E35]">Admin Brenda</h1>
-            <p className="text-xs text-[#3B5259]">Ingresá para editar el contenido</p>
+            <h1 className="font-display font-bold text-[#275240]">Admin Brenda</h1>
+            <p className="text-xs text-[#275240]">Ingresá para editar el contenido</p>
           </div>
         </div>
 
-        <label className="block text-xs font-bold text-[#132E35] mb-1">Email</label>
+        <label className="block text-xs font-bold text-[#275240] mb-1">Email</label>
         <input
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full mb-3 px-3 py-2.5 rounded-xl border border-[#CCE7E5] bg-[#F2F9F8] text-sm focus:outline-none focus:ring-2 focus:ring-[#0E9F8F]"
+          className="w-full mb-3 px-3 py-2.5 rounded-xl border border-[#e2e8dc] bg-[#e2e8dc] text-sm focus:outline-none focus:ring-2 focus:ring-[#275240]"
         />
 
-        <label className="block text-xs font-bold text-[#132E35] mb-1">Contraseña</label>
+        <label className="block text-xs font-bold text-[#275240] mb-1">Contraseña</label>
         <input
           type="password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-4 px-3 py-2.5 rounded-xl border border-[#CCE7E5] bg-[#F2F9F8] text-sm focus:outline-none focus:ring-2 focus:ring-[#0E9F8F]"
+          className="w-full mb-4 px-3 py-2.5 rounded-xl border border-[#e2e8dc] bg-[#e2e8dc] text-sm focus:outline-none focus:ring-2 focus:ring-[#275240]"
         />
 
         {error && (
@@ -61,12 +61,12 @@ export const AdminLogin: React.FC = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2.5 rounded-xl bg-[#0E9F8F] hover:bg-[#0B8276] text-white text-sm font-bold disabled:opacity-60"
+          className="w-full py-2.5 rounded-xl bg-[#275240] hover:bg-[#275240] text-white text-sm font-bold disabled:opacity-60"
         >
           {loading ? 'Entrando…' : 'Entrar'}
         </button>
 
-        <a href="/" className="block text-center text-xs text-[#3B5259] mt-4 hover:text-[#0B8276]">
+        <a href="/" className="block text-center text-xs text-[#275240] mt-4 hover:text-[#275240]">
           ← Volver al sitio
         </a>
       </form>

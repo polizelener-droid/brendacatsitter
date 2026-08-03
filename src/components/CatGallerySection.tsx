@@ -105,24 +105,24 @@ export const CatGallerySection: React.FC = () => {
   };
 
   return (
-    <section id="fotos" className="py-10 sm:py-12 bg-[#F2F9F8] border-t border-[#CCE7E5] overflow-x-hidden">
+    <section id="fotos" className="py-10 sm:py-12 bg-[#e2e8dc] border-t border-[#e2e8dc] overflow-x-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Clean Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 border-b border-[#CCE7E5] pb-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 border-b border-[#e2e8dc] pb-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-[#132E35] tracking-tight font-display">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#275240] tracking-tight font-display">
               Gatitos que cuido en sus casas
             </h2>
           </div>
 
-          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-[#CCE7E5] shrink-0 self-start md:self-auto">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-[#e2e8dc] shrink-0 self-start md:self-auto">
             <button
               onClick={() => setViewMode('carousel')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'carousel'
-                  ? 'bg-[#0E9F8F] text-white shadow-xs'
-                  : 'text-[#3B5259] hover:text-[#132E35]'
+                  ? 'bg-[#275240] text-white shadow-xs'
+                  : 'text-[#275240] hover:text-[#275240]'
               }`}
             >
               <Camera className="w-3.5 h-3.5" />
@@ -132,8 +132,8 @@ export const CatGallerySection: React.FC = () => {
               onClick={() => setViewMode('grid')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'grid'
-                  ? 'bg-[#0E9F8F] text-white shadow-xs'
-                  : 'text-[#3B5259] hover:text-[#132E35]'
+                  ? 'bg-[#275240] text-white shadow-xs'
+                  : 'text-[#275240] hover:text-[#275240]'
               }`}
             >
               <Grid className="w-3.5 h-3.5" />
@@ -151,17 +151,17 @@ export const CatGallerySection: React.FC = () => {
               <button
                 onClick={handlePrev}
                 aria-label="Anterior foto"
-                className="absolute -left-8 sm:-left-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#CCE7E5] text-[#132E35] shadow-sm flex items-center justify-center hover:bg-[#E0F2F1] active:scale-95 transition-all"
+                className="absolute -left-8 sm:-left-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#e2e8dc] text-[#275240] shadow-sm flex items-center justify-center hover:bg-[#e2e8dc] active:scale-95 transition-all"
               >
-                <ChevronLeft className="w-5 h-5 text-[#132E35]" />
+                <ChevronLeft className="w-5 h-5 text-[#275240]" />
               </button>
 
               {/* Main Photo Card */}
               <div
-                className="w-full min-w-0 bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-[#CCE7E5] group relative cursor-pointer"
+                className="w-full min-w-0 bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-[#e2e8dc] group relative cursor-pointer"
                 onClick={() => openLightbox(currentIndex)}
               >
-                <div className="relative aspect-[3/4] max-h-[52vh] mx-auto rounded-xl overflow-hidden bg-[#E8F4F2]">
+                <div className="relative aspect-[3/4] max-h-[52vh] mx-auto rounded-xl overflow-hidden bg-[#e2e8dc]">
                   <img
                     key={activeCat.id}
                     src={activeCat.image}
@@ -184,21 +184,21 @@ export const CatGallerySection: React.FC = () => {
               <button
                 onClick={handleNext}
                 aria-label="Siguiente foto"
-                className="absolute -right-8 sm:-right-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#CCE7E5] text-[#132E35] shadow-sm flex items-center justify-center hover:bg-[#E0F2F1] active:scale-95 transition-all"
+                className="absolute -right-8 sm:-right-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#e2e8dc] text-[#275240] shadow-sm flex items-center justify-center hover:bg-[#e2e8dc] active:scale-95 transition-all"
               >
-                <ChevronRight className="w-5 h-5 text-[#132E35]" />
+                <ChevronRight className="w-5 h-5 text-[#275240]" />
               </button>
             </div>
 
             {/* Photo Counter */}
             <div className="flex items-center justify-center my-2">
-              <span className="text-[11px] font-bold text-[#3B5259]">
+              <span className="text-[11px] font-bold text-[#275240]">
                 {currentIndex + 1} de {totalCats}
               </span>
             </div>
 
             {/* Thumbnails mini-slide */}
-            <div className="mt-1 pt-3 border-t border-[#CCE7E5]">
+            <div className="mt-1 pt-3 border-t border-[#e2e8dc]">
               <div
                 ref={thumbsRef}
                 onPointerDown={onThumbPointerDown}
@@ -219,7 +219,7 @@ export const CatGallerySection: React.FC = () => {
                         }}
                         className={`relative rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
                           isActive
-                            ? 'border-[#0E9F8F] ring-1 ring-[#E0F2F1] scale-105 z-10'
+                            ? 'border-[#275240] ring-1 ring-[#e2e8dc] scale-105 z-10'
                             : 'border-transparent opacity-55 hover:opacity-100'
                         }`}
                       >
@@ -244,7 +244,7 @@ export const CatGallerySection: React.FC = () => {
               <div
                 key={cat.id}
                 onClick={() => openLightbox(idx)}
-                className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-[#E8F4F2] border border-[#CCE7E5] cursor-pointer shadow-xs hover:shadow-md transition-all"
+                className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-[#e2e8dc] border border-[#e2e8dc] cursor-pointer shadow-xs hover:shadow-md transition-all"
               >
                 <img
                   src={cat.image}
