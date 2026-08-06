@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { HeaderNav } from '../components/HeaderNav';
 import { HeroSection } from '../components/HeroSection';
 import { ServicesSection } from '../components/ServicesSection';
+import { BudgetCalculatorSection } from '../components/BudgetCalculatorSection';
 import { AboutSection } from '../components/AboutSection';
 import { WhyHomeCareSection } from '../components/WhyHomeCareSection';
 import { CatGallerySection } from '../components/CatGallerySection';
@@ -23,6 +24,7 @@ export const HomePage: React.FC = () => {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
+        <BudgetCalculatorSection />
         <WhyHomeCareSection />
         <CatGallerySection />
         <TestimonialsSection />

@@ -28,6 +28,7 @@ export const HeaderNav: React.FC = () => {
   const navLinks = [
     { name: 'Sobre Mí', href: '#sobre-mi' },
     { name: 'Servicios & Tarifas', href: '#servicios' },
+    { name: 'Presupuesto', href: '#presupuesto' },
     { name: 'Clientes Felices', href: '#fotos' },
     { name: 'Testimonios', href: '#resenas' },
     { name: 'Cobertura', href: '#cobertura' },
@@ -65,7 +66,7 @@ export const HeaderNav: React.FC = () => {
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#e2e8dc] shadow-2xs">
+          <nav className="hidden xl:flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#e2e8dc] shadow-2xs">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -82,7 +83,7 @@ export const HeaderNav: React.FC = () => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
-            className="lg:hidden p-2 rounded-xl text-[#275240] bg-white border border-[#e2e8dc] hover:bg-[#e2e8dc] transition-colors shadow-2xs shrink-0"
+            className="xl:hidden p-2 rounded-xl text-[#275240] bg-white border border-[#e2e8dc] hover:bg-[#e2e8dc] transition-colors shadow-2xs shrink-0"
             aria-label="Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -91,7 +92,7 @@ export const HeaderNav: React.FC = () => {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-3 pt-3 pb-4 px-3 border border-[#e2e8dc] bg-[#e2e8dc]/98 backdrop-blur-xl rounded-2xl shadow-xl">
+          <div className="xl:hidden mt-3 pt-3 pb-4 px-3 border border-[#e2e8dc] bg-[#e2e8dc]/98 backdrop-blur-xl rounded-2xl shadow-xl">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
