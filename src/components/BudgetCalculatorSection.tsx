@@ -4,7 +4,7 @@ import { useContent } from '../content/ContentContext';
 
 const WHATSAPP_NUMBER = '5491161386748';
 const EXTRA_CAT_RATE = 5_000;
-const MAX_TOTAL_DAYS = 60;
+const MAX_TOTAL_DAYS = 90;
 const MAX_CATS = 10;
 
 function parseArgentinePrice(value: string, fallback: number): number {
