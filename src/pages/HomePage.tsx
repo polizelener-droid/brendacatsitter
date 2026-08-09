@@ -24,9 +24,9 @@ export const HomePage: React.FC = () => {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <BudgetCalculatorSection />
-        <WhyHomeCareSection />
         <CatGallerySection />
+        <WhyHomeCareSection />
+        <BudgetCalculatorSection />
         <TestimonialsSection />
         <CoverageSection />
         <ContactSection />
