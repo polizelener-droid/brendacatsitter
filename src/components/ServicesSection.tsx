@@ -1,5 +1,5 @@
 import React from 'react';
-import { Utensils, Sparkles, Heart, Camera, Clock, Home, Check, Calendar, Key, CreditCard, AlertCircle, Info } from 'lucide-react';
+import { Utensils, Sparkles, Heart, Camera, Clock, Home, Check, Calendar, Key, CreditCard, AlertCircle, Info, MessageCircle } from 'lucide-react';
 import type { ServiceItem } from '../data/catData';
 import { useContent } from '../content/ContentContext';
 
@@ -13,7 +13,20 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export const ServicesSection: React.FC = () => {
-  const { services, rates } = useContent();
+  const { services, rates, contact } = useContent();
+  const whatsappNumber = contact.whatsapp.replace(/\D/g, '') || '5491161386748';
+  const virtualMeetingMessage =
+    'Hola Brenda, me gustaría coordinar una charla virtual gratuita de 10 minutos para conocerte antes de reservar.';
+  const virtualMeetingUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(virtualMeetingMessage)}`;
+  const isVirtualMeetingService = (title: string) => {
+    const normalizedTitle = title.toLocaleLowerCase('es');
+    return (
+      normalizedTitle.includes('charla virtual') ||
+      normalizedTitle.includes('entrevista virtual') ||
+      normalizedTitle.includes('videollamada') ||
+      normalizedTitle.includes('meet')
+    );
+  };
 
   return (
     <section id="servicios" className="py-12 sm:py-16 bg-[#e2e8dc]">
@@ -46,6 +59,18 @@ export const ServicesSection: React.FC = () => {
                     <Check className="w-3.5 h-3.5 text-[#275240] shrink-0" />
                     <span>{service.highlight}</span>
                   </div>
+                )}
+                {isVirtualMeetingService(service.title) && (
+                  <a
+                    href={virtualMeetingUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#275240] px-3 py-2 text-[11px] font-bold text-white transition-colors hover:bg-[#1f4033] focus:outline-none focus:ring-2 focus:ring-[#275240] focus:ring-offset-2"
+                    aria-label="Agendar charla virtual gratuita por WhatsApp"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 shrink-0" />
+                    Agendar charla gratuita
+                  </a>
                 )}
               </div>
             </div>
