@@ -16,7 +16,7 @@ export const ServicesSection: React.FC = () => {
   const { services, rates, contact } = useContent();
   const whatsappNumber = contact.whatsapp.replace(/\D/g, '') || '5491161386748';
   const virtualMeetingMessage =
-    'Hola Brenda, me gustaría coordinar una charla virtual gratuita de 10 minutos para conocerte antes de reservar.';
+    'Hola Brenda, me gustaría coordinar una charla virtual gratuita de 15 minutos para conocerte antes de reservar.';
   const virtualMeetingUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(virtualMeetingMessage)}`;
   const isVirtualMeetingService = (title: string) => {
     const normalizedTitle = title.toLocaleLowerCase('es');
