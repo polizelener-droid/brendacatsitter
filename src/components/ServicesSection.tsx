@@ -1,6 +1,6 @@
 import React from 'react';
 import { Utensils, Sparkles, Heart, Camera, Clock, Home, Check, Calendar, Key, CreditCard, AlertCircle, Info, MessageCircle } from 'lucide-react';
-import type { ServiceItem } from '../data/catData';
+import { SERVICES, type ServiceItem } from '../data/catData';
 import { useContent } from '../content/ContentContext';
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -27,6 +27,24 @@ export const ServicesSection: React.FC = () => {
       normalizedTitle.includes('meet')
     );
   };
+  const isPaidInterviewService = (service: ServiceItem) => {
+    const normalizedTitle = service.title.toLocaleLowerCase('es');
+    return service.id === 'home-interview' || normalizedTitle.includes('entrevista previa');
+  };
+
+  const virtualMeetingService = services.find((service) =>
+    isVirtualMeetingService(service.title),
+  );
+  const configuredVisitServices = services.filter(
+    (service) =>
+      !isVirtualMeetingService(service.title) && !isPaidInterviewService(service),
+  );
+  const defaultVisitServices = SERVICES.filter(
+    (service) =>
+      !isVirtualMeetingService(service.title) && !isPaidInterviewService(service),
+  );
+  const visitServices =
+    configuredVisitServices.length > 0 ? configuredVisitServices : defaultVisitServices;
 
   return (
     <section id="servicios" className="py-12 sm:py-16 bg-[#e2e8dc]">
@@ -43,7 +61,7 @@ export const ServicesSection: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-          {services.map((service: ServiceItem) => (
+          {visitServices.map((service: ServiceItem) => (
             <div
               key={service.id}
               className="group p-4 rounded-2xl bg-white border border-[#e2e8dc] hover:border-[#e2e8dc] transition-all hover:shadow-sm flex items-start gap-3.5"
@@ -60,22 +78,49 @@ export const ServicesSection: React.FC = () => {
                     <span>{service.highlight}</span>
                   </div>
                 )}
-                {isVirtualMeetingService(service.title) && (
-                  <a
-                    href={virtualMeetingUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#275240] px-3 py-2 text-[11px] font-bold text-white transition-colors hover:bg-[#1f4033] focus:outline-none focus:ring-2 focus:ring-[#275240] focus:ring-offset-2"
-                    aria-label="Agendar charla virtual gratuita por WhatsApp"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5 shrink-0" />
-                    Agendar charla gratuita
-                  </a>
-                )}
               </div>
             </div>
           ))}
         </div>
+
+        {virtualMeetingService && (
+          <div className="mb-10 rounded-3xl border border-[#275240]/15 bg-white p-5 shadow-sm sm:p-6">
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex min-w-0 items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e2e8dc] text-[#275240]">
+                  <MessageCircle className="h-6 w-6" />
+                </div>
+                <div className="min-w-0">
+                  <span className="mb-2 inline-flex rounded-full bg-[#e2e8dc] px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-[#275240]">
+                    Nuevo servicio
+                  </span>
+                  <h3 className="font-display text-xl font-extrabold text-[#275240] sm:text-2xl">
+                    {virtualMeetingService.title}
+                  </h3>
+                  <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-[#275240] sm:text-sm">
+                    {virtualMeetingService.description}
+                  </p>
+                  {virtualMeetingService.highlight && (
+                    <div className="mt-3 flex items-center gap-1.5 text-xs font-bold text-[#275240]">
+                      <Check className="h-4 w-4 shrink-0" />
+                      <span>{virtualMeetingService.highlight}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <a
+                href={virtualMeetingUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#275240] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#1f4033] focus:outline-none focus:ring-2 focus:ring-[#275240] focus:ring-offset-2 lg:w-auto"
+                aria-label="Agendar charla virtual gratuita por WhatsApp"
+              >
+                <MessageCircle className="h-4 w-4 shrink-0" />
+                Agendar charla gratuita
+              </a>
+            </div>
+          </div>
+        )}
 
         <div className="bg-gradient-to-br from-white via-[#e2e8dc] to-[#e2e8dc] text-[#275240] rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden border border-[#e2e8dc]">
           <div className="relative z-10">
