@@ -60,13 +60,13 @@ export const HeaderNav: React.FC = () => {
             </div>
           </a>
 
-          <nav className="hidden items-center gap-1 rounded-full border border-[#275240]/10 bg-white/85 px-3 py-1.5 shadow-2xs backdrop-blur-md lg:flex">
+          <nav className="hidden items-center gap-1 rounded-full border border-[#275240]/15 bg-[#e2e8dc] px-3 py-1.5 backdrop-blur-md lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="rounded-full px-3 py-1.5 text-xs font-semibold text-[#275240] transition-colors hover:bg-[#e2e8dc]"
+                className="rounded-full px-3 py-1.5 text-xs font-semibold text-[#275240] transition-colors hover:bg-[#d7dfd1]"
               >
                 {link.name}
               </a>
@@ -76,7 +76,7 @@ export const HeaderNav: React.FC = () => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
-            className="shrink-0 rounded-xl border border-[#275240]/10 bg-white p-2 text-[#275240] shadow-2xs transition-colors hover:bg-[#e2e8dc] lg:hidden"
+            className="shrink-0 rounded-xl border border-[#275240]/15 bg-[#e2e8dc] p-2 text-[#275240] transition-colors hover:bg-[#d7dfd1] lg:hidden"
             aria-label="Menú"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -84,14 +84,14 @@ export const HeaderNav: React.FC = () => {
         </div>
 
         {mobileMenuOpen && (
-          <div className="mt-3 rounded-2xl border border-[#275240]/10 bg-[#e2e8dc]/98 px-3 pb-4 pt-3 shadow-xl backdrop-blur-xl lg:hidden">
+          <div className="mt-3 rounded-2xl border border-[#275240]/15 bg-[#e2e8dc]/98 px-3 pb-4 pt-3 shadow-xl backdrop-blur-xl lg:hidden">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="rounded-xl px-3.5 py-2 text-sm font-semibold text-[#275240] transition-colors hover:bg-white/60"
+                  className="rounded-xl px-3.5 py-2 text-sm font-semibold text-[#275240] transition-colors hover:bg-[#d7dfd1]"
                 >
                   {link.name}
                 </a>
