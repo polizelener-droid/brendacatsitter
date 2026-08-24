@@ -1,5 +1,6 @@
 import React from 'react';
 import { Clock3, MapPinned, MapPin, PawPrint } from 'lucide-react';
+import cabaCoverageMap from '../assets/cabaCoverageMap';
 
 type ZoneKey = 'zone1' | 'zone2' | 'zone3';
 
@@ -99,74 +100,14 @@ const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => (
   </div>
 );
 
-const CabaMiniMap: React.FC = () => (
-  <div className="mt-6 flex min-h-[280px] flex-1 items-center justify-center overflow-hidden rounded-3xl border border-[#275240]/10 bg-gradient-to-br from-[#fbfcfa] to-[#f4f6f1] p-4 sm:p-5">
-    <div className="w-full max-w-[420px]">
-      <svg
-        viewBox="0 0 420 320"
-        className="h-auto w-full"
-        role="img"
-        aria-label="Mapa ilustrativo de la Ciudad de Buenos Aires con las tres zonas de cobertura"
-      >
-        <defs>
-          <filter id="mapShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="5" floodColor="#275240" floodOpacity="0.10" />
-          </filter>
-          <clipPath id="cabaShape">
-            <path d="M103 28C143 12 197 15 243 31C285 45 329 73 349 111C368 147 367 191 345 226C322 263 282 288 236 298C191 308 145 300 109 279C74 258 48 224 43 185C38 147 49 105 66 74C77 54 87 38 103 28Z" />
-          </clipPath>
-        </defs>
-
-        <path
-          d="M103 28C143 12 197 15 243 31C285 45 329 73 349 111C368 147 367 191 345 226C322 263 282 288 236 298C191 308 145 300 109 279C74 258 48 224 43 185C38 147 49 105 66 74C77 54 87 38 103 28Z"
-          fill="#ffffff"
-          stroke="#275240"
-          strokeOpacity="0.18"
-          strokeWidth="3"
-          filter="url(#mapShadow)"
-        />
-
-        <g clipPath="url(#cabaShape)">
-          <path d="M27 28H251V158H27Z" fill="#dff1fb" />
-          <path d="M176 76H391V250H176Z" fill="#f8ddea" />
-          <path d="M245 208H400V329H245Z" fill="#f9f1c9" />
-
-          <path d="M142 7L184 315" stroke="#ffffff" strokeOpacity="0.85" strokeWidth="3" />
-          <path d="M60 146L358 105" stroke="#ffffff" strokeOpacity="0.8" strokeWidth="2.5" />
-          <path d="M70 230L343 180" stroke="#ffffff" strokeOpacity="0.8" strokeWidth="2.5" />
-          <path d="M224 18L252 300" stroke="#ffffff" strokeOpacity="0.75" strokeWidth="2" />
-          <path d="M103 77L325 264" stroke="#ffffff" strokeOpacity="0.7" strokeWidth="2" />
-        </g>
-
-        <path
-          d="M103 28C143 12 197 15 243 31C285 45 329 73 349 111C368 147 367 191 345 226C322 263 282 288 236 298C191 308 145 300 109 279C74 258 48 224 43 185C38 147 49 105 66 74C77 54 87 38 103 28Z"
-          fill="none"
-          stroke="#275240"
-          strokeOpacity="0.22"
-          strokeWidth="3"
-        />
-
-        <g fontFamily="sans-serif" fontWeight="800">
-          <circle cx="145" cy="92" r="18" fill="#ffffff" fillOpacity="0.9" />
-          <text x="145" y="98" textAnchor="middle" fontSize="17" fill="#4a7ea0">1</text>
-
-          <circle cx="252" cy="158" r="18" fill="#ffffff" fillOpacity="0.9" />
-          <text x="252" y="164" textAnchor="middle" fontSize="17" fill="#a46a87">2</text>
-
-          <circle cx="300" cy="245" r="18" fill="#ffffff" fillOpacity="0.9" />
-          <text x="300" y="251" textAnchor="middle" fontSize="17" fill="#9a8735">3</text>
-        </g>
-
-        <text x="333" y="79" fontFamily="sans-serif" fontSize="12" fontWeight="700" fill="#275240" fillOpacity="0.42" transform="rotate(18 333 79)">
-          Río de la Plata
-        </text>
-      </svg>
-
-      <div className="mt-1 flex items-center justify-center gap-2 text-center text-[11px] font-semibold text-[#275240]/55 sm:text-xs">
-        <MapPinned className="h-3.5 w-3.5" aria-hidden="true" />
-        <span>Mapa ilustrativo de CABA</span>
-      </div>
-    </div>
+const CabaCoverageMap: React.FC = () => (
+  <div className="mt-6 flex flex-1 items-center justify-center overflow-hidden rounded-3xl border border-[#275240]/10 bg-[#fffaf3] p-2 sm:p-3">
+    <img
+      src={cabaCoverageMap}
+      alt="Mapa ilustrado de las zonas de cobertura de Brenda Cat Sitter en CABA y zona norte"
+      className="h-auto w-full rounded-2xl object-contain"
+      loading="lazy"
+    />
   </div>
 );
 
@@ -218,7 +159,7 @@ export const CoveragePricingMap: React.FC = () => {
             </span>
           </div>
 
-          <CabaMiniMap />
+          <CabaCoverageMap />
         </div>
 
         <div className="space-y-3">
