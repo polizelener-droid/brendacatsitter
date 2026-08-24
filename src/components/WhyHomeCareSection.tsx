@@ -35,8 +35,8 @@ export const WhyHomeCareSection: React.FC = () => {
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {visitItems.map((item) => (
-            <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-[#275240]/10 bg-white p-4">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#e2e8dc] text-[#275240]">
+            <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-[#275240]/15 bg-[#e2e8dc] p-4">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#275240]/10 bg-[#e2e8dc] text-[#275240]">
                 {item.icon}
               </div>
               <div>
