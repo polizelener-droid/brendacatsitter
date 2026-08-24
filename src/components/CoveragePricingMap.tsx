@@ -10,22 +10,22 @@ type NeighborhoodTile = {
 
 const zoneStyles: Record<ZoneKey, { tile: string; dot: string; card: string; title: string }> = {
   zone1: {
-    tile: 'border-[#9eb58f] bg-[#dfe8d8] text-[#275240]',
-    dot: 'bg-[#789266]',
-    card: 'border-[#9eb58f] bg-[#f7faf5]',
-    title: 'text-[#466838]',
+    tile: 'border-[#a8c9df] bg-[#dff1fb] text-[#3e6f8f]',
+    dot: 'bg-[#8fc1df]',
+    card: 'border-[#a8c9df] bg-[#f4fbff]',
+    title: 'text-[#4a7ea0]',
   },
   zone2: {
-    tile: 'border-[#95bddb] bg-[#dcecf7] text-[#245a78]',
-    dot: 'bg-[#6fa5ca]',
-    card: 'border-[#95bddb] bg-[#f5faff]',
-    title: 'text-[#2d78a8]',
+    tile: 'border-[#dfb4c9] bg-[#f8ddea] text-[#935b77]',
+    dot: 'bg-[#e4a9c6]',
+    card: 'border-[#dfb4c9] bg-[#fff6fa]',
+    title: 'text-[#a46a87]',
   },
   zone3: {
-    tile: 'border-[#d9aa8d] bg-[#f5dfd2] text-[#7e4935]',
-    dot: 'bg-[#d58e68]',
-    card: 'border-[#d9aa8d] bg-[#fff8f4]',
-    title: 'text-[#9a5d42]',
+    tile: 'border-[#ddd095] bg-[#f9f1c9] text-[#8d7a2d]',
+    dot: 'bg-[#e5d57e]',
+    card: 'border-[#ddd095] bg-[#fffdf2]',
+    title: 'text-[#9a8735]',
   },
 };
 
@@ -135,15 +135,15 @@ export const CoveragePricingMap: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[11px] font-bold sm:text-xs">
-            <span className="inline-flex items-center gap-2 text-[#466838]">
-              <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone1.dot}`} /> Zona 1
+          <div className="mt-5 flex flex-wrap gap-x-7 gap-y-3 text-sm font-extrabold sm:text-base">
+            <span className={`inline-flex items-center gap-2.5 ${zoneStyles.zone1.title}`}>
+              <span className={`h-3.5 w-3.5 rounded-full ${zoneStyles.zone1.dot}`} /> Zona 1
             </span>
-            <span className="inline-flex items-center gap-2 text-[#2d78a8]">
-              <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone2.dot}`} /> Zona 2
+            <span className={`inline-flex items-center gap-2.5 ${zoneStyles.zone2.title}`}>
+              <span className={`h-3.5 w-3.5 rounded-full ${zoneStyles.zone2.dot}`} /> Zona 2
             </span>
-            <span className="inline-flex items-center gap-2 text-[#9a5d42]">
-              <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone3.dot}`} /> Zona 3
+            <span className={`inline-flex items-center gap-2.5 ${zoneStyles.zone3.title}`}>
+              <span className={`h-3.5 w-3.5 rounded-full ${zoneStyles.zone3.dot}`} /> Zona 3
             </span>
           </div>
         </div>
@@ -152,12 +152,12 @@ export const CoveragePricingMap: React.FC = () => {
           {zones.map((zone) => (
             <div key={zone.key} className={`rounded-3xl border p-4 sm:p-5 ${zoneStyles[zone.key].card}`}>
               <div className="mb-3 flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-current bg-white/80">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-current bg-white/80">
                   <PawPrint className={`h-5 w-5 ${zoneStyles[zone.key].title}`} aria-hidden="true" />
                 </div>
                 <div>
-                  <h5 className={`font-display text-xl font-black ${zoneStyles[zone.key].title}`}>{zone.name}</h5>
-                  <p className={`text-xs font-bold ${zoneStyles[zone.key].title}`}>{zone.subtitle}</p>
+                  <h5 className={`font-display text-2xl font-black sm:text-3xl ${zoneStyles[zone.key].title}`}>{zone.name}</h5>
+                  <p className={`text-sm font-bold sm:text-base ${zoneStyles[zone.key].title}`}>{zone.subtitle}</p>
                 </div>
               </div>
 
