@@ -1,6 +1,5 @@
 import React from 'react';
 import { Clock3, MapPinned, MapPin, PawPrint } from 'lucide-react';
-import cabaCoverageMap from '../assets/cabaCoverageMap';
 
 type ZoneKey = 'zone1' | 'zone2' | 'zone3';
 
@@ -100,17 +99,6 @@ const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => (
   </div>
 );
 
-const CabaCoverageMap: React.FC = () => (
-  <div className="mt-6 flex flex-1 items-center justify-center overflow-hidden rounded-3xl border border-[#275240]/10 bg-[#fffaf3] p-2 sm:p-3">
-    <img
-      src={cabaCoverageMap}
-      alt="Mapa ilustrado de las zonas de cobertura de Brenda Cat Sitter en CABA y zona norte"
-      className="h-auto w-full rounded-2xl object-contain"
-      loading="lazy"
-    />
-  </div>
-);
-
 export const CoveragePricingMap: React.FC = () => {
   return (
     <div className="mt-8 overflow-hidden rounded-[2rem] border border-[#275240]/15 bg-[#fffdf8] shadow-sm">
@@ -158,8 +146,6 @@ export const CoveragePricingMap: React.FC = () => {
               <span className={`h-3.5 w-3.5 rounded-full ${zoneStyles.zone3.dot}`} /> Zona 3
             </span>
           </div>
-
-          <CabaCoverageMap />
         </div>
 
         <div className="space-y-3">
