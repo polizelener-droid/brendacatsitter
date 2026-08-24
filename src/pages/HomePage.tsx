@@ -17,7 +17,7 @@ export const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#fffdf8] text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
+    <div className="min-h-screen overflow-x-hidden bg-[#e2e8dc] text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
       <HeaderNav />
       <main>
         <HeroSection />
