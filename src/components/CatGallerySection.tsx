@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import type { CatClient } from '../data/catData';
+import { CAT_CLIENTS, type CatClient } from '../data/catData';
 import { useContent } from '../content/ContentContext';
 import { ChevronLeft, ChevronRight, Maximize2, X, Grid, Camera } from 'lucide-react';
 
 export const CatGallerySection: React.FC = () => {
-  const { cats } = useContent();
+  const { cats: remoteCats } = useContent();
+  const cats = remoteCats?.length ? remoteCats : CAT_CLIENTS;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -50,9 +51,7 @@ export const CatGallerySection: React.FC = () => {
     if (!track) return;
 
     const btn = (e.target as HTMLElement).closest('button');
-    const clickIndex = btn
-      ? thumbBtnRefs.current.findIndex((el) => el === btn)
-      : -1;
+    const clickIndex = btn ? thumbBtnRefs.current.findIndex((el) => el === btn) : -1;
 
     dragState.current = {
       active: true,
@@ -96,44 +95,37 @@ export const CatGallerySection: React.FC = () => {
     dragState.current.clickIndex = null;
   };
 
-  const openLightbox = (index: number) => {
-    setSelectedPhotoIndex(index);
-  };
-
-  const closeLightbox = () => {
-    setSelectedPhotoIndex(null);
-  };
+  const openLightbox = (index: number) => setSelectedPhotoIndex(index);
+  const closeLightbox = () => setSelectedPhotoIndex(null);
 
   return (
-    <section id="fotos" className="py-10 sm:py-12 bg-[#e2e8dc] border-t border-[#e2e8dc] overflow-x-hidden">
+    <section id="fotos" className="bg-[#fffdf8] py-10 sm:py-12 overflow-x-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Clean Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 border-b border-[#e2e8dc] pb-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-[#275240]/10">
           <div>
             <h2 className="text-xl sm:text-2xl font-extrabold text-[#275240] tracking-tight font-display">
-              Gatitos que cuido en sus casas
+              Algunos de los michis que cuidé
             </h2>
           </div>
 
-          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-[#e2e8dc] shrink-0 self-start md:self-auto">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-[#275240]/10 shrink-0 self-start md:self-auto">
             <button
               onClick={() => setViewMode('carousel')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'carousel'
                   ? 'bg-[#275240] text-white shadow-xs'
-                  : 'text-[#275240] hover:text-[#275240]'
+                  : 'text-[#275240] hover:bg-[#e2e8dc]/50'
               }`}
             >
               <Camera className="w-3.5 h-3.5" />
-              <span>Ver de a uno</span>
+              <span>De a uno</span>
             </button>
             <button
               onClick={() => setViewMode('grid')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 viewMode === 'grid'
                   ? 'bg-[#275240] text-white shadow-xs'
-                  : 'text-[#275240] hover:text-[#275240]'
+                  : 'text-[#275240] hover:bg-[#e2e8dc]/50'
               }`}
             >
               <Grid className="w-3.5 h-3.5" />
@@ -142,23 +134,19 @@ export const CatGallerySection: React.FC = () => {
           </div>
         </div>
 
-        {/* CAROUSEL VIEW */}
         {viewMode === 'carousel' ? (
           <div className="max-w-sm mx-auto w-full px-8 sm:px-10">
             <div className="relative flex items-center justify-center py-1">
-              
-              {/* Prev Button */}
               <button
                 onClick={handlePrev}
                 aria-label="Anterior foto"
-                className="absolute -left-8 sm:-left-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#e2e8dc] text-[#275240] shadow-sm flex items-center justify-center hover:bg-[#e2e8dc] active:scale-95 transition-all"
+                className="absolute -left-8 sm:-left-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#275240]/10 text-[#275240] shadow-sm flex items-center justify-center hover:bg-[#e2e8dc] active:scale-95 transition-all"
               >
-                <ChevronLeft className="w-5 h-5 text-[#275240]" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
 
-              {/* Main Photo Card */}
               <div
-                className="w-full min-w-0 bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-[#e2e8dc] group relative cursor-pointer"
+                className="w-full min-w-0 bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-[#275240]/10 group relative cursor-pointer"
                 onClick={() => openLightbox(currentIndex)}
               >
                 <div className="relative aspect-[3/4] max-h-[52vh] mx-auto rounded-xl overflow-hidden bg-[#e2e8dc]">
@@ -166,39 +154,34 @@ export const CatGallerySection: React.FC = () => {
                     key={activeCat.id}
                     src={activeCat.image}
                     alt={`Gato ${activeCat.name}`}
-                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-102"
+                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                     referrerPolicy="no-referrer"
                   />
-
                   <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white p-1.5 rounded-full opacity-80 group-hover:opacity-100 transition-opacity">
                     <Maximize2 className="w-3.5 h-3.5" />
                   </div>
-
                   <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 via-black/30 to-transparent text-white">
                     <h3 className="text-xl font-bold font-display">{activeCat.name}</h3>
                   </div>
                 </div>
               </div>
 
-              {/* Next Button */}
               <button
                 onClick={handleNext}
                 aria-label="Siguiente foto"
-                className="absolute -right-8 sm:-right-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#e2e8dc] text-[#275240] shadow-sm flex items-center justify-center hover:bg-[#e2e8dc] active:scale-95 transition-all"
+                className="absolute -right-8 sm:-right-10 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-[#275240]/10 text-[#275240] shadow-sm flex items-center justify-center hover:bg-[#e2e8dc] active:scale-95 transition-all"
               >
-                <ChevronRight className="w-5 h-5 text-[#275240]" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Photo Counter */}
             <div className="flex items-center justify-center my-2">
               <span className="text-[11px] font-bold text-[#275240]">
                 {currentIndex + 1} de {totalCats}
               </span>
             </div>
 
-            {/* Thumbnails mini-slide */}
-            <div className="mt-1 pt-3 border-t border-[#e2e8dc]">
+            <div className="mt-1 pt-3 border-t border-[#275240]/10">
               <div
                 ref={thumbsRef}
                 onPointerDown={onThumbPointerDown}
@@ -238,13 +221,12 @@ export const CatGallerySection: React.FC = () => {
             </div>
           </div>
         ) : (
-          /* GRID VIEW */
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {cats.map((cat: CatClient, idx: number) => (
               <div
                 key={cat.id}
                 onClick={() => openLightbox(idx)}
-                className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-[#e2e8dc] border border-[#e2e8dc] cursor-pointer shadow-xs hover:shadow-md transition-all"
+                className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-[#e2e8dc] border border-[#275240]/10 cursor-pointer shadow-xs hover:shadow-md transition-all"
               >
                 <img
                   src={cat.image}
@@ -253,19 +235,16 @@ export const CatGallerySection: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                  <div>
-                    <h3 className="text-base font-bold text-white font-display leading-tight">{cat.name}</h3>
-                  </div>
+                  <h3 className="text-base font-bold text-white font-display leading-tight">{cat.name}</h3>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* LIGHTBOX MODAL */}
         {selectedPhotoIndex !== null && (
           <div
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
             onClick={closeLightbox}
           >
             <button
@@ -275,7 +254,6 @@ export const CatGallerySection: React.FC = () => {
             >
               <X className="w-6 h-6" />
             </button>
-
             <div
               className="max-w-3xl max-h-[85vh] flex flex-col items-center justify-center text-center"
               onClick={(e) => e.stopPropagation()}
@@ -294,7 +272,6 @@ export const CatGallerySection: React.FC = () => {
             </div>
           </div>
         )}
-
       </div>
     </section>
   );
