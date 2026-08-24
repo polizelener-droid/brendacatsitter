@@ -2,6 +2,7 @@ import React from 'react';
 import { Utensils, Sparkles, Heart, Camera, Clock, Home, Check, Calendar, Key, CreditCard, AlertCircle, Info, MessageCircle } from 'lucide-react';
 import { SERVICES, type ServiceItem } from '../data/catData';
 import { useContent } from '../content/ContentContext';
+import { CoveragePricingMap } from './CoveragePricingMap';
 
 const iconMap: Record<string, React.ReactNode> = {
   Clock: <Clock className="w-6 h-6 text-[#275240]" />,
@@ -162,7 +163,9 @@ export const ServicesSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 pt-6 border-t border-[#e2e8dc]">
+            <CoveragePricingMap />
+
+            <div className="grid md:grid-cols-3 gap-6 pt-6 mt-8 border-t border-[#e2e8dc]">
               <div className="flex gap-3">
                 <div className="w-9 h-9 rounded-xl bg-[#e2e8dc] text-[#275240] flex items-center justify-center shrink-0 border border-[#e2e8dc] mt-0.5">
                   <Key className="w-4 h-4" />
