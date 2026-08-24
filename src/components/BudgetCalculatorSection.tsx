@@ -81,21 +81,21 @@ export const BudgetCalculatorSection: React.FC = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section id="presupuesto" className="bg-[#e2e8dc] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <div className="mx-auto max-w-4xl rounded-[2rem] border border-[#275240]/15 bg-white p-5 shadow-[0_18px_55px_rgba(39,82,64,0.10)] sm:p-8 lg:p-10">
-        <div className="mx-auto mb-8 max-w-2xl text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#275240] text-white shadow-sm">
-            <Calculator className="h-6 w-6" aria-hidden="true" />
+    <section id="presupuesto" className="bg-[#fffdf8] px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+      <div className="mx-auto max-w-4xl rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-8 lg:p-10">
+        <div className="mx-auto mb-7 max-w-2xl text-center">
+          <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#275240] text-white">
+            <Calculator className="h-5 w-5" aria-hidden="true" />
           </div>
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#275240] sm:text-4xl">
             Calculá tu presupuesto
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#275240]/80 sm:text-base">
-            Elegí tu zona, la cantidad de gatos y los días del servicio.
+          <p className="mt-2 text-sm text-[#275240]/70 sm:text-base">
+            Elegí zona, cantidad de gatos y días.
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           <div>
             <div className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
               <MapPin className="h-4 w-4" aria-hidden="true" />
@@ -119,9 +119,6 @@ export const BudgetCalculatorSection: React.FC = () => {
                 );
               })}
             </div>
-            <p className="mt-2 text-center text-[11px] text-[#275240]/60 sm:text-xs">
-              Podés ver qué barrios incluye cada zona en el mapa de arriba.
-            </p>
           </div>
 
           <div>
@@ -148,8 +145,8 @@ export const BudgetCalculatorSection: React.FC = () => {
               <CalendarDays className="h-4 w-4" aria-hidden="true" />
               ¿Qué días incluye el servicio?
             </legend>
-            <p id="day-limit-help" className="mb-3 text-xs text-[#275240]/60">
-              Máximo: {MAX_TOTAL_DAYS} días en total.
+            <p id="day-limit-help" className="mb-3 text-xs text-[#275240]/55">
+              Máximo {MAX_TOTAL_DAYS} días.
             </p>
             <div className="grid gap-4 md:grid-cols-3">
               <DayInput
@@ -191,18 +188,16 @@ export const BudgetCalculatorSection: React.FC = () => {
           <strong className="mt-1 block font-display text-4xl font-black text-[#275240] sm:text-5xl">
             {exceedsDayLimit ? '—' : formatPesos(total)}
           </strong>
-          <p className="mt-2 text-sm text-[#275240]/80">
+          <p className="mt-2 text-sm text-[#275240]/75">
             Zona {zone} · {totalDays} {totalDays === 1 ? 'día' : 'días'} · {cats} {cats === 1 ? 'gato' : 'gatos'}
           </p>
           {!exceedsDayLimit && extraCats > 0 && (
-            <p className="mt-1 text-xs font-semibold text-[#275240]/70">
-              Incluye adicional por cantidad de gatos.
-            </p>
+            <p className="mt-1 text-xs font-semibold text-[#275240]/65">Incluye adicional por cantidad de gatos.</p>
           )}
         </div>
 
-        <p className="mt-5 text-center text-xs leading-relaxed text-[#275240]/65 sm:text-sm">
-          La entrevista previa no está incluida en este cálculo. Desde el cuarto gato se aplica un adicional por visita.
+        <p className="mt-4 text-center text-xs leading-relaxed text-[#275240]/60">
+          La entrevista previa se calcula aparte. Desde el cuarto gato se aplica un adicional por visita.
         </p>
 
         {exceedsDayLimit ? (
@@ -210,7 +205,7 @@ export const BudgetCalculatorSection: React.FC = () => {
             type="button"
             disabled
             aria-describedby="day-limit-error"
-            className="mt-6 flex min-h-14 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-6 py-4 text-center text-sm font-bold text-white sm:text-base"
+            className="mt-5 flex min-h-14 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-6 py-4 text-center text-sm font-bold text-white sm:text-base"
           >
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
             Corregí la cantidad de días para continuar
@@ -220,7 +215,7 @@ export const BudgetCalculatorSection: React.FC = () => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#275240] px-6 py-4 text-center text-sm font-bold text-white shadow-sm transition hover:bg-[#1e3f32] focus:outline-none focus:ring-4 focus:ring-[#275240]/25 sm:text-base"
+            className="mt-5 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#275240] px-6 py-4 text-center text-sm font-bold text-white transition hover:bg-[#1e3f32] focus:outline-none focus:ring-4 focus:ring-[#275240]/25 sm:text-base"
             aria-label="Consultar disponibilidad con Brenda por WhatsApp"
           >
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
