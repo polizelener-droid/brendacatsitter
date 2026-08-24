@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Calendar, Key, CreditCard, AlertCircle, Info, MessageCircle } from 'lucide-react';
+import { Home, Key, CreditCard, AlertCircle, Info, MessageCircle } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
 import { CoveragePricingMap } from './CoveragePricingMap';
 
@@ -81,84 +81,44 @@ export const ServicesSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-white via-[#e2e8dc] to-[#e2e8dc] text-[#275240] rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden border border-[#e2e8dc]">
-          <div className="relative z-10">
-            <div className="mb-8 pb-5 border-b border-[#e2e8dc]">
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#275240] font-display">Tarifas de las Visitas</h3>
-              <p className="text-xs sm:text-sm text-[#275240] mt-1 font-medium">
-                {rates.periodNotice} • {rates.duration}
-              </p>
-            </div>
+        <CoveragePricingMap />
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-              <div className="bg-white/95 p-5 rounded-2xl border border-[#e2e8dc] shadow-2xs">
-                <div className="flex items-center gap-2 text-[#275240] text-xs font-bold mb-1.5">
-                  <Calendar className="w-4 h-4" /> Lunes a Viernes
-                </div>
-                <div className="text-2xl sm:text-3xl font-black text-[#275240] font-display">{rates.weekday}</div>
-                <p className="text-xs text-[#275240] mt-1">Por visita de 45 minutos</p>
+        <div className="mt-8 rounded-3xl border border-[#275240]/10 bg-white/85 p-5 shadow-sm sm:p-6">
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="flex gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#e2e8dc] text-[#275240] flex items-center justify-center shrink-0 border border-[#e2e8dc] mt-0.5">
+                <Key className="w-4 h-4" />
               </div>
-              <div className="bg-white/95 p-5 rounded-2xl border border-[#e2e8dc] shadow-2xs">
-                <div className="flex items-center gap-2 text-[#275240] text-xs font-bold mb-1.5">
-                  <Calendar className="w-4 h-4" /> Sábados
-                </div>
-                <div className="text-2xl sm:text-3xl font-black text-[#275240] font-display">{rates.saturday}</div>
-                <p className="text-xs text-[#275240] mt-1">Por visita de 45 minutos</p>
-              </div>
-              <div className="bg-white/95 p-5 rounded-2xl border border-[#e2e8dc] shadow-2xs">
-                <div className="flex items-center gap-2 text-[#275240] text-xs font-bold mb-1.5">
-                  <Calendar className="w-4 h-4" /> Domingos y Feriados
-                </div>
-                <div className="text-2xl sm:text-3xl font-black text-[#275240] font-display">{rates.sundayHoliday}</div>
-                <p className="text-xs text-[#275240] mt-1">Por visita de 45 minutos</p>
-              </div>
-              <div className="bg-[#DDF2F0]/90 p-5 rounded-2xl border border-[#e2e8dc] shadow-2xs">
-                <div className="flex items-center gap-2 text-[#275240] text-xs font-bold mb-1.5">
-                  <Home className="w-4 h-4" /> Entrevista Previa
-                </div>
-                <div className="text-2xl sm:text-3xl font-black text-[#275240] font-display">{rates.interview}</div>
-                <p className="text-xs text-[#275240] font-medium mt-1 leading-relaxed">{rates.interviewDesc}</p>
+              <div>
+                <h4 className="font-bold text-[#275240] text-xs sm:text-sm mb-0.5 font-display">Entrega de Llaves</h4>
+                <p className="text-xs text-[#275240] leading-relaxed">{rates.keyHandover}</p>
               </div>
             </div>
-
-            <CoveragePricingMap />
-
-            <div className="grid md:grid-cols-3 gap-6 pt-6 mt-8 border-t border-[#e2e8dc]">
-              <div className="flex gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#e2e8dc] text-[#275240] flex items-center justify-center shrink-0 border border-[#e2e8dc] mt-0.5">
-                  <Key className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-[#275240] text-xs sm:text-sm mb-0.5 font-display">Entrega de Llaves</h4>
-                  <p className="text-xs text-[#275240] leading-relaxed">{rates.keyHandover}</p>
-                </div>
+            <div className="flex gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#e2e8dc] text-[#275240] flex items-center justify-center shrink-0 border border-[#e2e8dc] mt-0.5">
+                <CreditCard className="w-4 h-4" />
               </div>
-              <div className="flex gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#e2e8dc] text-[#275240] flex items-center justify-center shrink-0 border border-[#e2e8dc] mt-0.5">
-                  <CreditCard className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-[#275240] text-xs sm:text-sm mb-0.5 font-display">Políticas de Pago</h4>
-                  <p className="text-xs text-[#275240] leading-relaxed">{rates.paymentTerms}</p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#e2e8dc] text-[#275240] flex items-center justify-center shrink-0 border border-[#e2e8dc] mt-0.5">
-                  <AlertCircle className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-[#275240] text-xs sm:text-sm mb-0.5 font-display">Cancelaciones & Reembolsos</h4>
-                  <p className="text-xs text-[#275240] leading-relaxed">{rates.cancellationPolicy}</p>
-                </div>
+              <div>
+                <h4 className="font-bold text-[#275240] text-xs sm:text-sm mb-0.5 font-display">Políticas de Pago</h4>
+                <p className="text-xs text-[#275240] leading-relaxed">{rates.paymentTerms}</p>
               </div>
             </div>
-
-            <div className="mt-6 pt-5 border-t border-[#e2e8dc] flex items-center gap-3 bg-white/90 p-4 rounded-2xl border border-[#e2e8dc]">
-              <Info className="w-4 h-4 text-[#275240] shrink-0" />
-              <p className="text-xs text-[#275240] leading-relaxed">
-                <strong className="text-[#275240]">Aviso de Mantenimiento de Litera:</strong> Incluye higiene diaria en todas las visitas. A partir del 7mo día consecutivo se realiza además una limpieza profunda completa de la bandeja sanitaria.
-              </p>
+            <div className="flex gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#e2e8dc] text-[#275240] flex items-center justify-center shrink-0 border border-[#e2e8dc] mt-0.5">
+                <AlertCircle className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#275240] text-xs sm:text-sm mb-0.5 font-display">Cancelaciones & Reembolsos</h4>
+                <p className="text-xs text-[#275240] leading-relaxed">{rates.cancellationPolicy}</p>
+              </div>
             </div>
+          </div>
+
+          <div className="mt-6 flex items-center gap-3 rounded-2xl border border-[#e2e8dc] bg-[#f8faf6] p-4">
+            <Info className="w-4 h-4 text-[#275240] shrink-0" />
+            <p className="text-xs text-[#275240] leading-relaxed">
+              <strong className="text-[#275240]">Aviso de Mantenimiento de Litera:</strong> Incluye higiene diaria en todas las visitas. A partir del 7mo día consecutivo se realiza además una limpieza profunda completa de la bandeja sanitaria.
+            </p>
           </div>
         </div>
       </div>
