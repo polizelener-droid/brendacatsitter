@@ -1,11 +1,19 @@
 import React, { useMemo, useState } from 'react';
-import { Calculator, CalendarDays, Cat, MessageCircle } from 'lucide-react';
+import { Calculator, CalendarDays, Cat, MapPin, MessageCircle } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
 
 const WHATSAPP_NUMBER = '5491161386748';
 const EXTRA_CAT_RATE = 5_000;
 const MAX_TOTAL_DAYS = 90;
 const MAX_CATS = 10;
+
+const ZONE_SURCHARGE = {
+  1: 0,
+  2: 2_000,
+  3: 4_000,
+} as const;
+
+type CoverageZone = keyof typeof ZONE_SURCHARGE;
 
 function parseArgentinePrice(value: string, fallback: number): number {
   const parsed = Number(value.replace(/\D/g, ''));
@@ -28,19 +36,21 @@ function safeCatCount(value: string): number {
 
 export const BudgetCalculatorSection: React.FC = () => {
   const { rates } = useContent();
+  const [zone, setZone] = useState<CoverageZone>(1);
   const [cats, setCats] = useState(1);
   const [weekdays, setWeekdays] = useState(1);
   const [saturdays, setSaturdays] = useState(0);
   const [sundaysAndHolidays, setSundaysAndHolidays] = useState(0);
 
-  const prices = useMemo(
-    () => ({
-      weekday: parseArgentinePrice(rates.weekday, 18_000),
-      saturday: parseArgentinePrice(rates.saturday, 21_000),
-      sundayHoliday: parseArgentinePrice(rates.sundayHoliday, 25_000),
-    }),
-    [rates.weekday, rates.saturday, rates.sundayHoliday],
-  );
+  const prices = useMemo(() => {
+    const surcharge = ZONE_SURCHARGE[zone];
+
+    return {
+      weekday: parseArgentinePrice(rates.weekday, 18_000) + surcharge,
+      saturday: parseArgentinePrice(rates.saturday, 21_000) + surcharge,
+      sundayHoliday: parseArgentinePrice(rates.sundayHoliday, 25_000) + surcharge,
+    };
+  }, [rates.weekday, rates.saturday, rates.sundayHoliday, zone]);
 
   const totalDays = weekdays + saturdays + sundaysAndHolidays;
   const exceedsDayLimit = totalDays > MAX_TOTAL_DAYS;
@@ -53,6 +63,7 @@ export const BudgetCalculatorSection: React.FC = () => {
 
   const whatsappMessage = [
     'Hola Brenda! Calculé un presupuesto desde tu página web.',
+    `• Zona de cobertura: Zona ${zone}`,
     `• Cantidad de gatos: ${cats}`,
     `• Días de lunes a viernes: ${weekdays}`,
     `• Sábados: ${saturdays}`,
@@ -74,11 +85,31 @@ export const BudgetCalculatorSection: React.FC = () => {
             Calculá tu presupuesto
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-[#275240]/80 sm:text-base">
-            Indicá cuántos gatos son y cuántos días corresponden a cada tarifa.
+            Elegí tu zona, indicá cuántos gatos son y cuántos días corresponden a cada tarifa.
           </p>
         </div>
 
         <div className="space-y-6">
+          <div>
+            <label htmlFor="zona-cobertura" className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
+              <MapPin className="h-4 w-4" aria-hidden="true" />
+              ¿De qué zona sos?
+            </label>
+            <select
+              id="zona-cobertura"
+              value={zone}
+              onChange={(event) => setZone(Number(event.target.value) as CoverageZone)}
+              className="min-h-14 w-full rounded-2xl border border-[#275240]/20 bg-white px-4 text-base font-semibold text-[#275240] outline-none transition focus:border-[#275240] focus:ring-4 focus:ring-[#275240]/10"
+            >
+              <option value={1}>Zona 1</option>
+              <option value={2}>Zona 2</option>
+              <option value={3}>Zona 3</option>
+            </select>
+            <p className="mt-2 text-xs text-[#275240]/70">
+              Si no sabés cuál te corresponde, revisá el mapa de zonas y tarifas de arriba.
+            </p>
+          </div>
+
           <div>
             <label htmlFor="cantidad-gatos" className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
               <Cat className="h-4 w-4" aria-hidden="true" />
@@ -110,21 +141,21 @@ export const BudgetCalculatorSection: React.FC = () => {
             <div className="grid gap-4 md:grid-cols-3">
               <DayInput
                 id="dias-semana"
-                label="Días de lunes a viernes"
+                label={`Lunes a viernes · ${formatPesos(prices.weekday)}`}
                 value={weekdays}
                 onChange={setWeekdays}
                 isInvalid={exceedsDayLimit}
               />
               <DayInput
                 id="dias-sabado"
-                label="Días sábado"
+                label={`Sábados · ${formatPesos(prices.saturday)}`}
                 value={saturdays}
                 onChange={setSaturdays}
                 isInvalid={exceedsDayLimit}
               />
               <DayInput
                 id="dias-domingo"
-                label="Días domingo y feriados"
+                label={`Domingos y feriados · ${formatPesos(prices.sundayHoliday)}`}
                 value={sundaysAndHolidays}
                 onChange={setSundaysAndHolidays}
                 isInvalid={exceedsDayLimit}
@@ -143,7 +174,7 @@ export const BudgetCalculatorSection: React.FC = () => {
         </div>
 
         <div className="mt-7 rounded-3xl bg-[#e2e8dc] p-5 text-center sm:p-7" aria-live="polite">
-          <span className="text-sm font-semibold text-[#275240]/75">Presupuesto estimado desde</span>
+          <span className="text-sm font-semibold text-[#275240]/75">Presupuesto estimado · Zona {zone}</span>
           <strong className="mt-1 block font-display text-4xl font-black text-[#275240] sm:text-5xl">
             {exceedsDayLimit ? '—' : formatPesos(total)}
           </strong>
