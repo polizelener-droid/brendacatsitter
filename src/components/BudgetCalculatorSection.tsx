@@ -81,63 +81,65 @@ export const BudgetCalculatorSection: React.FC = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section id="presupuesto" className="bg-[#fffdf8] px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-      <div className="mx-auto max-w-4xl rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-8 lg:p-10">
-        <div className="mx-auto mb-7 max-w-2xl text-center">
-          <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#275240] text-white">
-            <Calculator className="h-5 w-5" aria-hidden="true" />
+    <section id="presupuesto" className="bg-[#fffdf8] px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-6 lg:p-7">
+        <div className="mx-auto mb-5 max-w-xl text-center">
+          <div className="mx-auto mb-2.5 flex h-9 w-9 items-center justify-center rounded-xl bg-[#275240] text-white">
+            <Calculator className="h-4.5 w-4.5" aria-hidden="true" />
           </div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#275240] sm:text-4xl">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#275240] sm:text-3xl">
             Calculá tu presupuesto
           </h2>
-          <p className="mt-2 text-sm text-[#275240]/70 sm:text-base">
+          <p className="mt-1.5 text-xs text-[#275240]/65 sm:text-sm">
             Elegí zona, cantidad de gatos y días.
           </p>
         </div>
 
-        <div className="space-y-5">
-          <div>
-            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
-              <MapPin className="h-4 w-4" aria-hidden="true" />
-              ¿De qué zona sos?
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-[1.35fr_0.65fr]">
+            <div>
+              <div className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+                ¿De qué zona sos?
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {([1, 2, 3] as CoverageZone[]).map((zoneOption) => {
+                  const selected = zone === zoneOption;
+                  return (
+                    <button
+                      key={zoneOption}
+                      type="button"
+                      aria-pressed={selected}
+                      onClick={() => setZone(zoneOption)}
+                      className={`min-h-10 rounded-xl border px-2.5 py-2 text-sm font-extrabold transition ${zoneButtonStyles[zoneOption]} ${
+                        selected ? 'ring-2 ring-[#275240]/30 ring-offset-1' : 'opacity-75 hover:opacity-100'
+                      }`}
+                    >
+                      Zona {zoneOption}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {([1, 2, 3] as CoverageZone[]).map((zoneOption) => {
-                const selected = zone === zoneOption;
-                return (
-                  <button
-                    key={zoneOption}
-                    type="button"
-                    aria-pressed={selected}
-                    onClick={() => setZone(zoneOption)}
-                    className={`min-h-12 rounded-2xl border px-3 py-2 text-sm font-extrabold transition sm:text-base ${zoneButtonStyles[zoneOption]} ${
-                      selected ? 'ring-2 ring-[#275240]/35 ring-offset-2' : 'opacity-75 hover:opacity-100'
-                    }`}
-                  >
-                    Zona {zoneOption}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
 
-          <div>
-            <label htmlFor="cantidad-gatos" className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
-              <Cat className="h-4 w-4" aria-hidden="true" />
-              ¿Cuántos gatos?
-            </label>
-            <select
-              id="cantidad-gatos"
-              value={cats}
-              onChange={(event) => setCats(safeCatCount(event.target.value))}
-              className="min-h-14 w-full rounded-2xl border border-[#275240]/20 bg-white px-4 text-base text-[#275240] outline-none transition focus:border-[#275240] focus:ring-4 focus:ring-[#275240]/10"
-            >
-              {Array.from({ length: MAX_CATS }, (_, index) => index + 1).map((quantity) => (
-                <option key={quantity} value={quantity}>
-                  {quantity} {quantity === 1 ? 'gato' : 'gatos'}
-                </option>
-              ))}
-            </select>
+            <div>
+              <label htmlFor="cantidad-gatos" className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
+                <Cat className="h-4 w-4" aria-hidden="true" />
+                ¿Cuántos gatos?
+              </label>
+              <select
+                id="cantidad-gatos"
+                value={cats}
+                onChange={(event) => setCats(safeCatCount(event.target.value))}
+                className="min-h-10 w-full rounded-xl border border-[#275240]/20 bg-white px-3 text-sm text-[#275240] outline-none transition focus:border-[#275240] focus:ring-2 focus:ring-[#275240]/10"
+              >
+                {Array.from({ length: MAX_CATS }, (_, index) => index + 1).map((quantity) => (
+                  <option key={quantity} value={quantity}>
+                    {quantity} {quantity === 1 ? 'gato' : 'gatos'}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <fieldset aria-describedby="day-limit-help day-limit-error">
@@ -145,10 +147,10 @@ export const BudgetCalculatorSection: React.FC = () => {
               <CalendarDays className="h-4 w-4" aria-hidden="true" />
               ¿Qué días incluye el servicio?
             </legend>
-            <p id="day-limit-help" className="mb-3 text-xs text-[#275240]/55">
+            <p id="day-limit-help" className="mb-2 text-[11px] text-[#275240]/50">
               Máximo {MAX_TOTAL_DAYS} días.
             </p>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               <DayInput
                 id="dias-semana"
                 label="Lunes a viernes"
@@ -175,7 +177,7 @@ export const BudgetCalculatorSection: React.FC = () => {
               <p
                 id="day-limit-error"
                 role="alert"
-                className="mt-3 rounded-2xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700"
+                className="mt-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
               >
                 Podés calcular hasta {MAX_TOTAL_DAYS} días en total. Ingresaste {totalDays}.
               </p>
@@ -183,20 +185,20 @@ export const BudgetCalculatorSection: React.FC = () => {
           </fieldset>
         </div>
 
-        <div className="mt-7 rounded-3xl bg-[#e2e8dc] p-5 text-center sm:p-7" aria-live="polite">
-          <span className="text-sm font-semibold text-[#275240]/75">Presupuesto estimado desde</span>
-          <strong className="mt-1 block font-display text-4xl font-black text-[#275240] sm:text-5xl">
+        <div className="mt-5 rounded-2xl bg-[#e2e8dc] p-4 text-center" aria-live="polite">
+          <span className="text-xs font-semibold text-[#275240]/70">Presupuesto estimado desde</span>
+          <strong className="mt-0.5 block font-display text-3xl font-black text-[#275240] sm:text-4xl">
             {exceedsDayLimit ? '—' : formatPesos(total)}
           </strong>
-          <p className="mt-2 text-sm text-[#275240]/75">
+          <p className="mt-1 text-xs text-[#275240]/70">
             Zona {zone} · {totalDays} {totalDays === 1 ? 'día' : 'días'} · {cats} {cats === 1 ? 'gato' : 'gatos'}
           </p>
           {!exceedsDayLimit && extraCats > 0 && (
-            <p className="mt-1 text-xs font-semibold text-[#275240]/65">Incluye adicional por cantidad de gatos.</p>
+            <p className="mt-1 text-[11px] font-semibold text-[#275240]/60">Incluye adicional por cantidad de gatos.</p>
           )}
         </div>
 
-        <p className="mt-4 text-center text-xs leading-relaxed text-[#275240]/60">
+        <p className="mt-3 text-center text-[11px] leading-relaxed text-[#275240]/55 sm:text-xs">
           La entrevista previa se calcula aparte. Desde el cuarto gato se aplica un adicional por visita.
         </p>
 
@@ -205,9 +207,9 @@ export const BudgetCalculatorSection: React.FC = () => {
             type="button"
             disabled
             aria-describedby="day-limit-error"
-            className="mt-5 flex min-h-14 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-6 py-4 text-center text-sm font-bold text-white sm:text-base"
+            className="mt-4 flex min-h-12 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-5 py-3 text-center text-sm font-bold text-white"
           >
-            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
             Corregí la cantidad de días para continuar
           </button>
         ) : (
@@ -215,10 +217,10 @@ export const BudgetCalculatorSection: React.FC = () => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#275240] px-6 py-4 text-center text-sm font-bold text-white transition hover:bg-[#1e3f32] focus:outline-none focus:ring-4 focus:ring-[#275240]/25 sm:text-base"
+            className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#275240] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#1e3f32] focus:outline-none focus:ring-4 focus:ring-[#275240]/20"
             aria-label="Consultar disponibilidad con Brenda por WhatsApp"
           >
-            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
             Consultar disponibilidad por WhatsApp
           </a>
         )}
@@ -237,7 +239,7 @@ type DayInputProps = {
 
 const DayInput: React.FC<DayInputProps> = ({ id, label, value, onChange, isInvalid }) => (
   <div>
-    <label htmlFor={id} className="mb-2 block min-h-8 text-xs font-semibold leading-snug text-[#275240] sm:text-sm">
+    <label htmlFor={id} className="mb-1.5 block text-xs font-semibold leading-snug text-[#275240]">
       {label}
     </label>
     <input
@@ -250,7 +252,7 @@ const DayInput: React.FC<DayInputProps> = ({ id, label, value, onChange, isInval
       value={value}
       aria-invalid={isInvalid}
       onChange={(event) => onChange(safeDayCount(event.target.value))}
-      className={`min-h-14 w-full rounded-2xl border bg-white px-4 text-base text-[#275240] outline-none transition focus:ring-4 ${
+      className={`min-h-10 w-full rounded-xl border bg-white px-3 text-sm text-[#275240] outline-none transition focus:ring-2 ${
         isInvalid
           ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
           : 'border-[#275240]/20 focus:border-[#275240] focus:ring-[#275240]/10'
