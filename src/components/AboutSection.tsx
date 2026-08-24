@@ -4,7 +4,7 @@ import brendaPhoto from '../assets/images/brenda_con_gato.png';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="sobre-mi" className="bg-[#fffdf8] py-10 sm:py-12">
+    <section id="sobre-mi" className="bg-[#e2e8dc] py-10 sm:py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-6 rounded-[2rem] border border-[#275240]/10 bg-white p-4 shadow-sm sm:p-6 md:grid-cols-[280px_1fr] md:gap-8">
           <div className="mx-auto w-full max-w-[280px]">
