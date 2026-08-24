@@ -34,6 +34,12 @@ function safeCatCount(value: string): number {
   return Math.min(MAX_CATS, Math.max(1, Math.floor(Number(value) || 1)));
 }
 
+const zoneButtonStyles: Record<CoverageZone, string> = {
+  1: 'border-[#a8c9df] bg-[#dff1fb] text-[#3e6f8f]',
+  2: 'border-[#dfb4c9] bg-[#f8ddea] text-[#935b77]',
+  3: 'border-[#ddd095] bg-[#f9f1c9] text-[#8d7a2d]',
+};
+
 export const BudgetCalculatorSection: React.FC = () => {
   const { rates } = useContent();
   const [zone, setZone] = useState<CoverageZone>(1);
@@ -85,28 +91,36 @@ export const BudgetCalculatorSection: React.FC = () => {
             Calculá tu presupuesto
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-[#275240]/80 sm:text-base">
-            Elegí tu zona, indicá cuántos gatos son y cuántos días corresponden a cada tarifa.
+            Elegí tu zona, la cantidad de gatos y los días del servicio.
           </p>
         </div>
 
         <div className="space-y-6">
           <div>
-            <label htmlFor="zona-cobertura" className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
+            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-[#275240]">
               <MapPin className="h-4 w-4" aria-hidden="true" />
               ¿De qué zona sos?
-            </label>
-            <select
-              id="zona-cobertura"
-              value={zone}
-              onChange={(event) => setZone(Number(event.target.value) as CoverageZone)}
-              className="min-h-14 w-full rounded-2xl border border-[#275240]/20 bg-white px-4 text-base font-semibold text-[#275240] outline-none transition focus:border-[#275240] focus:ring-4 focus:ring-[#275240]/10"
-            >
-              <option value={1}>Zona 1</option>
-              <option value={2}>Zona 2</option>
-              <option value={3}>Zona 3</option>
-            </select>
-            <p className="mt-2 text-xs text-[#275240]/70">
-              Si no sabés cuál te corresponde, revisá el mapa de zonas y tarifas de arriba.
+            </div>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              {([1, 2, 3] as CoverageZone[]).map((zoneOption) => {
+                const selected = zone === zoneOption;
+                return (
+                  <button
+                    key={zoneOption}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => setZone(zoneOption)}
+                    className={`min-h-12 rounded-2xl border px-3 py-2 text-sm font-extrabold transition sm:text-base ${zoneButtonStyles[zoneOption]} ${
+                      selected ? 'ring-2 ring-[#275240]/35 ring-offset-2' : 'opacity-75 hover:opacity-100'
+                    }`}
+                  >
+                    Zona {zoneOption}
+                  </button>
+                );
+              })}
+            </div>
+            <p className="mt-2 text-center text-[11px] text-[#275240]/60 sm:text-xs">
+              Podés ver qué barrios incluye cada zona en el mapa de arriba.
             </p>
           </div>
 
@@ -127,7 +141,6 @@ export const BudgetCalculatorSection: React.FC = () => {
                 </option>
               ))}
             </select>
-            <p className="mt-2 text-xs text-[#275240]/70">Máximo: {MAX_CATS} gatos.</p>
           </div>
 
           <fieldset aria-describedby="day-limit-help day-limit-error">
@@ -135,27 +148,27 @@ export const BudgetCalculatorSection: React.FC = () => {
               <CalendarDays className="h-4 w-4" aria-hidden="true" />
               ¿Qué días incluye el servicio?
             </legend>
-            <p id="day-limit-help" className="mb-3 text-xs text-[#275240]/70">
-              Máximo: {MAX_TOTAL_DAYS} días en total entre todas las tarifas.
+            <p id="day-limit-help" className="mb-3 text-xs text-[#275240]/60">
+              Máximo: {MAX_TOTAL_DAYS} días en total.
             </p>
             <div className="grid gap-4 md:grid-cols-3">
               <DayInput
                 id="dias-semana"
-                label={`Lunes a viernes · ${formatPesos(prices.weekday)}`}
+                label="Lunes a viernes"
                 value={weekdays}
                 onChange={setWeekdays}
                 isInvalid={exceedsDayLimit}
               />
               <DayInput
                 id="dias-sabado"
-                label={`Sábados · ${formatPesos(prices.saturday)}`}
+                label="Sábados"
                 value={saturdays}
                 onChange={setSaturdays}
                 isInvalid={exceedsDayLimit}
               />
               <DayInput
                 id="dias-domingo"
-                label={`Domingos y feriados · ${formatPesos(prices.sundayHoliday)}`}
+                label="Domingos y feriados"
                 value={sundaysAndHolidays}
                 onChange={setSundaysAndHolidays}
                 isInvalid={exceedsDayLimit}
@@ -174,24 +187,23 @@ export const BudgetCalculatorSection: React.FC = () => {
         </div>
 
         <div className="mt-7 rounded-3xl bg-[#e2e8dc] p-5 text-center sm:p-7" aria-live="polite">
-          <span className="text-sm font-semibold text-[#275240]/75">Presupuesto estimado · Zona {zone}</span>
+          <span className="text-sm font-semibold text-[#275240]/75">Presupuesto estimado desde</span>
           <strong className="mt-1 block font-display text-4xl font-black text-[#275240] sm:text-5xl">
             {exceedsDayLimit ? '—' : formatPesos(total)}
           </strong>
           <p className="mt-2 text-sm text-[#275240]/80">
-            {totalDays} {totalDays === 1 ? 'día' : 'días'} en total · {cats} {cats === 1 ? 'gato' : 'gatos'}
+            Zona {zone} · {totalDays} {totalDays === 1 ? 'día' : 'días'} · {cats} {cats === 1 ? 'gato' : 'gatos'}
           </p>
           {!exceedsDayLimit && extraCats > 0 && (
-            <p className="mt-1 text-xs font-semibold text-[#275240]/75">
-              Incluye {formatPesos(extraPerVisit)} extra por visita por cantidad de gatos.
+            <p className="mt-1 text-xs font-semibold text-[#275240]/70">
+              Incluye adicional por cantidad de gatos.
             </p>
           )}
         </div>
 
-        <div className="mt-5 space-y-2 text-center text-xs leading-relaxed text-[#275240]/70 sm:text-sm">
-          <p>La entrevista previa tiene un valor de {rates.interview} y no está incluida en este cálculo.</p>
-          <p>Desde el cuarto gato se suman {formatPesos(EXTRA_CAT_RATE)} por cada gato extra, por visita.</p>
-        </div>
+        <p className="mt-5 text-center text-xs leading-relaxed text-[#275240]/65 sm:text-sm">
+          La entrevista previa no está incluida en este cálculo. Desde el cuarto gato se aplica un adicional por visita.
+        </p>
 
         {exceedsDayLimit ? (
           <button
@@ -230,7 +242,7 @@ type DayInputProps = {
 
 const DayInput: React.FC<DayInputProps> = ({ id, label, value, onChange, isInvalid }) => (
   <div>
-    <label htmlFor={id} className="mb-2 block min-h-10 text-xs font-semibold leading-snug text-[#275240] sm:text-sm">
+    <label htmlFor={id} className="mb-2 block min-h-8 text-xs font-semibold leading-snug text-[#275240] sm:text-sm">
       {label}
     </label>
     <input
