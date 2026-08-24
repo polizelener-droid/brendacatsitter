@@ -7,7 +7,6 @@ import { AboutSection } from '../components/AboutSection';
 import { WhyHomeCareSection } from '../components/WhyHomeCareSection';
 import { CatGallerySection } from '../components/CatGallerySection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
-import { CoverageSection } from '../components/CoverageSection';
 import { ContactSection } from '../components/ContactSection';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 import { Footer } from '../components/Footer';
@@ -28,7 +27,6 @@ export const HomePage: React.FC = () => {
         <WhyHomeCareSection />
         <BudgetCalculatorSection />
         <TestimonialsSection />
-        <CoverageSection />
         <ContactSection />
       </main>
       <Footer />
