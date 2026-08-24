@@ -93,12 +93,12 @@ const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => (
 
 export const CoveragePricingMap: React.FC = () => {
   return (
-    <div className="mt-6 rounded-[2rem] border border-[#275240]/15 bg-[#e2e8dc] p-5 sm:p-7">
+    <div className="mt-6 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
       <h3 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Zonas y tarifas</h3>
 
       <div className="mt-5 grid items-start gap-5 lg:grid-cols-[1.3fr_1fr]">
         <div>
-          <div className="relative overflow-hidden rounded-3xl border border-[#275240]/15 bg-[#e2e8dc] p-4">
+          <div className="relative overflow-hidden rounded-3xl border border-[#275240]/10 bg-[#f7f7f3] p-4">
             <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(to_right,#27524012_1px,transparent_1px),linear-gradient(to_bottom,#27524012_1px,transparent_1px)] [background-size:28px_28px]" />
             <div className="relative flex flex-wrap gap-2.5">
               {coverageTiles.map((tile) => (
