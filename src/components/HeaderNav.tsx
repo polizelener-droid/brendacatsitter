@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Cat, Menu, X, Heart } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Cat, Heart, Menu, X } from 'lucide-react';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const HeaderNav: React.FC = () => {
@@ -7,9 +7,7 @@ export const HeaderNav: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -26,80 +24,74 @@ export const HeaderNav: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'Sobre Mí', href: '#sobre-mi' },
-    { name: 'Servicios & Tarifas', href: '#servicios' },
+    { name: 'Qué incluye', href: '#incluye' },
+    { name: 'Tarifas', href: '#servicios' },
     { name: 'Presupuesto', href: '#presupuesto' },
-    { name: 'Clientes Felices', href: '#fotos' },
-    { name: 'Testimonios', href: '#resenas' },
-    { name: 'Cobertura', href: '#cobertura' },
+    { name: 'Reseñas', href: '#resenas' },
     { name: 'Contacto', href: '#contacto' },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#e2e8dc]/95 backdrop-blur-md shadow-xs border-b border-[#e2e8dc] py-2.5'
+          ? 'border-b border-[#275240]/10 bg-[#e2e8dc]/95 py-2.5 shadow-xs backdrop-blur-md'
           : 'bg-transparent py-4'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-3">
-          {/* Brand Logo */}
           <a
             href="#"
             id="brand-logo-link"
             onClick={(e) => handleNavClick(e, '#')}
-            className="flex items-center gap-2 sm:gap-2.5 group min-w-0"
+            className="group flex min-w-0 items-center gap-2 sm:gap-2.5"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full bg-[#275240] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform border border-[#e2e8dc]">
-              <Cat className="w-5 h-5 text-white" />
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#e2e8dc] bg-[#275240] text-white shadow-sm transition-transform group-hover:scale-105 sm:h-10 sm:w-10">
+              <Cat className="h-5 w-5" />
             </div>
             <div className="min-w-0">
-              <span className="text-lg sm:text-xl font-bold tracking-tight text-[#275240] block leading-none font-display truncate">
-                Brenda <span className="text-[#275240] italic font-serif">Cat Sitter</span>
+              <span className="block truncate font-display text-lg font-bold leading-none tracking-tight text-[#275240] sm:text-xl">
+                Brenda <span className="font-serif italic">Cat Sitter</span>
               </span>
-              <span className="text-xs text-[#275240] font-medium flex items-center gap-1 mt-0.5">
-                <Heart className="w-3 h-3 text-[#275240] fill-[#275240] shrink-0" /> Cuidado a Domicilio
+              <span className="mt-0.5 flex items-center gap-1 text-xs font-medium text-[#275240]">
+                <Heart className="h-3 w-3 shrink-0 fill-[#275240]" /> Cuidado a domicilio
               </span>
             </div>
           </a>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden xl:flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#e2e8dc] shadow-2xs">
+          <nav className="hidden items-center gap-1 rounded-full border border-[#275240]/10 bg-white/85 px-3 py-1.5 shadow-2xs backdrop-blur-md lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-xs font-semibold text-[#275240] hover:text-[#275240] hover:bg-[#e2e8dc] px-3 py-1.5 rounded-full transition-colors"
+                className="rounded-full px-3 py-1.5 text-xs font-semibold text-[#275240] transition-colors hover:bg-[#e2e8dc]"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* Mobile menu trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
-            className="xl:hidden p-2 rounded-xl text-[#275240] bg-white border border-[#e2e8dc] hover:bg-[#e2e8dc] transition-colors shadow-2xs shrink-0"
-            aria-label="Menu"
+            className="shrink-0 rounded-xl border border-[#275240]/10 bg-white p-2 text-[#275240] shadow-2xs transition-colors hover:bg-[#e2e8dc] lg:hidden"
+            aria-label="Menú"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
-        {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="xl:hidden mt-3 pt-3 pb-4 px-3 border border-[#e2e8dc] bg-[#e2e8dc]/98 backdrop-blur-xl rounded-2xl shadow-xl">
+          <div className="mt-3 rounded-2xl border border-[#275240]/10 bg-[#e2e8dc]/98 px-3 pb-4 pt-3 shadow-xl backdrop-blur-xl lg:hidden">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="px-3.5 py-2 text-sm font-semibold text-[#275240] hover:bg-[#e2e8dc] rounded-xl transition-colors"
+                  className="rounded-xl px-3.5 py-2 text-sm font-semibold text-[#275240] transition-colors hover:bg-white/60"
                 >
                   {link.name}
                 </a>
