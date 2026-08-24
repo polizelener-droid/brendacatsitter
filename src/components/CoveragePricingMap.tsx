@@ -124,8 +124,8 @@ export const CoveragePricingMap: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[1.25fr_1fr] lg:p-8">
-        <div className="flex h-full flex-col rounded-3xl border border-[#275240]/10 bg-white p-4 sm:p-5">
+      <div className="grid items-start gap-6 p-5 sm:p-7 lg:grid-cols-[1.25fr_1fr] lg:p-8">
+        <div className="self-start rounded-3xl border border-[#275240]/10 bg-white p-4 sm:p-5">
           <div className="relative overflow-hidden rounded-3xl border border-[#275240]/10 bg-[#f6f5f1] p-4 sm:p-5">
             <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(to_right,#27524012_1px,transparent_1px),linear-gradient(to_bottom,#27524012_1px,transparent_1px)] [background-size:28px_28px]" />
             <div className="relative flex flex-wrap gap-2.5 sm:gap-3">
