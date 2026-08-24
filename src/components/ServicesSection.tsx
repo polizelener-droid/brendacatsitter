@@ -9,6 +9,9 @@ export const ServicesSection: React.FC = () => {
   const virtualMeetingMessage =
     'Hola Brenda, me gustaría coordinar una charla virtual gratuita para conocerte antes de reservar.';
   const virtualMeetingUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(virtualMeetingMessage)}`;
+  const interviewMessage =
+    'Hola Brenda, me gustaría coordinar una entrevista previa presencial para conocernos antes de reservar.';
+  const interviewUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(interviewMessage)}`;
 
   const virtualMeetingService = services.find((service) => {
     const normalizedTitle = service.title.toLocaleLowerCase('es');
@@ -30,21 +33,34 @@ export const ServicesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 md:grid-cols-2 mb-10">
           <div className="rounded-3xl border border-[#275240]/15 bg-white p-5 shadow-sm sm:p-6">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#DDF2F0] text-[#275240]">
-                <Home className="h-6 w-6" aria-hidden="true" />
-              </div>
-              <div className="min-w-0">
-                <h2 className="font-display text-xl font-extrabold text-[#275240] sm:text-2xl">
-                  Entrevista previa
-                </h2>
-                <div className="mt-1 font-display text-2xl font-black text-[#275240]">
-                  {rates.interview}
+            <div className="flex h-full flex-col justify-between gap-5">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#DDF2F0] text-[#275240]">
+                  <Home className="h-6 w-6" aria-hidden="true" />
                 </div>
-                <p className="mt-2 text-xs leading-relaxed text-[#275240]/80 sm:text-sm">
-                  {rates.interviewDesc}
-                </p>
+                <div className="min-w-0">
+                  <h2 className="font-display text-xl font-extrabold text-[#275240] sm:text-2xl">
+                    Entrevista previa
+                  </h2>
+                  <div className="mt-1 font-display text-2xl font-black text-[#275240]">
+                    {rates.interview}
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-[#275240]/80 sm:text-sm">
+                    {rates.interviewDesc}
+                  </p>
+                </div>
               </div>
+
+              <a
+                href={interviewUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#275240] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#1f4033] focus:outline-none focus:ring-2 focus:ring-[#275240] focus:ring-offset-2 sm:w-auto sm:self-end"
+                aria-label="Agendar entrevista previa por WhatsApp"
+              >
+                <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Agendar entrevista previa
+              </a>
             </div>
           </div>
 
