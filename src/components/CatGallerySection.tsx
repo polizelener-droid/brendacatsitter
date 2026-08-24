@@ -23,7 +23,7 @@ export const CatGallerySection: React.FC = () => {
   };
 
   return (
-    <section id="fotos" className="overflow-hidden bg-[#fffdf8] py-10 sm:py-12">
+    <section id="fotos" className="overflow-hidden bg-[#e2e8dc] py-10 sm:py-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
