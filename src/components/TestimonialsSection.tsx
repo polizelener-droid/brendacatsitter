@@ -19,7 +19,6 @@ export const TestimonialsSection: React.FC = () => {
 
   const total = testimonials.length;
 
-  // Responsive cards visible per slide in carousel
   const getCardsPerPage = () => {
     if (typeof window !== 'undefined') {
       if (window.innerWidth >= 1024) return 3;
@@ -38,14 +37,12 @@ export const TestimonialsSection: React.FC = () => {
 
   const maxIndex = Math.max(0, total - cardsPerPage);
 
-  // Ensure index is valid
   useEffect(() => {
     if (currentIndex > maxIndex && maxIndex >= 0) {
       setCurrentIndex(0);
     }
   }, [total, maxIndex, currentIndex]);
 
-  // Auto slide interval
   useEffect(() => {
     if (!isPlaying || maxIndex <= 0) return;
     const interval = setInterval(() => {
@@ -64,7 +61,6 @@ export const TestimonialsSection: React.FC = () => {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
-  // Touch Swipe handlers
   const minSwipeDistance = 40;
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
@@ -86,10 +82,8 @@ export const TestimonialsSection: React.FC = () => {
   };
 
   return (
-    <section id="resenas" className="py-14 sm:py-16 bg-[#e2e8dc] border-t border-[#e2e8dc]">
+    <section id="resenas" className="bg-[#e2e8dc] py-14 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#275240] tracking-tight font-display">
@@ -100,11 +94,10 @@ export const TestimonialsSection: React.FC = () => {
             </p>
           </div>
 
-          {/* Navigation Controls */}
           <div className="flex items-center gap-2 shrink-0 self-start sm:self-end">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#275240] bg-white hover:bg-[#e2e8dc]/50 px-3.5 py-2 rounded-xl border border-[#e2e8dc] shadow-2xs transition-all"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#275240] bg-[#e2e8dc] hover:bg-[#d7dfd1] px-3.5 py-2 rounded-xl border border-[#275240]/15 transition-all"
               title={isPlaying ? 'Pausar avance automático' : 'Activar avance automático'}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5 text-[#275240]" /> : <Play className="w-3.5 h-3.5 text-[#275240]" />}
@@ -113,7 +106,7 @@ export const TestimonialsSection: React.FC = () => {
             <button
               onClick={handlePrev}
               aria-label="Anterior"
-              className="w-9 h-9 rounded-xl bg-white border border-[#e2e8dc] text-[#275240] shadow-2xs hover:bg-[#e2e8dc]/50 active:scale-95 transition-all flex items-center justify-center"
+              className="w-9 h-9 rounded-xl bg-[#e2e8dc] border border-[#275240]/15 text-[#275240] hover:bg-[#d7dfd1] active:scale-95 transition-all flex items-center justify-center"
             >
               <ChevronLeft className="w-4 h-4 text-[#275240]" />
             </button>
@@ -121,14 +114,13 @@ export const TestimonialsSection: React.FC = () => {
             <button
               onClick={handleNext}
               aria-label="Siguiente"
-              className="w-9 h-9 rounded-xl bg-white border border-[#e2e8dc] text-[#275240] shadow-2xs hover:bg-[#e2e8dc]/50 active:scale-95 transition-all flex items-center justify-center"
+              className="w-9 h-9 rounded-xl bg-[#e2e8dc] border border-[#275240]/15 text-[#275240] hover:bg-[#d7dfd1] active:scale-95 transition-all flex items-center justify-center"
             >
               <ChevronRight className="w-4 h-4 text-[#275240]" />
             </button>
           </div>
         </div>
 
-        {/* CAROUSEL VIEW */}
         <div
           className="overflow-hidden py-2"
           onTouchStart={onTouchStart}
@@ -146,15 +138,12 @@ export const TestimonialsSection: React.FC = () => {
                 key={item.id}
                 className="w-full sm:w-1/2 lg:w-1/3 shrink-0 flex flex-col px-2"
               >
-                <div className="bg-white p-6 rounded-2xl border border-[#e2e8dc] shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between h-full group">
-                  
-                  {/* Top Header */}
+                <div className="bg-[#e2e8dc] p-6 rounded-2xl border border-[#275240]/15 transition-all flex flex-col justify-between h-full group">
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        {/* Avatar with subtle Instagram Story Ring */}
                         <div className="p-0.5 rounded-full bg-gradient-to-tr from-[#e2e8dc] via-[#275240] to-[#275240] shrink-0">
-                          <div className="w-8 h-8 rounded-full bg-[#e2e8dc] text-[#275240] font-bold text-xs flex items-center justify-center border-2 border-white font-display">
+                          <div className="w-8 h-8 rounded-full bg-[#e2e8dc] text-[#275240] font-bold text-xs flex items-center justify-center border-2 border-[#e2e8dc] font-display">
                             {item.author.charAt(1).toUpperCase()}
                           </div>
                         </div>
@@ -172,22 +161,20 @@ export const TestimonialsSection: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1 text-amber-500 bg-[#e2e8dc]/60 px-2.5 py-1 rounded-md border border-[#e2e8dc]">
+                      <div className="flex items-center gap-1 text-amber-500 bg-[#e2e8dc] px-2.5 py-1 rounded-md border border-[#275240]/10">
                         <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                         <span className="text-[11px] font-bold text-[#275240]">5.0</span>
                       </div>
                     </div>
 
-                    {/* Quote Text */}
                     <p className="text-[#275240] text-xs sm:text-sm leading-relaxed font-normal mb-5 italic">
                       "{item.quote}"
                     </p>
                   </div>
 
-                  {/* Footer */}
-                  <div className="pt-3 border-t border-[#e2e8dc] flex items-center justify-between mt-auto text-xs">
+                  <div className="pt-3 border-t border-[#275240]/10 flex items-center justify-between mt-auto text-xs">
                     {item.catName ? (
-                      <span className="font-bold text-[#275240] bg-[#e2e8dc] px-3 py-1 rounded-md border border-[#e2e8dc] text-[11px] font-display">
+                      <span className="font-bold text-[#275240] bg-[#e2e8dc] px-3 py-1 rounded-md border border-[#275240]/10 text-[11px] font-display">
                         🐱 {item.catName}
                       </span>
                     ) : (
@@ -201,16 +188,12 @@ export const TestimonialsSection: React.FC = () => {
                       <span>Me gusta</span>
                     </div>
                   </div>
-
                 </div>
               </div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
 };
-
-
