@@ -6,7 +6,7 @@ export const AboutSection: React.FC = () => {
   return (
     <section id="sobre-mi" className="bg-[#e2e8dc] py-10 sm:py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-6 rounded-[2rem] border border-[#275240]/10 bg-white p-4 shadow-sm sm:p-6 md:grid-cols-[280px_1fr] md:gap-8">
+        <div className="grid items-center gap-6 rounded-[2rem] border border-[#275240]/15 bg-[#e2e8dc] p-4 sm:p-6 md:grid-cols-[280px_1fr] md:gap-8">
           <div className="mx-auto w-full max-w-[280px]">
             <img
               src={brendaPhoto}
@@ -28,11 +28,11 @@ export const AboutSection: React.FC = () => {
             </p>
 
             <div className="mt-5 flex flex-wrap justify-center gap-2 md:justify-start">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#e2e8dc] px-3 py-2 text-xs font-bold text-[#275240]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#275240]/10 bg-[#e2e8dc] px-3 py-2 text-xs font-bold text-[#275240]">
                 <Heart className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
                 Cuidado personalizado
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#e2e8dc] px-3 py-2 text-xs font-bold text-[#275240]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#275240]/10 bg-[#e2e8dc] px-3 py-2 text-xs font-bold text-[#275240]">
                 <Camera className="h-3.5 w-3.5" aria-hidden="true" />
                 Fotos y videos en cada visita
               </span>
