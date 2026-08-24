@@ -1,65 +1,52 @@
 import React from 'react';
-import { ShieldCheck, CheckCircle2, Clock, KeyRound, Sparkles } from 'lucide-react';
+import { Camera, Heart, Sparkles, Utensils } from 'lucide-react';
 
 export const WhyHomeCareSection: React.FC = () => {
-  const benefits = [
+  const visitItems = [
     {
-      icon: <ShieldCheck className="w-4 h-4 text-[#275240] shrink-0" />,
-      title: 'Cero Estrés Territorial',
-      desc: 'Evita la ansiedad de traslados y guarderías.',
+      icon: <Utensils className="h-5 w-5" aria-hidden="true" />,
+      title: 'Comida y agua',
+      desc: 'Según su rutina habitual.',
     },
     {
-      icon: <CheckCircle2 className="w-4 h-4 text-[#275240] shrink-0" />,
-      title: 'Sin Riesgo de Contagios',
-      desc: 'Cero contacto con animales desconocidos.',
+      icon: <Sparkles className="h-5 w-5" aria-hidden="true" />,
+      title: 'Arenero limpio',
+      desc: 'Higiene en cada visita.',
     },
     {
-      icon: <Clock className="w-4 h-4 text-[#275240] shrink-0" />,
-      title: 'Rutinas e Higiene Intactas',
-      desc: 'Mantiene sus horarios y descansos de siempre.',
+      icon: <Heart className="h-5 w-5" aria-hidden="true" />,
+      title: 'Juego y compañía',
+      desc: 'Respetando sus tiempos.',
     },
     {
-      icon: <KeyRound className="w-4 h-4 text-[#275240] shrink-0" />,
-      title: 'Hogar Habitado y Seguro',
-      desc: 'Supervisión presencial mientras viajás.',
+      icon: <Camera className="h-5 w-5" aria-hidden="true" />,
+      title: 'Fotos y videos',
+      desc: 'Para que sepas cómo está.',
     },
   ];
 
   return (
-    <section className="py-10 bg-[#e2e8dc] border-y border-[#e2e8dc]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header Row */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
-          <h2 className="text-xl sm:text-2xl font-extrabold text-[#275240] tracking-tight font-display">
-            ¿Por qué elegir cuidado a domicilio?
-          </h2>
-          <p className="text-xs sm:text-sm text-[#275240] max-w-xl font-normal">
-            Los gatos son territoriales: quedarse en su casa conserva sus olores, sus hábitos cotidianos y les evita el estrés de un traslado.
-          </p>
+    <section id="incluye" className="bg-[#fffdf8] py-10 sm:py-12">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Qué incluye cada visita</h2>
+          <span className="text-sm font-semibold text-[#275240]/65">45 minutos de cuidado a domicilio</span>
         </div>
 
-        {/* 4 Compact Inline Benefit Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-          {benefits.map((b, idx) => (
-            <div
-              key={idx}
-              className="bg-white p-4 rounded-2xl border border-[#e2e8dc] shadow-2xs flex items-start gap-3"
-            >
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {visitItems.map((item) => (
+            <div key={item.title} className="flex items-start gap-3 rounded-2xl border border-[#275240]/10 bg-white p-4">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#e2e8dc] text-[#275240]">
+                {item.icon}
+              </div>
               <div>
-                <h3 className="text-sm font-bold text-[#275240] mb-1 font-display">
-                  {b.title}
-                </h3>
-                <p className="text-xs text-[#275240] leading-relaxed">
-                  {b.desc}
-                </p>
+                <h3 className="text-sm font-bold text-[#275240]">{item.title}</h3>
+                <p className="mt-0.5 text-xs leading-relaxed text-[#275240]/65">{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
 };
-
