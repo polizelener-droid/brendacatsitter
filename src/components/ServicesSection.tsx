@@ -19,9 +19,9 @@ export const ServicesSection: React.FC = () => {
     <section id="servicios" className="bg-[#e2e8dc] py-10 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-3xl border border-[#275240]/15 bg-[#e2e8dc] p-5">
+          <div className="rounded-3xl border border-[#275240]/12 bg-white p-5 shadow-sm">
             <div className="flex items-start gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#275240]/10 bg-[#e2e8dc] text-[#275240]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#DDF2F0] text-[#275240]">
                 <Home className="h-5 w-5" aria-hidden="true" />
               </div>
               <div className="min-w-0 flex-1">
@@ -45,15 +45,15 @@ export const ServicesSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-[#275240]/15 bg-[#e2e8dc] p-5">
+          <div className="rounded-3xl border border-[#275240]/12 bg-white p-5 shadow-sm">
             <div className="flex items-start gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#275240]/10 bg-[#e2e8dc] text-[#275240]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e2e8dc] text-[#275240]">
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h2 className="font-display text-xl font-extrabold text-[#275240]">Charla virtual</h2>
-                  <span className="rounded-full border border-[#275240]/10 bg-[#e2e8dc] px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#275240]">
+                  <span className="rounded-full bg-[#e2e8dc] px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#275240]">
                     Gratis
                   </span>
                 </div>
@@ -76,7 +76,7 @@ export const ServicesSection: React.FC = () => {
 
         <CoveragePricingMap />
 
-        <details className="group mt-5 rounded-2xl border border-[#275240]/15 bg-[#e2e8dc]">
+        <details className="group mt-5 rounded-2xl border border-[#275240]/10 bg-white/85 shadow-sm">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-bold text-[#275240]">
             Condiciones del servicio
             <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
@@ -109,7 +109,7 @@ export const ServicesSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-5 flex gap-3 rounded-xl border border-[#275240]/10 bg-[#e2e8dc] p-3.5">
+            <div className="mt-5 flex gap-3 rounded-xl bg-[#f7f8f4] p-3.5">
               <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#275240]" aria-hidden="true" />
               <p className="text-xs leading-relaxed text-[#275240]/75">
                 La higiene del arenero está incluida en cada visita. Desde el 7.º día consecutivo se realiza además una limpieza profunda de la bandeja.
