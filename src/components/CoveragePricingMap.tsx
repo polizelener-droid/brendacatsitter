@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock3, Map, MapPin, PawPrint } from 'lucide-react';
+import { Clock3, MapPinned, MapPin, PawPrint } from 'lucide-react';
 
 type ZoneKey = 'zone1' | 'zone2' | 'zone3';
 
@@ -103,7 +103,7 @@ export const CoveragePricingMap: React.FC = () => {
   return (
     <div className="mt-8 overflow-hidden rounded-[2rem] border border-[#275240]/15 bg-[#fffdf8] shadow-sm">
       <div className="border-b border-[#275240]/10 px-5 py-6 sm:px-7 lg:px-8">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="mb-2 flex items-center gap-2 text-[#275240]">
               <MapPin className="h-5 w-5" aria-hidden="true" />
@@ -113,8 +113,8 @@ export const CoveragePricingMap: React.FC = () => {
               <h4 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">
                 Zonas de cobertura y tarifas
               </h4>
-              <div className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#e2e8dc] text-[#275240] sm:flex">
-                <Map className="h-5 w-5" aria-hidden="true" />
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#275240]/10 bg-gradient-to-br from-[#dff1fb] via-[#f8ddea] to-[#f9f1c9] text-[#275240] shadow-sm">
+                <MapPinned className="h-6 w-6" aria-hidden="true" />
               </div>
             </div>
           </div>
