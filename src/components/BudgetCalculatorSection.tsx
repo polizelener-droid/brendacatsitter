@@ -81,7 +81,7 @@ export const BudgetCalculatorSection: React.FC = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section id="presupuesto" className="bg-[#fffdf8] px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+    <section id="presupuesto" className="bg-[#e2e8dc] px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
       <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-6 lg:p-7">
         <div className="mx-auto mb-5 max-w-xl text-center">
           <div className="mx-auto mb-2.5 flex h-9 w-9 items-center justify-center rounded-xl bg-[#275240] text-white">
