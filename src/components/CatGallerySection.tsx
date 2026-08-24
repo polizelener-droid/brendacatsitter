@@ -33,7 +33,7 @@ export const CatGallerySection: React.FC = () => {
     <button
       type="button"
       onClick={() => setSelectedPhotoIndex(index)}
-      className={`group overflow-hidden rounded-2xl border border-[#275240]/10 bg-white text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
+      className={`group overflow-hidden rounded-2xl border border-[#275240]/15 bg-[#e2e8dc] text-left transition hover:-translate-y-0.5 ${
         compact
           ? 'w-[44vw] max-w-[210px] shrink-0 snap-start sm:w-[30%] sm:max-w-none lg:w-[23.5%]'
           : 'w-full'
@@ -60,7 +60,7 @@ export const CatGallerySection: React.FC = () => {
   return (
     <section id="fotos" className="bg-[#e2e8dc] py-10 sm:py-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-[#275240]/10 bg-white/85 p-4 shadow-sm sm:p-6">
+        <div className="rounded-[2rem] border border-[#275240]/15 bg-[#e2e8dc] p-4 sm:p-6">
           <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="font-display text-xl font-extrabold tracking-tight text-[#275240] sm:text-2xl">
@@ -71,7 +71,7 @@ export const CatGallerySection: React.FC = () => {
               </p>
             </div>
 
-            <div className="inline-flex w-fit rounded-full border border-[#275240]/10 bg-[#e2e8dc] p-1">
+            <div className="inline-flex w-fit rounded-full border border-[#275240]/15 bg-[#e2e8dc] p-1">
               <button
                 type="button"
                 onClick={() => setViewMode('multiple')}
@@ -107,7 +107,7 @@ export const CatGallerySection: React.FC = () => {
                 type="button"
                 onClick={() => scrollCards('left')}
                 aria-label="Ver michis anteriores"
-                className="absolute -left-2 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#275240]/15 bg-white text-[#275240] shadow-sm transition hover:bg-[#e2e8dc] sm:flex"
+                className="absolute -left-2 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#275240]/20 bg-[#e2e8dc] text-[#275240] transition hover:bg-[#d7dfd1] sm:flex"
               >
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
               </button>
@@ -125,7 +125,7 @@ export const CatGallerySection: React.FC = () => {
                 type="button"
                 onClick={() => scrollCards('right')}
                 aria-label="Ver más michis"
-                className="absolute -right-2 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#275240]/15 bg-white text-[#275240] shadow-sm transition hover:bg-[#e2e8dc] sm:flex"
+                className="absolute -right-2 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#275240]/20 bg-[#e2e8dc] text-[#275240] transition hover:bg-[#d7dfd1] sm:flex"
               >
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </button>
