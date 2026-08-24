@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock3, MapPin, PawPrint } from 'lucide-react';
+import { Clock3, Map, MapPin, PawPrint } from 'lucide-react';
 
 type ZoneKey = 'zone1' | 'zone2' | 'zone3';
 
@@ -29,37 +29,28 @@ const zoneStyles: Record<ZoneKey, { tile: string; dot: string; card: string; tit
   },
 };
 
-const northRow: NeighborhoodTile[] = [
+const coverageTiles: NeighborhoodTile[] = [
   { name: 'Vicente López', zone: 'zone1' },
   { name: 'Florida', zone: 'zone1' },
-];
-
-const mapRows: NeighborhoodTile[][] = [
-  [
-    { name: 'Saavedra', zone: 'zone1' },
-    { name: 'Núñez', zone: 'zone1' },
-    { name: 'Belgrano', zone: 'zone1' },
-    { name: 'Palermo', zone: 'zone2' },
-    { name: 'Recoleta', zone: 'zone2' },
-  ],
-  [
-    { name: 'Villa Pueyrredón', zone: 'zone1' },
-    { name: 'Villa Urquiza', zone: 'zone1' },
-    { name: 'Coghlan', zone: 'zone1' },
-    { name: 'Colegiales', zone: 'zone1' },
-    { name: 'Villa Ortúzar', zone: 'zone2' },
-    { name: 'Villa Crespo', zone: 'zone2' },
-    { name: 'Chacarita', zone: 'zone2' },
-  ],
-  [
-    { name: 'Villa Devoto', zone: 'zone2' },
-    { name: 'Parque Chas', zone: 'zone2' },
-    { name: 'Agronomía', zone: 'zone2' },
-    { name: 'La Paternal', zone: 'zone2' },
-    { name: 'Almagro', zone: 'zone2' },
-    { name: 'Puerto Madero', zone: 'zone3' },
-  ],
-  [{ name: 'Villa Real', zone: 'zone2' }],
+  { name: 'Saavedra', zone: 'zone1' },
+  { name: 'Núñez', zone: 'zone1' },
+  { name: 'Belgrano', zone: 'zone1' },
+  { name: 'Villa Pueyrredón', zone: 'zone1' },
+  { name: 'Villa Urquiza', zone: 'zone1' },
+  { name: 'Coghlan', zone: 'zone1' },
+  { name: 'Colegiales', zone: 'zone1' },
+  { name: 'Palermo', zone: 'zone2' },
+  { name: 'Recoleta', zone: 'zone2' },
+  { name: 'Villa Ortúzar', zone: 'zone2' },
+  { name: 'Villa Crespo', zone: 'zone2' },
+  { name: 'Chacarita', zone: 'zone2' },
+  { name: 'Villa Devoto', zone: 'zone2' },
+  { name: 'Parque Chas', zone: 'zone2' },
+  { name: 'Agronomía', zone: 'zone2' },
+  { name: 'La Paternal', zone: 'zone2' },
+  { name: 'Almagro', zone: 'zone2' },
+  { name: 'Villa Real', zone: 'zone2' },
+  { name: 'Puerto Madero', zone: 'zone3' },
 ];
 
 const zones = [
@@ -73,7 +64,7 @@ const zones = [
       ['Domingos y feriados', '$25.000'],
     ],
     neighborhoods:
-      'Núñez · Saavedra · Belgrano · Villa Urquiza · Colegiales · Coghlan · Villa Pueyrredón · Vicente López · Florida',
+      'Vicente López · Florida · Saavedra · Núñez · Belgrano · Villa Pueyrredón · Villa Urquiza · Coghlan · Colegiales',
   },
   {
     key: 'zone2' as const,
@@ -85,7 +76,7 @@ const zones = [
       ['Domingos y feriados', '$27.000'],
     ],
     neighborhoods:
-      'Palermo · Villa Crespo · Almagro · Villa Devoto · Villa Real · Recoleta · Chacarita · La Paternal · Agronomía · Parque Chas · Villa Ortúzar',
+      'Palermo · Recoleta · Villa Ortúzar · Villa Crespo · Chacarita · Villa Devoto · Parque Chas · Agronomía · La Paternal · Almagro · Villa Real',
   },
   {
     key: 'zone3' as const,
@@ -102,7 +93,7 @@ const zones = [
 
 const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => (
   <div
-    className={`inline-flex min-h-11 items-center justify-center rounded-2xl border px-3 py-2 text-center text-[11px] font-extrabold leading-tight shadow-sm sm:text-xs ${zoneStyles[tile.zone].tile}`}
+    className={`inline-flex min-h-11 items-center justify-center rounded-2xl border px-3.5 py-2.5 text-center text-[11px] font-extrabold leading-tight shadow-sm sm:text-xs ${zoneStyles[tile.zone].tile}`}
   >
     {tile.name}
   </div>
@@ -118,39 +109,28 @@ export const CoveragePricingMap: React.FC = () => {
               <MapPin className="h-5 w-5" aria-hidden="true" />
               <span className="text-xs font-extrabold uppercase tracking-[0.16em]">Cobertura por zona</span>
             </div>
-            <h4 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">
-              Zonas de cobertura y tarifas
-            </h4>
+            <div className="flex items-center gap-3">
+              <h4 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">
+                Zonas de cobertura y tarifas
+              </h4>
+              <div className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#e2e8dc] text-[#275240] sm:flex">
+                <Map className="h-5 w-5" aria-hidden="true" />
+              </div>
+            </div>
           </div>
           <p className="max-w-md text-xs leading-relaxed text-[#275240]/75 sm:text-sm">
-            El color de cada barrio indica la tarifa correspondiente según la zona de cobertura.
+            Los barrios están agrupados por color según la tarifa correspondiente.
           </p>
         </div>
       </div>
 
       <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[1.25fr_1fr] lg:p-8">
         <div className="rounded-3xl border border-[#275240]/10 bg-white p-4 sm:p-5">
-          <div className="mb-4 flex flex-wrap items-center gap-2">
-            {northRow.map((tile) => (
-              <Tile key={tile.name} tile={tile} />
-            ))}
-            <span className="ml-auto hidden text-[10px] font-semibold uppercase tracking-[0.14em] text-[#275240]/45 sm:inline">
-              Norte
-            </span>
-          </div>
-
-          <div className="relative overflow-hidden rounded-3xl border border-[#275240]/10 bg-[#f6f5f1] p-3 sm:p-4">
+          <div className="relative overflow-hidden rounded-3xl border border-[#275240]/10 bg-[#f6f5f1] p-4 sm:p-5">
             <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(to_right,#27524012_1px,transparent_1px),linear-gradient(to_bottom,#27524012_1px,transparent_1px)] [background-size:28px_28px]" />
-            <div className="relative space-y-2.5">
-              {mapRows.map((row, index) => (
-                <div
-                  key={index}
-                  className={`flex flex-wrap gap-2 ${index === 1 ? 'sm:pl-5' : ''} ${index === 2 ? 'sm:pl-2' : ''}`}
-                >
-                  {row.map((tile) => (
-                    <Tile key={tile.name} tile={tile} />
-                  ))}
-                </div>
+            <div className="relative flex flex-wrap gap-2.5 sm:gap-3">
+              {coverageTiles.map((tile) => (
+                <Tile key={tile.name} tile={tile} />
               ))}
             </div>
           </div>
