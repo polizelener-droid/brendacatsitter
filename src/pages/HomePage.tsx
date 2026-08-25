@@ -4,8 +4,10 @@ import { HeroSection } from '../components/HeroSection';
 import { AboutSection } from '../components/AboutSection';
 import { ServicesSection } from '../components/ServicesSection';
 import { WhyHomeCareSection } from '../components/WhyHomeCareSection';
+import { BookingStepsSection } from '../components/BookingStepsSection';
 import { CatGallerySection } from '../components/CatGallerySection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
+import { FaqSection } from '../components/FaqSection';
 import { ContactSection } from '../components/ContactSection';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 import { Footer } from '../components/Footer';
@@ -22,9 +24,11 @@ export const HomePage: React.FC = () => {
         <HeroSection />
         <AboutSection />
         <WhyHomeCareSection />
+        <BookingStepsSection />
         <ServicesSection />
         <CatGallerySection />
         <TestimonialsSection />
+        <FaqSection />
         <ContactSection />
       </main>
       <Footer />
