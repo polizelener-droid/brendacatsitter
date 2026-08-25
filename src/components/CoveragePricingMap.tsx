@@ -105,7 +105,7 @@ export const CoveragePricingMap: React.FC = () => {
   const poliWhatsAppUrl = buildWhatsAppUrl(POLI_WHATSAPP, POLI_WHATSAPP_BASE_MESSAGE);
 
   return (
-    <div className="mt-6 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
+    <div id="zonas-presupuesto" className="mt-6 scroll-mt-24 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
       <h3 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">
         Zonas, tarifas y presupuesto
       </h3>
