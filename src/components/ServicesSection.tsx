@@ -18,7 +18,9 @@ export const ServicesSection: React.FC = () => {
   return (
     <section id="servicios" className="bg-[#e2e8dc] py-10 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-4 md:grid-cols-2">
+        <CoveragePricingMap />
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
           <div className="rounded-3xl border border-[#275240]/12 bg-white p-5 shadow-sm">
             <div className="flex items-start gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#DDF2F0] text-[#275240]">
@@ -73,8 +75,6 @@ export const ServicesSection: React.FC = () => {
             </div>
           </div>
         </div>
-
-        <CoveragePricingMap />
 
         <details className="group mt-5 rounded-2xl border border-[#275240]/10 bg-white/85 shadow-sm">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-bold text-[#275240]">
