@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Calculator, CalendarDays, Cat, MapPin, MessageCircle } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
+import { POLI_WHATSAPP, buildWhatsAppUrl } from '../data/whatsappContacts';
 
-const WHATSAPP_NUMBER = '5491161386748';
 const EXTRA_CAT_RATE = 5_000;
 const MAX_TOTAL_DAYS = 90;
 const MAX_CATS = 10;
@@ -41,7 +41,7 @@ const zoneButtonStyles: Record<CoverageZone, string> = {
 };
 
 export const BudgetCalculatorSection: React.FC = () => {
-  const { rates } = useContent();
+  const { rates, contact } = useContent();
   const [zone, setZone] = useState<CoverageZone>(1);
   const [cats, setCats] = useState(1);
   const [weekdays, setWeekdays] = useState(1);
@@ -67,8 +67,10 @@ export const BudgetCalculatorSection: React.FC = () => {
     saturdays * (prices.saturday + extraPerVisit) +
     sundaysAndHolidays * (prices.sundayHoliday + extraPerVisit);
 
+  const contactName = zone === 1 ? 'Brenda' : 'Poli';
+  const whatsappNumber = zone === 1 ? contact.whatsapp : POLI_WHATSAPP;
   const whatsappMessage = [
-    'Hola Brenda! Calculé un presupuesto desde tu página web.',
+    `Hola ${contactName}! Calculé un presupuesto desde la página web de Brenda Cat Sitter.`,
     `• Zona de cobertura: Zona ${zone}`,
     `• Cantidad de gatos: ${cats}`,
     `• Días de lunes a viernes: ${weekdays}`,
@@ -78,7 +80,7 @@ export const BudgetCalculatorSection: React.FC = () => {
     'Quería consultar disponibilidad y confirmar el valor final.',
   ].join('\n');
 
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappUrl = buildWhatsAppUrl(whatsappNumber, whatsappMessage);
 
   return (
     <section id="presupuesto" className="bg-[#e2e8dc] px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
@@ -193,6 +195,9 @@ export const BudgetCalculatorSection: React.FC = () => {
           <p className="mt-1 text-xs text-[#275240]/70">
             Zona {zone} · {totalDays} {totalDays === 1 ? 'día' : 'días'} · {cats} {cats === 1 ? 'gato' : 'gatos'}
           </p>
+          <p className="mt-1 text-[11px] font-bold text-[#275240]/65">
+            Te responde {contactName} por WhatsApp.
+          </p>
           {!exceedsDayLimit && extraCats > 0 && (
             <p className="mt-1 text-[11px] font-semibold text-[#275240]/60">Incluye adicional por cantidad de gatos.</p>
           )}
@@ -218,10 +223,10 @@ export const BudgetCalculatorSection: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#275240] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#1e3f32] focus:outline-none focus:ring-4 focus:ring-[#275240]/20"
-            aria-label="Consultar disponibilidad con Brenda por WhatsApp"
+            aria-label={`Consultar disponibilidad con ${contactName} por WhatsApp`}
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Consultar disponibilidad por WhatsApp
+            Consultar con {contactName} por WhatsApp
           </a>
         )}
       </div>
