@@ -83,17 +83,17 @@ export const BudgetCalculatorSection: React.FC = () => {
   const whatsappUrl = buildWhatsAppUrl(whatsappNumber, whatsappMessage);
 
   return (
-    <section id="presupuesto" className="bg-[#e2e8dc] px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-      <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-6 lg:p-7">
+    <div id="presupuesto" className="mt-6 border-t border-[#275240]/10 pt-6 sm:mt-7 sm:pt-7">
+      <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-[#275240]/10 bg-[#f7f8f4] p-5 sm:p-6 lg:p-7">
         <div className="mx-auto mb-5 max-w-xl text-center">
           <div className="mx-auto mb-2.5 flex h-9 w-9 items-center justify-center rounded-xl bg-[#275240] text-white">
             <Calculator className="h-4.5 w-4.5" aria-hidden="true" />
           </div>
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#275240] sm:text-3xl">
+          <h3 className="font-display text-2xl font-extrabold tracking-tight text-[#275240] sm:text-3xl">
             Calculá tu presupuesto
-          </h2>
+          </h3>
           <p className="mt-1.5 text-xs text-[#275240]/65 sm:text-sm">
-            Elegí zona, cantidad de gatos y días.
+            Elegí tu zona, cantidad de gatos y días para obtener un estimado.
           </p>
         </div>
 
@@ -187,7 +187,7 @@ export const BudgetCalculatorSection: React.FC = () => {
           </fieldset>
         </div>
 
-        <div className="mt-5 rounded-2xl bg-[#e2e8dc] p-4 text-center" aria-live="polite">
+        <div className="mt-5 rounded-2xl bg-white p-4 text-center" aria-live="polite">
           <span className="text-xs font-semibold text-[#275240]/70">Presupuesto estimado desde</span>
           <strong className="mt-0.5 block font-display text-3xl font-black text-[#275240] sm:text-4xl">
             {exceedsDayLimit ? '—' : formatPesos(total)}
@@ -230,7 +230,7 @@ export const BudgetCalculatorSection: React.FC = () => {
           </a>
         )}
       </div>
-    </section>
+    </div>
   );
 };
 
