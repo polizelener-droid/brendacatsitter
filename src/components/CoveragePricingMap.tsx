@@ -2,6 +2,7 @@ import React from 'react';
 import { Clock3, MessageCircle, PawPrint } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { BudgetCalculatorSection } from './BudgetCalculatorSection';
 import {
   POLI_WHATSAPP,
   POLI_WHATSAPP_BASE_MESSAGE,
@@ -105,7 +106,12 @@ export const CoveragePricingMap: React.FC = () => {
 
   return (
     <div className="mt-6 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
-      <h3 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Zonas y tarifas</h3>
+      <h3 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">
+        Zonas, tarifas y presupuesto
+      </h3>
+      <p className="mt-1.5 text-xs text-[#275240]/60 sm:text-sm">
+        Encontrá tu zona, revisá la tarifa y calculá el valor estimado de tu servicio en el mismo lugar.
+      </p>
 
       <div className="mt-5 grid items-start gap-5 lg:grid-cols-[1.3fr_1fr]">
         <div>
@@ -196,6 +202,8 @@ export const CoveragePricingMap: React.FC = () => {
         </span>
         <span>Si tu barrio queda cerca, consultanos disponibilidad.</span>
       </div>
+
+      <BudgetCalculatorSection />
     </div>
   );
 };
