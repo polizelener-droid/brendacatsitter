@@ -1,18 +1,7 @@
 import React from 'react';
 import { Camera, Heart, Clock, Sparkles } from 'lucide-react';
-import { useContent } from '../content/ContentContext';
-import { WhatsAppIcon } from './WhatsAppIcon';
-import {
-  POLI_WHATSAPP,
-  POLI_WHATSAPP_BASE_MESSAGE,
-  buildWhatsAppUrl,
-} from '../data/whatsappContacts';
 
 export const HeroSection: React.FC = () => {
-  const { contact } = useContent();
-  const brendaWaLink = buildWhatsAppUrl(contact.whatsapp, contact.whatsappBaseMessage);
-  const poliWaLink = buildWhatsAppUrl(POLI_WHATSAPP, POLI_WHATSAPP_BASE_MESSAGE);
-
   return (
     <section className="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-[#e2e8dc] border-b border-[#e2e8dc]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -24,33 +13,9 @@ export const HeroSection: React.FC = () => {
           Cuidadora de gatos <span className="text-[#275240] font-serif italic">a domicilio</span>
         </h1>
 
-        <p className="text-base sm:text-lg text-[#275240] mb-7 max-w-2xl mx-auto leading-relaxed font-normal text-pretty">
+        <p className="text-base sm:text-lg text-[#275240] mb-8 max-w-2xl mx-auto leading-relaxed font-normal text-pretty">
           Visitas personalizadas de <strong className="text-[#275240] font-bold">45 minutos dedicados</strong> para que tu gato conserve su paz, rutinas y territorio mientras viajás. Comida fresca, mimos, juego y reportes detallados en vivo.
         </p>
-
-        <p className="mb-3 text-xs font-bold text-[#275240]/70">Elegí tu zona para escribirnos por WhatsApp</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 w-full">
-          <a
-            href={brendaWaLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            id="hero-whatsapp-cta-zone1"
-            className="w-full sm:w-auto max-w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold px-5 sm:px-7 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all border border-emerald-300/40"
-          >
-            <WhatsAppIcon className="w-5 h-5 fill-white shrink-0" />
-            <span className="text-center">Zona 1 · Brenda</span>
-          </a>
-          <a
-            href={poliWaLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            id="hero-whatsapp-cta-zone23"
-            className="w-full sm:w-auto max-w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold px-5 sm:px-7 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all border border-emerald-300/40"
-          >
-            <WhatsAppIcon className="w-5 h-5 fill-white shrink-0" />
-            <span className="text-center">Zonas 2 y 3 · Poli</span>
-          </a>
-        </div>
 
         <div className="flex flex-wrap justify-center gap-2 mb-7">
           <span className="inline-flex max-w-full items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#e2e8dc] text-xs font-bold text-[#275240] shadow-2xs">
