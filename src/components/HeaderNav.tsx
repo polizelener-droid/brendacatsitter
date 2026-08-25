@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Cat, Heart, Menu, X } from 'lucide-react';
+import { Heart, Menu, X } from 'lucide-react';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const HeaderNav: React.FC = () => {
@@ -38,25 +38,21 @@ export const HeaderNav: React.FC = () => {
           : 'bg-transparent py-4'
       }`}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 sm:px-7 lg:px-9">
         <div className="flex items-center justify-between gap-3">
           <a
             href="#"
             id="brand-logo-link"
             onClick={(e) => handleNavClick(e, '#')}
-            className="group flex min-w-0 items-center gap-2 sm:gap-2.5"
+            className="group min-w-0 py-0.5"
           >
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#e2e8dc] bg-[#275240] text-white shadow-sm transition-transform group-hover:scale-105 sm:h-10 sm:w-10">
-              <Cat className="h-5 w-5" />
-            </div>
-            <div className="min-w-0">
-              <span className="block truncate font-display text-lg font-bold leading-none tracking-tight text-[#275240] sm:text-xl">
-                Brenda <span className="font-serif italic">Cat Sitter</span>
-              </span>
-              <span className="mt-0.5 flex items-center gap-1 text-xs font-medium text-[#275240]">
-                <Heart className="h-3 w-3 shrink-0 fill-[#275240]" /> Cuidado a domicilio
-              </span>
-            </div>
+            <span className="block whitespace-nowrap font-sans text-[15px] font-extrabold leading-none tracking-[-0.02em] text-[#275240] sm:text-base">
+              Brenda <span className="font-medium italic">Cat Sitter</span>
+            </span>
+            <span className="mt-1 flex items-center gap-1 text-[9px] font-semibold tracking-[0.01em] text-[#275240]/60 sm:text-[10px]">
+              <Heart className="h-2.5 w-2.5 shrink-0 fill-[#275240]/60" />
+              Cuidado a domicilio
+            </span>
           </a>
 
           <nav className="hidden items-center gap-1 rounded-full border border-[#275240]/10 bg-white/85 px-3 py-1.5 shadow-2xs backdrop-blur-md lg:flex">
