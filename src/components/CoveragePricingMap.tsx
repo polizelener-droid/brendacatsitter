@@ -1,5 +1,12 @@
 import React from 'react';
-import { Clock3, PawPrint } from 'lucide-react';
+import { Clock3, MessageCircle, PawPrint } from 'lucide-react';
+import { useContent } from '../content/ContentContext';
+import { WhatsAppIcon } from './WhatsAppIcon';
+import {
+  POLI_WHATSAPP,
+  POLI_WHATSAPP_BASE_MESSAGE,
+  buildWhatsAppUrl,
+} from '../data/whatsappContacts';
 
 type ZoneKey = 'zone1' | 'zone2' | 'zone3';
 
@@ -92,6 +99,10 @@ const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => (
 );
 
 export const CoveragePricingMap: React.FC = () => {
+  const { contact } = useContent();
+  const brendaWhatsAppUrl = buildWhatsAppUrl(contact.whatsapp, contact.whatsappBaseMessage);
+  const poliWhatsAppUrl = buildWhatsAppUrl(POLI_WHATSAPP, POLI_WHATSAPP_BASE_MESSAGE);
+
   return (
     <div className="mt-6 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
       <h3 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Zonas y tarifas</h3>
@@ -117,6 +128,42 @@ export const CoveragePricingMap: React.FC = () => {
             <span className={`inline-flex items-center gap-2 ${zoneStyles.zone3.title}`}>
               <span className={`h-3 w-3 rounded-full ${zoneStyles.zone3.dot}`} /> Zona 3
             </span>
+          </div>
+
+          <div className="mt-5 rounded-3xl border border-[#275240]/10 bg-[#f7f8f4] p-4 sm:p-5">
+            <div className="flex items-center gap-2 text-[#275240]">
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              <h4 className="text-sm font-extrabold sm:text-base">¿Querés consultar disponibilidad?</h4>
+            </div>
+            <p className="mt-1 text-xs text-[#275240]/65">Elegí la zona y te lleva directo al WhatsApp correspondiente.</p>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <a
+                href={brendaWhatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-h-14 items-center justify-between gap-3 rounded-2xl border border-[#a8c9df] bg-[#f4fbff] px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                <div className="text-left">
+                  <span className="block text-xs font-bold text-[#4a7ea0]">Zona 1</span>
+                  <strong className="text-sm font-black text-[#275240]">Hablar con Brenda</strong>
+                </div>
+                <WhatsAppIcon className="h-6 w-6 shrink-0 fill-[#25D366] text-[#25D366]" />
+              </a>
+
+              <a
+                href={poliWhatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-h-14 items-center justify-between gap-3 rounded-2xl border border-[#dfb4c9] bg-[#fff6fa] px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                <div className="text-left">
+                  <span className="block text-xs font-bold text-[#a46a87]">Zonas 2 y 3</span>
+                  <strong className="text-sm font-black text-[#275240]">Hablar con Poli</strong>
+                </div>
+                <WhatsAppIcon className="h-6 w-6 shrink-0 fill-[#25D366] text-[#25D366]" />
+              </a>
+            </div>
           </div>
         </div>
 
