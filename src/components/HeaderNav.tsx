@@ -25,8 +25,7 @@ export const HeaderNav: React.FC = () => {
 
   const navLinks = [
     { name: 'Qué incluye', href: '#incluye' },
-    { name: 'Tarifas', href: '#servicios' },
-    { name: 'Presupuesto', href: '#presupuesto' },
+    { name: 'Zonas y presupuesto', href: '#zonas-presupuesto' },
     { name: 'Reseñas', href: '#resenas' },
     { name: 'Contacto', href: '#contacto' },
   ];
