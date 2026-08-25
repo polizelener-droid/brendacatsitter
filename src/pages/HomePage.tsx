@@ -3,7 +3,6 @@ import { HeaderNav } from '../components/HeaderNav';
 import { HeroSection } from '../components/HeroSection';
 import { AboutSection } from '../components/AboutSection';
 import { ServicesSection } from '../components/ServicesSection';
-import { BudgetCalculatorSection } from '../components/BudgetCalculatorSection';
 import { WhyHomeCareSection } from '../components/WhyHomeCareSection';
 import { CatGallerySection } from '../components/CatGallerySection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
@@ -25,7 +24,6 @@ export const HomePage: React.FC = () => {
         <WhyHomeCareSection />
         <ServicesSection />
         <CatGallerySection />
-        <BudgetCalculatorSection />
         <TestimonialsSection />
         <ContactSection />
       </main>
