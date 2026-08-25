@@ -2,10 +2,16 @@ import React from 'react';
 import { Camera, Heart, Clock, Sparkles } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import {
+  POLI_WHATSAPP,
+  POLI_WHATSAPP_BASE_MESSAGE,
+  buildWhatsAppUrl,
+} from '../data/whatsappContacts';
 
 export const HeroSection: React.FC = () => {
   const { contact } = useContent();
-  const waLink = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappBaseMessage)}`;
+  const brendaWaLink = buildWhatsAppUrl(contact.whatsapp, contact.whatsappBaseMessage);
+  const poliWaLink = buildWhatsAppUrl(POLI_WHATSAPP, POLI_WHATSAPP_BASE_MESSAGE);
 
   return (
     <section className="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-[#e2e8dc] border-b border-[#e2e8dc]">
@@ -22,16 +28,27 @@ export const HeroSection: React.FC = () => {
           Visitas personalizadas de <strong className="text-[#275240] font-bold">45 minutos dedicados</strong> para que tu gato conserve su paz, rutinas y territorio mientras viajás. Comida fresca, mimos, juego y reportes detallados en vivo.
         </p>
 
+        <p className="mb-3 text-xs font-bold text-[#275240]/70">Elegí tu zona para escribirnos por WhatsApp</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 w-full">
           <a
-            href={waLink}
+            href={brendaWaLink}
             target="_blank"
             rel="noopener noreferrer"
-            id="hero-whatsapp-cta"
-            className="w-full sm:w-auto max-w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold px-5 sm:px-8 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all border border-emerald-300/40"
+            id="hero-whatsapp-cta-zone1"
+            className="w-full sm:w-auto max-w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold px-5 sm:px-7 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all border border-emerald-300/40"
           >
             <WhatsAppIcon className="w-5 h-5 fill-white shrink-0" />
-            <span className="text-center">Hablar con Brenda por WhatsApp</span>
+            <span className="text-center">Zona 1 · Brenda</span>
+          </a>
+          <a
+            href={poliWaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="hero-whatsapp-cta-zone23"
+            className="w-full sm:w-auto max-w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold px-5 sm:px-7 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all border border-emerald-300/40"
+          >
+            <WhatsAppIcon className="w-5 h-5 fill-white shrink-0" />
+            <span className="text-center">Zonas 2 y 3 · Poli</span>
           </a>
         </div>
 
