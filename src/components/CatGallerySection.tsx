@@ -37,7 +37,7 @@ export const CatGallerySection: React.FC = () => {
         left: atEnd ? 0 : Math.min(track.scrollLeft + step, maxScroll),
         behavior: 'smooth',
       });
-    }, 4000);
+    }, 2000);
 
     return () => window.clearInterval(intervalId);
   }, [cats.length, selectedPhotoIndex, viewMode]);
