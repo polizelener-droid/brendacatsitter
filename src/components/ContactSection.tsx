@@ -40,7 +40,7 @@ export const ContactSection: React.FC = () => {
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-[#275240] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#1f4033]"
             >
               <WhatsAppLogo className="h-5 w-5" />
-              Zonas 2 y 3 · Hablar con Poli
+              Zona 2 · Hablar con Poli
             </a>
           </div>
 
