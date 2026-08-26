@@ -5,7 +5,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section className="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-[#e2e8dc] border-b border-[#e2e8dc]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex max-w-full items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-[#e2e8dc] border border-[#e2e8dc] text-[#275240] text-[11px] sm:text-sm font-bold mb-5 shadow-2xs text-balance">
+        <div className="inline-flex max-w-full items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#e2e8dc] text-[#275240] text-[11px] sm:text-sm font-bold mb-5 shadow-2xs text-balance">
           <span>Servicio de Cuidado de Gatos Exclusivo a Domicilio</span>
         </div>
 
