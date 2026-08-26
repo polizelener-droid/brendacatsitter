@@ -11,15 +11,9 @@ export const CatGallerySection: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = useState<GalleryView>('multiple');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
 
   useEffect(() => {
-    if (
-      viewMode !== 'multiple' ||
-      isCarouselPaused ||
-      selectedPhotoIndex !== null ||
-      cats.length <= 1
-    ) {
+    if (viewMode !== 'multiple' || selectedPhotoIndex !== null || cats.length <= 1) {
       return;
     }
 
@@ -34,7 +28,8 @@ export const CatGallerySection: React.FC = () => {
       const firstCard = track.firstElementChild as HTMLElement | null;
       const styles = window.getComputedStyle(track);
       const gap = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
-      const step = (firstCard?.getBoundingClientRect().width ?? Math.max(280, track.clientWidth * 0.25)) + gap;
+      const step =
+        (firstCard?.getBoundingClientRect().width ?? Math.max(280, track.clientWidth * 0.25)) + gap;
       const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
       const atEnd = track.scrollLeft >= maxScroll - step * 0.5;
 
@@ -45,7 +40,7 @@ export const CatGallerySection: React.FC = () => {
     }, 4000);
 
     return () => window.clearInterval(intervalId);
-  }, [cats.length, isCarouselPaused, selectedPhotoIndex, viewMode]);
+  }, [cats.length, selectedPhotoIndex, viewMode]);
 
   if (!cats.length) return null;
 
@@ -137,11 +132,7 @@ export const CatGallerySection: React.FC = () => {
           </div>
 
           {viewMode === 'multiple' ? (
-            <div
-              className="relative"
-              onMouseEnter={() => setIsCarouselPaused(true)}
-              onMouseLeave={() => setIsCarouselPaused(false)}
-            >
+            <div className="relative">
               <button
                 type="button"
                 onClick={() => scrollCards('left')}
