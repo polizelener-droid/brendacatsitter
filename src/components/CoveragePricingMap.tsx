@@ -94,7 +94,7 @@ export const CoveragePricingMap: React.FC = () => {
         Zonas, tarifas y presupuesto
       </h3>
       <p className="mt-1.5 text-xs text-[#275240]/60 sm:text-sm">
-        Encontrá tu zona, revisá la tarifa por visita de 45 min y calculá el valor estimado de tu servicio.
+        Encontrá tu zona, revisá la tarifa por visita de 45 minutos y calculá el valor estimado de tu servicio.
       </p>
 
       <div className="mt-5 grid items-start gap-5 lg:grid-cols-[1.3fr_1fr]">
@@ -179,7 +179,7 @@ export const CoveragePricingMap: React.FC = () => {
 
       <div className="mt-5 flex flex-col gap-1.5 border-t border-[#275240]/10 pt-4 text-xs text-[#275240]/70 sm:flex-row sm:items-center sm:justify-between">
         <span className="inline-flex items-center gap-2 font-bold text-[#275240]">
-          <Clock3 className="h-4 w-4" aria-hidden="true" /> Tarifas por visita de 45 min
+          <Clock3 className="h-4 w-4" aria-hidden="true" /> Tarifas por visita de 45 minutos
         </span>
         <span>Si tu barrio queda cerca, consultanos disponibilidad.</span>
       </div>
