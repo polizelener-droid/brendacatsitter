@@ -47,7 +47,7 @@ export const TestimonialsSection: React.FC = () => {
     if (!isPlaying || maxIndex <= 0) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 4500);
+    }, 2000);
     return () => clearInterval(interval);
   }, [isPlaying, maxIndex]);
 
