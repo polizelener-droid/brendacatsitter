@@ -5,7 +5,7 @@ const steps = [
   {
     number: '01',
     title: 'Encontrá tu zona',
-    description: 'Buscá tu barrio y fijate si corresponde a Zona 1, 2 o 3.',
+    description: 'Buscá tu barrio y fijate si corresponde a Zona 1 o 2.',
     icon: MapPin,
   },
   {
@@ -17,7 +17,7 @@ const steps = [
   {
     number: '03',
     title: 'Escribinos por WhatsApp',
-    description: 'Zona 1 va con Brenda. Zonas 2 y 3, con Poli.',
+    description: 'Zona 1 va con Brenda. Zona 2, con Poli.',
     icon: MessageCircle,
   },
   {
