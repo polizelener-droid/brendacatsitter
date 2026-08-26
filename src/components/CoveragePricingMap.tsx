@@ -9,7 +9,7 @@ import {
   buildWhatsAppUrl,
 } from '../data/whatsappContacts';
 
-type ZoneKey = 'zone1' | 'zone2' | 'zone3';
+type ZoneKey = 'zone1' | 'zone2';
 
 type NeighborhoodTile = {
   name: string;
@@ -28,12 +28,6 @@ const zoneStyles: Record<ZoneKey, { tile: string; dot: string; card: string; tit
     dot: 'bg-[#e4a9c6]',
     card: 'border-[#dfb4c9] bg-[#fff6fa]',
     title: 'text-[#a46a87]',
-  },
-  zone3: {
-    tile: 'border-[#ddd095] bg-[#f9f1c9] text-[#8d7a2d]',
-    dot: 'bg-[#e5d57e]',
-    card: 'border-[#ddd095] bg-[#fffdf2]',
-    title: 'text-[#9a8735]',
   },
 };
 
@@ -58,7 +52,6 @@ const coverageTiles: NeighborhoodTile[] = [
   { name: 'La Paternal', zone: 'zone2' },
   { name: 'Almagro', zone: 'zone2' },
   { name: 'Villa Real', zone: 'zone2' },
-  { name: 'Puerto Madero', zone: 'zone3' },
 ];
 
 const zones = [
@@ -78,15 +71,6 @@ const zones = [
       ['Lunes a viernes', '$20.000'],
       ['Sábados', '$23.000'],
       ['Domingos y feriados', '$27.000'],
-    ],
-  },
-  {
-    key: 'zone3' as const,
-    name: 'Zona 3',
-    prices: [
-      ['Lunes a viernes', '$22.000'],
-      ['Sábados', '$25.000'],
-      ['Domingos y feriados', '$29.000'],
     ],
   },
 ];
@@ -131,9 +115,6 @@ export const CoveragePricingMap: React.FC = () => {
             <span className={`inline-flex items-center gap-2 ${zoneStyles.zone2.title}`}>
               <span className={`h-3 w-3 rounded-full ${zoneStyles.zone2.dot}`} /> Zona 2
             </span>
-            <span className={`inline-flex items-center gap-2 ${zoneStyles.zone3.title}`}>
-              <span className={`h-3 w-3 rounded-full ${zoneStyles.zone3.dot}`} /> Zona 3
-            </span>
           </div>
 
           <div className="mt-5 rounded-3xl border border-[#275240]/10 bg-[#f7f8f4] p-4 sm:p-5">
@@ -164,7 +145,7 @@ export const CoveragePricingMap: React.FC = () => {
                 className="flex min-h-14 items-center justify-between gap-3 rounded-2xl border border-[#dfb4c9] bg-[#fff6fa] px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm"
               >
                 <div className="text-left">
-                  <span className="block text-xs font-bold text-[#a46a87]">Zonas 2 y 3</span>
+                  <span className="block text-xs font-bold text-[#a46a87]">Zona 2</span>
                   <strong className="text-sm font-black text-[#275240]">Hablar con Poli</strong>
                 </div>
                 <WhatsAppIcon className="h-6 w-6 shrink-0 fill-[#25D366] text-[#25D366]" />
