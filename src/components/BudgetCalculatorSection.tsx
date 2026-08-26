@@ -10,7 +10,6 @@ const MAX_CATS = 10;
 const ZONE_SURCHARGE = {
   1: 0,
   2: 2_000,
-  3: 4_000,
 } as const;
 
 type CoverageZone = keyof typeof ZONE_SURCHARGE;
@@ -37,7 +36,6 @@ function safeCatCount(value: string): number {
 const zoneButtonStyles: Record<CoverageZone, string> = {
   1: 'border-[#a8c9df] bg-[#dff1fb] text-[#3e6f8f]',
   2: 'border-[#dfb4c9] bg-[#f8ddea] text-[#935b77]',
-  3: 'border-[#ddd095] bg-[#f9f1c9] text-[#8d7a2d]',
 };
 
 export const BudgetCalculatorSection: React.FC = () => {
@@ -104,8 +102,8 @@ export const BudgetCalculatorSection: React.FC = () => {
                 <MapPin className="h-4 w-4" aria-hidden="true" />
                 ¿De qué zona sos?
               </div>
-              <div className="grid grid-cols-3 gap-2">
-                {([1, 2, 3] as CoverageZone[]).map((zoneOption) => {
+              <div className="grid grid-cols-2 gap-2">
+                {([1, 2] as CoverageZone[]).map((zoneOption) => {
                   const selected = zone === zoneOption;
                   return (
                     <button
