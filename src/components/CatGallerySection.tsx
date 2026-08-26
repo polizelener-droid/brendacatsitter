@@ -9,6 +9,7 @@ export const CatGallerySection: React.FC = () => {
   const { cats: remoteCats } = useContent();
   const cats = remoteCats?.length ? remoteCats : CAT_CLIENTS;
   const trackRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = useState<GalleryView>('multiple');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
 
@@ -35,6 +36,37 @@ export const CatGallerySection: React.FC = () => {
 
       track.scrollTo({
         left: atEnd ? 0 : Math.min(track.scrollLeft + step, maxScroll),
+        behavior: 'smooth',
+      });
+    }, 2000);
+
+    return () => window.clearInterval(intervalId);
+  }, [cats.length, selectedPhotoIndex, viewMode]);
+
+  useEffect(() => {
+    if (viewMode !== 'grid' || selectedPhotoIndex !== null || cats.length <= 1) {
+      return;
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      const grid = gridRef.current;
+      if (!grid) return;
+
+      const maxScroll = Math.max(0, grid.scrollHeight - grid.clientHeight);
+      if (maxScroll <= 0) return;
+
+      const firstCard = grid.firstElementChild as HTMLElement | null;
+      const styles = window.getComputedStyle(grid);
+      const gap = Number.parseFloat(styles.rowGap || styles.gap || '0') || 0;
+      const step = (firstCard?.getBoundingClientRect().height ?? grid.clientHeight * 0.75) + gap;
+      const atEnd = grid.scrollTop >= maxScroll - step * 0.5;
+
+      grid.scrollTo({
+        top: atEnd ? 0 : Math.min(grid.scrollTop + step, maxScroll),
         behavior: 'smooth',
       });
     }, 2000);
@@ -165,7 +197,10 @@ export const CatGallerySection: React.FC = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+            <div
+              ref={gridRef}
+              className="grid max-h-[540px] grid-cols-2 gap-3 overflow-y-auto pr-1 scroll-smooth scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:max-h-[620px] sm:grid-cols-3 sm:gap-4 lg:grid-cols-4"
+            >
               {cats.map((cat: CatClient, index: number) => (
                 <CatCard key={cat.id} cat={cat} index={index} />
               ))}
