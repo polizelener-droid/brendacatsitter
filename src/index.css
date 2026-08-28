@@ -30,7 +30,7 @@
   background-color: #f1f4ed !important;
 }
 
-/* Opening transition: branded reveal inspired by editorial/logistics homepages */
+/* Lightweight opening transition */
 .site-opening {
   position: fixed;
   inset: 0;
@@ -41,7 +41,10 @@
   background: #275240;
   color: #f1f4ed;
   pointer-events: none;
-  animation: site-opening-exit 1.45s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+  animation: site-opening-exit 1.12s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .site-opening::before,
@@ -49,7 +52,7 @@
   content: '';
   position: absolute;
   border-radius: 999px;
-  background: rgba(241, 244, 237, 0.07);
+  background: rgba(241, 244, 237, 0.06);
 }
 
 .site-opening::before {
@@ -73,7 +76,8 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  animation: site-opening-content 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform: translate3d(0, 0, 0);
+  animation: site-opening-content 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .site-opening__paw {
@@ -95,11 +99,13 @@
 }
 
 .site-opening__line {
-  width: 0;
+  width: min(13rem, 42vw);
   height: 1px;
   margin: 1rem 0 0.75rem;
   background: rgba(241, 244, 237, 0.6);
-  animation: site-opening-line 0.55s 0.18s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: site-opening-line 0.35s 0.12s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .site-opening__tagline {
@@ -108,23 +114,23 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0;
-  animation: site-opening-tagline 0.45s 0.3s ease-out forwards;
+  animation: site-opening-tagline 0.3s 0.18s ease-out forwards;
 }
 
 @keyframes site-opening-content {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.98);
+    transform: translate3d(0, 14px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes site-opening-line {
   to {
-    width: min(13rem, 42vw);
+    transform: scaleX(1);
   }
 }
 
@@ -135,57 +141,50 @@
 }
 
 @keyframes site-opening-exit {
-  0%, 48% {
-    transform: translateY(0);
+  0%, 52% {
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateY(-100%);
+    transform: translate3d(0, -100%, 0);
     visibility: hidden;
   }
 }
 
-/* The first screen appears in staggered layers after the cover starts moving away */
+/* First screen: same layered entrance, with fewer overlapping frames */
 .hero-intro-item {
   opacity: 0;
-  transform: translateY(28px);
-  animation: hero-intro-in 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translate3d(0, 18px, 0);
+  animation: hero-intro-in 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.hero-intro-1 { animation-delay: 0.78s; }
-.hero-intro-2 { animation-delay: 0.88s; }
-.hero-intro-3 { animation-delay: 0.98s; }
-.hero-intro-4 { animation-delay: 1.08s; }
-.hero-intro-5 { animation-delay: 1.18s; }
-.hero-intro-6 { animation-delay: 1.28s; }
+.hero-intro-1 { animation-delay: 0.62s; }
+.hero-intro-2 { animation-delay: 0.67s; }
+.hero-intro-3 { animation-delay: 0.72s; }
+.hero-intro-4 { animation-delay: 0.77s; }
+.hero-intro-5 { animation-delay: 0.82s; }
+.hero-intro-6 { animation-delay: 0.87s; }
 
 .hero-paw-intro {
   opacity: 0;
-  animation: hero-paw-in 1s 1.08s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: hero-paw-in 0.45s 0.75s ease-out forwards;
 }
 
+/* Keep decorative glows static: animating large blurred areas is expensive on mobile */
 .hero-bg-glow {
-  opacity: 0;
-  transform: scale(0.82);
-  animation: hero-glow-in 1.25s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 1;
+  transform: none;
 }
 
 @keyframes hero-intro-in {
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes hero-paw-in {
   to {
     opacity: 1;
-  }
-}
-
-@keyframes hero-glow-in {
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
 
@@ -197,19 +196,18 @@
 
 .scroll-reveal-active .scroll-reveal:not(.is-visible) {
   opacity: 0;
-  transform: translateY(34px) scale(0.992);
+  transform: translate3d(0, 28px, 0);
 }
 
 .scroll-reveal-active .scroll-reveal {
   transition:
-    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .scroll-reveal-active .scroll-reveal.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate3d(0, 0, 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
