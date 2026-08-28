@@ -234,7 +234,7 @@
   }
 }
 
-/* Smooth reveal as each homepage section enters the viewport */
+/* More noticeable upward reveal while scrolling */
 .scroll-reveal {
   opacity: 1;
   transform: none;
@@ -242,13 +242,14 @@
 
 .scroll-reveal-active .scroll-reveal:not(.is-visible) {
   opacity: 0;
-  transform: translate3d(0, 28px, 0);
+  transform: translate3d(0, 72px, 0);
 }
 
 .scroll-reveal-active .scroll-reveal {
   transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .scroll-reveal-active .scroll-reveal.is-visible {
