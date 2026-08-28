@@ -1,6 +1,6 @@
 import React from 'react';
 import { Camera, Clock, Heart, MessageCircle, PawPrint } from 'lucide-react';
-import { brendaProfilePhoto } from '../assets/images/brenda_profile_data';
+import brendaProfilePhoto from '../assets/images/brenda_cat_selfie_1785359588288.jpg';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -33,7 +33,7 @@ export const HeroSection: React.FC = () => {
           <div className="overflow-hidden rounded-[1.5rem]">
             <img
               src={brendaProfilePhoto}
-              alt="Brenda junto a un gato"
+              alt="Brenda con un gato"
               className="h-28 w-28 object-cover sm:h-32 sm:w-32"
             />
           </div>
