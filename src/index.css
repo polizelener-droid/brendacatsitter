@@ -5,8 +5,8 @@
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
     overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: #275240 #d7dfd2;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -20,23 +20,20 @@
     background-color: #d7dfd2;
     color: #275240;
     overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
   }
 
-  *,
-  *::before,
-  *::after {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  html::-webkit-scrollbar {
+    width: 10px;
   }
 
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  *::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+  html::-webkit-scrollbar-track {
+    background: #d7dfd2;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: #275240;
+    border-radius: 999px;
+    border: 2px solid #d7dfd2;
   }
 
   h1, h2, h3, .font-display {
