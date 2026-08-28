@@ -28,10 +28,6 @@ export const HeroSection: React.FC = () => {
           Cat sitter a domicilio
         </div>
 
-        <p className="hero-intro-item hero-intro-2 mb-3 text-sm font-extrabold uppercase tracking-[0.16em] text-[#275240]/60">
-          Hola, soy Brenda
-        </p>
-
         <h1 className="hero-intro-item hero-intro-3 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.035em] text-[#275240] sm:text-5xl lg:text-6xl">
           Tu gato, cuidado y tranquilo
           <span className="mt-1 block font-serif italic">en su propia casa.</span>
