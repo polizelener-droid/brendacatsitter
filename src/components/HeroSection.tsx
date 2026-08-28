@@ -1,17 +1,48 @@
 import React from 'react';
-import { Camera, Clock, Heart, MapPin, MessageCircle } from 'lucide-react';
+import { Camera, Clock, Heart, MessageCircle, PawPrint } from 'lucide-react';
+import brendaPhoto from '../assets/images/brenda_con_gato.png';
 
 export const HeroSection: React.FC = () => {
   return (
     <section className="relative overflow-hidden border-b border-[#275240]/10 bg-[#d7dfd2] pt-24 pb-12 md:pt-32 md:pb-16">
-      <div className="pointer-events-none absolute -left-20 top-20 h-64 w-64 rounded-full bg-[#c6d2bf]/60 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-[#edf1e9]/70 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-10 top-16 h-44 w-44 rounded-full bg-[#c4d0be]/60 blur-3xl" />
+        <div className="absolute -right-10 top-10 h-56 w-56 rounded-full bg-[#edf1e9]/80 blur-3xl" />
+
+        <div className="absolute left-[8%] top-24 rotate-[-18deg] text-[#275240]/10">
+          <PawPrint className="h-10 w-10" />
+        </div>
+        <div className="absolute right-[10%] top-32 rotate-[16deg] text-[#275240]/10">
+          <PawPrint className="h-8 w-8" />
+        </div>
+        <div className="absolute left-[16%] bottom-20 rotate-[12deg] text-[#275240]/10">
+          <PawPrint className="h-9 w-9" />
+        </div>
+        <div className="absolute right-[14%] bottom-16 rotate-[-10deg] text-[#275240]/10">
+          <PawPrint className="h-10 w-10" />
+        </div>
+      </div>
 
       <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-7 lg:px-9">
-        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#275240]/10 bg-[#eef2eb] px-3 py-1.5 text-[11px] font-extrabold text-[#275240] shadow-sm sm:text-sm">
+        <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full border border-[#275240]/10 bg-[#eef2eb] px-3 py-1.5 text-[11px] font-extrabold text-[#275240] shadow-sm sm:text-sm">
           <Heart className="h-3.5 w-3.5 fill-[#275240]" />
           Cat sitter a domicilio
         </div>
+
+        <div className="mx-auto mb-6 w-fit rounded-[2rem] border border-[#275240]/10 bg-[#eef2eb] p-2 shadow-lg">
+          <div className="overflow-hidden rounded-[1.5rem]">
+            <img
+              src={brendaPhoto}
+              alt="Brenda junto a un gato"
+              referrerPolicy="no-referrer"
+              className="h-28 w-28 object-cover sm:h-32 sm:w-32"
+            />
+          </div>
+        </div>
+
+        <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.16em] text-[#275240]/60">
+          Hola, soy Brenda
+        </p>
 
         <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.035em] text-[#275240] sm:text-5xl lg:text-6xl">
           Cuido a tu gato en su casa
@@ -19,16 +50,15 @@ export const HeroSection: React.FC = () => {
         </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#275240]/80 sm:text-lg">
-          Voy a domicilio, respeto su rutina y en cada visita me ocupo de su comida, agua, arenero, juego y compañía. Además, te mando fotos y videos para que sepas cómo está.
+          Voy a domicilio para cuidar a tu gato, respetar su rutina y mandarte fotos y videos en cada visita.
         </p>
 
         <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <a
             href="#zonas-presupuesto"
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#275240] px-5 py-3.5 text-sm font-extrabold text-white shadow-md transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center rounded-2xl bg-[#275240] px-5 py-3.5 text-sm font-extrabold text-white shadow-md transition-transform hover:-translate-y-0.5"
           >
             Ver zonas y presupuesto
-            <MapPin className="h-4 w-4" />
           </a>
           <a
             href="#contacto"
