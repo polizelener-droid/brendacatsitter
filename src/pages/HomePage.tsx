@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { PawPrint } from 'lucide-react';
 import { HeaderNav } from '../components/HeaderNav';
 import { HeroSection } from '../components/HeroSection';
 import { AboutSection } from '../components/AboutSection';
@@ -55,17 +54,6 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="page-enter min-h-screen overflow-x-clip bg-[#d7dfd2] text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
-      <div className="site-opening" aria-hidden="true">
-        <div className="site-opening__content">
-          <div className="site-opening__paw">
-            <PawPrint className="h-7 w-7" />
-          </div>
-          <p className="site-opening__brand">Brenda Cat Sitter</p>
-          <span className="site-opening__line" />
-          <p className="site-opening__tagline">Cuidado a domicilio</p>
-        </div>
-      </div>
-
       <HeaderNav />
       <main>
         <div className="scroll-reveal is-visible" data-scroll-reveal>
