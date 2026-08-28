@@ -25,6 +25,101 @@
   }
 }
 
+/* Homepage intro transition */
+.site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e2e8dc;
+  color: #275240;
+  animation: site-intro-fade 1.8s ease-in-out forwards;
+}
+
+.site-intro__content {
+  width: min(88vw, 520px);
+  padding: 2rem;
+  text-align: center;
+  animation: site-intro-content 1.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.site-intro__brand {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(2.2rem, 8vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.site-intro__line {
+  width: 0;
+  height: 2px;
+  margin: 1rem auto 0.9rem;
+  border-radius: 999px;
+  background: #275240;
+  animation: site-intro-line 0.75s 0.2s ease-out forwards;
+}
+
+.site-intro__message {
+  margin: 0;
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 600;
+  opacity: 0;
+  animation: site-intro-message 0.45s 0.45s ease-out forwards;
+}
+
+@keyframes site-intro-content {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes site-intro-line {
+  to {
+    width: 84px;
+  }
+}
+
+@keyframes site-intro-message {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes site-intro-fade {
+  0%, 72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-intro,
+  .site-intro__content,
+  .site-intro__line,
+  .site-intro__message {
+    animation: none;
+  }
+
+  .site-intro__line {
+    width: 84px;
+  }
+
+  .site-intro__message {
+    opacity: 1;
+  }
+}
+
 /* Custom scrollbar and smooth design polish */
 ::-webkit-scrollbar {
   width: 8px;
