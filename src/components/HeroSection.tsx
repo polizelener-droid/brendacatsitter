@@ -1,6 +1,5 @@
 import React from 'react';
 import { Camera, Clock, Heart, MessageCircle, PawPrint } from 'lucide-react';
-import brendaProfilePhoto from '../assets/images/brenda_cat_selfie_1785359588288.jpg';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -27,16 +26,6 @@ export const HeroSection: React.FC = () => {
         <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full border border-[#275240]/10 bg-[#eef2eb] px-3 py-1.5 text-[11px] font-extrabold text-[#275240] shadow-sm sm:text-sm">
           <Heart className="h-3.5 w-3.5 fill-[#275240]" />
           Cat sitter a domicilio
-        </div>
-
-        <div className="mx-auto mb-6 w-fit rounded-[2rem] border border-[#275240]/10 bg-[#eef2eb] p-2 shadow-lg">
-          <div className="overflow-hidden rounded-[1.5rem]">
-            <img
-              src={brendaProfilePhoto}
-              alt="Brenda con un gato"
-              className="h-28 w-28 object-cover sm:h-32 sm:w-32"
-            />
-          </div>
         </div>
 
         <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.16em] text-[#275240]/60">
