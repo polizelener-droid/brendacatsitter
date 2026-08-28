@@ -169,7 +169,7 @@
   animation: hero-paw-in 0.45s 0.75s ease-out forwards;
 }
 
-/* Keep decorative glows static: animating large blurred areas is expensive on mobile */
+/* Keep decorative glows static */
 .hero-bg-glow {
   opacity: 1;
   transform: none;
@@ -185,6 +185,52 @@
 @keyframes hero-paw-in {
   to {
     opacity: 1;
+  }
+}
+
+/* Desktop uses a simpler fade so the large full-screen layer does not stutter */
+@media (min-width: 768px) {
+  .site-opening {
+    transform: none;
+    will-change: opacity;
+    animation: site-opening-desktop 0.82s ease-out forwards;
+  }
+
+  .site-opening::before,
+  .site-opening::after {
+    display: none;
+  }
+
+  .site-opening__content {
+    animation-duration: 0.32s;
+  }
+
+  .hero-intro-item {
+    transform: translate3d(0, 12px, 0);
+    animation-duration: 0.4s;
+  }
+
+  .hero-intro-1 { animation-delay: 0.36s; }
+  .hero-intro-2 { animation-delay: 0.40s; }
+  .hero-intro-3 { animation-delay: 0.44s; }
+  .hero-intro-4 { animation-delay: 0.48s; }
+  .hero-intro-5 { animation-delay: 0.52s; }
+  .hero-intro-6 { animation-delay: 0.56s; }
+
+  .hero-paw-intro {
+    animation-delay: 0.46s;
+    animation-duration: 0.35s;
+  }
+}
+
+@keyframes site-opening-desktop {
+  0%, 42% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
