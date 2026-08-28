@@ -53,7 +53,7 @@ export const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="page-enter min-h-screen overflow-x-hidden bg-[#e2e8dc] text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
+    <div className="page-enter min-h-screen overflow-x-hidden bg-[#d7dfd2] text-zinc-900 font-sans selection:bg-rose-200 selection:text-rose-950">
       <HeaderNav />
       <main>
         <div className="scroll-reveal is-visible" data-scroll-reveal>
