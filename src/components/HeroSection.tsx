@@ -45,8 +45,8 @@ export const HeroSection: React.FC = () => {
         </p>
 
         <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.035em] text-[#275240] sm:text-5xl lg:text-6xl">
-          Cuido a tu gato en su casa
-          <span className="mt-1 block font-serif italic">mientras vos no estás.</span>
+          Tu gato, cuidado y tranquilo
+          <span className="mt-1 block font-serif italic">en su propia casa.</span>
         </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#275240]/80 sm:text-lg">
