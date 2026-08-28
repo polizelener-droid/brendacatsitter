@@ -25,6 +25,24 @@
   }
 }
 
+/* Soft transition when the homepage first opens */
+.page-enter {
+  animation: page-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.995);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
 /* Smooth reveal as each homepage section enters the viewport */
 .scroll-reveal {
   opacity: 1;
@@ -49,12 +67,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page-enter,
   .scroll-reveal,
   .scroll-reveal-active .scroll-reveal,
   .scroll-reveal-active .scroll-reveal:not(.is-visible) {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
+    animation: none;
   }
 }
 
