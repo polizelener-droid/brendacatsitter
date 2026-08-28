@@ -14,12 +14,12 @@ export const HeroSection: React.FC = () => {
         </div>
 
         <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.035em] text-[#275240] sm:text-5xl lg:text-6xl">
-          Tu gato se queda en casa.
-          <span className="mt-1 block font-serif italic">Yo lo cuido por vos.</span>
+          Cuido a tu gato en su casa
+          <span className="mt-1 block font-serif italic">mientras vos no estás.</span>
         </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#275240]/80 sm:text-lg">
-          Visitas personalizadas de <strong className="font-extrabold text-[#275240]">45 minutos</strong> con comida, agua, limpieza del arenero, juego, mimos y fotos o videos en cada visita.
+          Voy a domicilio, respeto su rutina y en cada visita me ocupo de su comida, agua, arenero, juego y compañía. Además, te mando fotos y videos para que sepas cómo está.
         </p>
 
         <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
