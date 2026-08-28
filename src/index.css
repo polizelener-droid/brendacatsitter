@@ -15,7 +15,7 @@
 
   body {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    background-color: #e2e8dc;
+    background-color: #d7dfd2;
     color: #275240;
     overflow-x: hidden;
   }
@@ -84,7 +84,7 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #e2e8dc;
+  background: #d7dfd2;
 }
 ::-webkit-scrollbar-thumb {
   background: #275240;
