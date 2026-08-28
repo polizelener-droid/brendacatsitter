@@ -25,6 +25,11 @@
   }
 }
 
+/* Homepage palette: replace stark white cards with a very light sage */
+.page-enter .bg-white {
+  background-color: #f1f4ed !important;
+}
+
 /* Soft transition when the homepage first opens */
 .page-enter {
   animation: page-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
