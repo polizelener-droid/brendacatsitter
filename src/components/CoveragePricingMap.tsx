@@ -3,11 +3,7 @@ import { Clock3, MessageCircle, PawPrint } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { BudgetCalculatorSection } from './BudgetCalculatorSection';
-import {
-  POLI_WHATSAPP,
-  POLI_WHATSAPP_BASE_MESSAGE,
-  buildWhatsAppUrl,
-} from '../data/whatsappContacts';
+import { buildWhatsAppUrl } from '../data/whatsappContacts';
 
 type ZoneKey = 'zone1' | 'zone2';
 
@@ -86,7 +82,6 @@ const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => (
 export const CoveragePricingMap: React.FC = () => {
   const { contact } = useContent();
   const brendaWhatsAppUrl = buildWhatsAppUrl(contact.whatsapp, contact.whatsappBaseMessage);
-  const poliWhatsAppUrl = buildWhatsAppUrl(POLI_WHATSAPP, POLI_WHATSAPP_BASE_MESSAGE);
 
   return (
     <div id="zonas-presupuesto" className="mt-6 scroll-mt-24 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
@@ -122,35 +117,25 @@ export const CoveragePricingMap: React.FC = () => {
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               <h4 className="text-sm font-extrabold sm:text-base">¿Querés consultar disponibilidad?</h4>
             </div>
-            <p className="mt-1 text-xs text-[#275240]/65">Elegí la zona y te lleva directo al WhatsApp correspondiente.</p>
+            <p className="mt-1 text-xs text-[#275240]/65">Te lleva directo al WhatsApp de Brenda.</p>
 
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <a
-                href={brendaWhatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-14 items-center justify-between gap-3 rounded-2xl border border-[#a8c9df] bg-[#f4fbff] px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm"
-              >
-                <div className="text-left">
-                  <span className="block text-xs font-bold text-[#4a7ea0]">Zona 1</span>
-                  <strong className="text-sm font-black text-[#275240]">Hablar con Brenda</strong>
-                </div>
-                <WhatsAppIcon className="h-6 w-6 shrink-0 fill-[#25D366] text-[#25D366]" />
-              </a>
-
-              <a
-                href={poliWhatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-14 items-center justify-between gap-3 rounded-2xl border border-[#dfb4c9] bg-[#fff6fa] px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm"
-              >
-                <div className="text-left">
-                  <span className="block text-xs font-bold text-[#a46a87]">Zona 2</span>
-                  <strong className="text-sm font-black text-[#275240]">Hablar con Poli</strong>
-                </div>
-                <WhatsAppIcon className="h-6 w-6 shrink-0 fill-[#25D366] text-[#25D366]" />
-              </a>
-            </div>
+            <a
+              href={brendaWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex min-h-16 items-center justify-between gap-3 rounded-2xl border border-[#b9d3bf] bg-[#f7fbf7] px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm"
+            >
+              <div className="text-left">
+                <span className="mb-1 flex items-center gap-2 text-xs font-bold text-[#275240]/75">
+                  <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone1.dot}`} />
+                  <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone2.dot}`} />
+                  Todas las zonas
+                </span>
+                <strong className="block text-base font-black text-[#275240]">Hablar con Brenda</strong>
+                <span className="mt-0.5 block text-xs text-[#275240]/65">Brenda te responde por WhatsApp.</span>
+              </div>
+              <WhatsAppIcon className="h-7 w-7 shrink-0 fill-[#25D366] text-[#25D366]" />
+            </a>
           </div>
         </div>
 
