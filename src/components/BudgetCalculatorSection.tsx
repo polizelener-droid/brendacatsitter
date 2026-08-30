@@ -65,10 +65,9 @@ export const BudgetCalculatorSection: React.FC = () => {
     saturdays * (prices.saturday + extraPerVisit) +
     sundaysAndHolidays * (prices.sundayHoliday + extraPerVisit);
 
-  const contactName = 'Brenda';
   const whatsappNumber = contact.whatsapp;
   const whatsappMessage = [
-    `Hola ${contactName}! Calculé un presupuesto desde la página web de Brenda Cat Sitter.`,
+    'Hola Brenda! Calculé un presupuesto desde tu página web.',
     `• Zona de cobertura: Zona ${zone}`,
     `• Cantidad de gatos: ${cats}`,
     `• Días de lunes a viernes: ${weekdays}`,
@@ -91,7 +90,7 @@ export const BudgetCalculatorSection: React.FC = () => {
             Calculá tu presupuesto
           </h3>
           <p className="mt-1.5 text-xs text-[#275240]/65 sm:text-sm">
-            Elegí tu zona, cantidad de gatos y días para obtener un estimado.
+            Elegí tu zona, cantidad de gatos y días para obtener un estimado de mi servicio.
           </p>
         </div>
 
@@ -145,7 +144,7 @@ export const BudgetCalculatorSection: React.FC = () => {
           <fieldset aria-describedby="day-limit-help day-limit-error">
             <legend className="mb-1 flex items-center gap-2 text-sm font-bold text-[#275240]">
               <CalendarDays className="h-4 w-4" aria-hidden="true" />
-              ¿Qué días incluye el servicio?
+              ¿Qué días necesitás que vaya?
             </legend>
             <p id="day-limit-help" className="mb-2 text-[11px] text-[#275240]/50">
               Máximo {MAX_TOTAL_DAYS} días.
@@ -172,7 +171,7 @@ export const BudgetCalculatorSection: React.FC = () => {
             Zona {zone} · {totalDays} {totalDays === 1 ? 'día' : 'días'} · {cats} {cats === 1 ? 'gato' : 'gatos'}
           </p>
           <p className="mt-1 text-[11px] font-bold text-[#275240]/65">
-            Te responde Brenda por WhatsApp.
+            Te respondo por WhatsApp.
           </p>
           {!exceedsDayLimit && extraCats > 0 && (
             <p className="mt-1 text-[11px] font-semibold text-[#275240]/60">Incluye adicional por cantidad de gatos.</p>
@@ -180,7 +179,7 @@ export const BudgetCalculatorSection: React.FC = () => {
         </div>
 
         <p className="mt-3 text-center text-[11px] leading-relaxed text-[#275240]/55 sm:text-xs">
-          La entrevista previa se calcula aparte. Desde el cuarto gato se aplica un adicional por visita.
+          La entrevista previa se calcula aparte. Desde el cuarto gato aplico un adicional por visita.
         </p>
 
         {exceedsDayLimit ? (
@@ -194,10 +193,10 @@ export const BudgetCalculatorSection: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#275240] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#1e3f32] focus:outline-none focus:ring-4 focus:ring-[#275240]/20"
-            aria-label="Consultar disponibilidad con Brenda por WhatsApp"
+            aria-label="Escribirme por WhatsApp para consultar disponibilidad"
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Consultar con Brenda por WhatsApp
+            Escribime por WhatsApp
           </a>
         )}
       </div>
