@@ -165,7 +165,7 @@ export const CoveragePricingMap: React.FC = () => {
         <span className="inline-flex items-center gap-2 font-bold text-[#275240]">
           <Clock3 className="h-4 w-4" aria-hidden="true" /> Tarifas por visita de 45 minutos
         </span>
-        <span>Si tu barrio queda cerca, consultanos disponibilidad.</span>
+        <span>Si tu barrio no aparece, consultá de todas formas.</span>
       </div>
 
       <BudgetCalculatorSection />
