@@ -48,7 +48,7 @@ export const HeroSection: React.FC = () => {
             href="#contacto"
             className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#275240]/15 bg-[#eef2eb] px-5 py-3.5 text-sm font-extrabold text-[#275240] shadow-sm transition-colors hover:bg-[#e5ebe1]"
           >
-            Escribirme
+            Escribime por WhatsApp
             <MessageCircle className="h-4 w-4" />
           </a>
         </div>
