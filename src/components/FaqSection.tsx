@@ -4,27 +4,27 @@ import { ChevronDown, CircleHelp } from 'lucide-react';
 const faqs = [
   {
     question: '¿Cuánto dura cada visita?',
-    answer: 'Cada visita dura 45 minutos dedicados al cuidado, la rutina, la higiene, el juego y la compañía de tu gato.',
+    answer: 'Cada visita dura 45 minutos. Durante ese tiempo me ocupo del cuidado, la rutina, la higiene, el juego y la compañía de tu gato.',
   },
   {
-    question: '¿Mandamos fotos y videos?',
-    answer: 'Sí. Durante el servicio recibís seguimiento por WhatsApp con fotos, videos y novedades para que sepas cómo está tu gato.',
+    question: '¿Mandás fotos y videos?',
+    answer: 'Sí. Durante cada visita te mando fotos, videos y novedades por WhatsApp para que sepas cómo está tu gato.',
   },
   {
-    question: '¿Con quién hablo según mi zona?',
-    answer: 'Si estás en Zona 1, te atiende Brenda. Si estás en Zona 2 o Zona 3, te atiende Poli. La página te dirige automáticamente al WhatsApp correspondiente.',
+    question: '¿Con quién hablo para reservar?',
+    answer: 'Hablás directamente conmigo, Brenda, sin importar si estás en Zona 1 o Zona 2.',
   },
   {
     question: '¿Qué pasa si mi barrio no aparece?',
-    answer: 'Si estás cerca de una zona de cobertura, consultanos igual. Revisamos la ubicación y la disponibilidad antes de confirmar.',
+    answer: 'Si tu barrio queda cerca de mi zona de cobertura, escribime igual. Reviso la ubicación y mi disponibilidad antes de confirmarte.',
   },
   {
     question: '¿Puedo saber el precio antes de escribir?',
-    answer: 'Sí. En “Zonas, tarifas y presupuesto” podés elegir tu zona, cantidad de gatos y días para obtener un presupuesto estimado.',
+    answer: 'Sí. En “Zonas, tarifas y presupuesto” podés elegir tu zona, cantidad de gatos y días para obtener un presupuesto estimado antes de escribirme.',
   },
   {
     question: '¿Hay una instancia para conocernos antes?',
-    answer: 'Sí. Podés coordinar una entrevista presencial o una charla virtual gratuita antes de reservar el servicio.',
+    answer: 'Sí. Podemos coordinar una entrevista presencial o una charla virtual gratuita antes de que reserves el servicio.',
   },
 ] as const;
 
@@ -37,7 +37,7 @@ export const FaqSection: React.FC = () => (
         </div>
         <h2 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Preguntas frecuentes</h2>
         <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-[#275240]/65">
-          Algunas respuestas rápidas antes de reservar.
+          Te dejo algunas respuestas rápidas antes de reservar conmigo.
         </p>
       </div>
 
