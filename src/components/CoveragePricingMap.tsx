@@ -117,7 +117,7 @@ export const CoveragePricingMap: React.FC = () => {
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               <h4 className="text-sm font-extrabold sm:text-base">¿Querés consultar disponibilidad?</h4>
             </div>
-            <p className="mt-1 text-xs text-[#275240]/65">Te lleva directo al WhatsApp de Brenda.</p>
+            <p className="mt-1 text-xs text-[#275240]/65">Escribile por WhatsApp.</p>
 
             <a
               href={brendaWhatsAppUrl}
@@ -129,10 +129,9 @@ export const CoveragePricingMap: React.FC = () => {
                 <span className="mb-1 flex items-center gap-2 text-xs font-bold text-[#275240]/75">
                   <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone1.dot}`} />
                   <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone2.dot}`} />
-                  Todas las zonas
+                  Ambas zonas
                 </span>
                 <strong className="block text-base font-black text-[#275240]">Hablar con Brenda</strong>
-                <span className="mt-0.5 block text-xs text-[#275240]/65">Brenda te responde por WhatsApp.</span>
               </div>
               <WhatsAppIcon className="h-7 w-7 shrink-0 fill-[#25D366] text-[#25D366]" />
             </a>
