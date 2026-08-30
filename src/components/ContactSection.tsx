@@ -14,7 +14,7 @@ export const ContactSection: React.FC = () => {
         <div className="rounded-[2rem] border border-[#275240]/10 bg-white p-6 text-center shadow-sm sm:p-8">
           <h2 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">¿Hablamos?</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-[#275240]/70">
-            Escribile directamente a Brenda por WhatsApp. También podés contactarnos por Instagram o email.
+            Si querés consultar disponibilidad o hacerme una pregunta, escribime directamente por WhatsApp. También podés encontrarme en Instagram o mandarme un email.
           </p>
 
           <div className="mx-auto mt-6 max-w-2xl">
@@ -25,7 +25,7 @@ export const ContactSection: React.FC = () => {
               className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#275240] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#1f4033]"
             >
               <WhatsAppLogo className="h-5 w-5" />
-              Hablar con Brenda por WhatsApp
+              Escribime por WhatsApp
             </a>
           </div>
 
