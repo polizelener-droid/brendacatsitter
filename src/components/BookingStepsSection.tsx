@@ -17,7 +17,7 @@ const steps = [
   {
     number: '03',
     title: 'Escribinos por WhatsApp',
-    description: 'Zona 1 va con Brenda. Zona 2, con Poli.',
+    description: 'Sea cual sea tu zona, te responde Brenda.',
     icon: MessageCircle,
   },
   {
