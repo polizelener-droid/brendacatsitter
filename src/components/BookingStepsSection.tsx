@@ -16,14 +16,14 @@ const steps = [
   },
   {
     number: '03',
-    title: 'Escribinos por WhatsApp',
-    description: 'Sea cual sea tu zona, te responde Brenda.',
+    title: 'Escribime por WhatsApp',
+    description: 'Sea cual sea tu zona, te respondo yo directamente.',
     icon: MessageCircle,
   },
   {
     number: '04',
     title: 'Coordinamos los detalles',
-    description: 'Definimos fechas, rutina, llaves y todo lo necesario antes de empezar.',
+    description: 'Definimos fechas, rutina, llaves y todo lo necesario antes de que empiece a cuidar a tu gato.',
     icon: KeyRound,
   },
 ] as const;
@@ -34,9 +34,9 @@ export const BookingStepsSection: React.FC = () => (
       <div className="rounded-[2rem] border border-[#275240]/10 bg-white p-5 shadow-sm sm:p-7">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#275240]/55">Paso a paso</span>
-          <h2 className="mt-1 font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Cómo reservar</h2>
+          <h2 className="mt-1 font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Cómo reservar conmigo</h2>
           <p className="mt-2 text-sm leading-relaxed text-[#275240]/65">
-            Todo el proceso en cuatro pasos simples, desde encontrar tu zona hasta coordinar la visita.
+            En cuatro pasos simples podemos organizar todo, desde encontrar tu zona hasta coordinar la visita.
           </p>
         </div>
 
