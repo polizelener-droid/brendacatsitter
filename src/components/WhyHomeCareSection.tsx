@@ -6,22 +6,22 @@ export const WhyHomeCareSection: React.FC = () => {
     {
       icon: <Utensils className="h-5 w-5" aria-hidden="true" />,
       title: 'Comida y agua',
-      desc: 'Según su rutina habitual.',
+      desc: 'Sigo su rutina habitual.',
     },
     {
       icon: <Sparkles className="h-5 w-5" aria-hidden="true" />,
       title: 'Arenero limpio',
-      desc: 'Higiene en cada visita.',
+      desc: 'Lo limpio en cada visita.',
     },
     {
       icon: <Heart className="h-5 w-5" aria-hidden="true" />,
       title: 'Juego y compañía',
-      desc: 'Respetando sus tiempos.',
+      desc: 'Me adapto a sus tiempos.',
     },
     {
       icon: <Camera className="h-5 w-5" aria-hidden="true" />,
       title: 'Fotos y videos',
-      desc: 'Para que sepas cómo está.',
+      desc: 'Te los mando para que sepas cómo está.',
     },
   ];
 
@@ -29,8 +29,8 @@ export const WhyHomeCareSection: React.FC = () => {
     <section id="incluye" className="bg-[#e2e8dc] py-10 sm:py-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Qué incluye cada visita</h2>
-          <span className="text-sm font-semibold text-[#275240]/65">45 minutos de cuidado a domicilio</span>
+          <h2 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Qué incluyo en cada visita</h2>
+          <span className="text-sm font-semibold text-[#275240]/65">45 minutos conmigo en tu domicilio</span>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
