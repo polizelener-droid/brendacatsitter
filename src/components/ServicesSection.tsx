@@ -41,7 +41,7 @@ export const ServicesSection: React.FC = () => {
                   className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#275240] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#1f4033]"
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  Coordiná conmigo por WhatsApp
+                  Coordiná por WhatsApp
                 </a>
               </div>
             </div>
@@ -69,7 +69,7 @@ export const ServicesSection: React.FC = () => {
                   className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#275240] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#1f4033]"
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  Coordiná conmigo por WhatsApp
+                  Coordiná por WhatsApp
                 </a>
               </div>
             </div>
