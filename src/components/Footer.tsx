@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
               <span className="text-base font-bold text-[#275240] block leading-tight font-display">
                 Brenda <span className="font-serif italic">Cat Sitter</span>
               </span>
-              <span className="text-[11px] text-[#275240]/70">Cuidado amoroso y personalizado a domicilio</span>
+              <span className="text-[11px] text-[#275240]/70">Cuido a tu gato con amor y de forma personalizada</span>
             </div>
           </div>
 
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#275240]/70 gap-2 text-center sm:text-left font-medium">
           <p>© Brenda Cat Sitter. Todos los derechos reservados.</p>
           <p className="flex items-center gap-1 justify-center">
-            Diseñado con <Heart className="w-3.5 h-3.5 text-[#275240] fill-[#275240] inline" /> para el bienestar de tus gatos
+            Hecho con <Heart className="w-3.5 h-3.5 text-[#275240] fill-[#275240] inline" /> pensando en el bienestar de tus gatos
           </p>
         </div>
       </div>
