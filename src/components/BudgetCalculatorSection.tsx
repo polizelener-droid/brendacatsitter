@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Calculator, CalendarDays, Cat, MapPin, MessageCircle } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
-import { POLI_WHATSAPP, buildWhatsAppUrl } from '../data/whatsappContacts';
+import { buildWhatsAppUrl } from '../data/whatsappContacts';
 
 const EXTRA_CAT_RATE = 5_000;
 const MAX_TOTAL_DAYS = 90;
@@ -65,8 +65,8 @@ export const BudgetCalculatorSection: React.FC = () => {
     saturdays * (prices.saturday + extraPerVisit) +
     sundaysAndHolidays * (prices.sundayHoliday + extraPerVisit);
 
-  const contactName = zone === 1 ? 'Brenda' : 'Poli';
-  const whatsappNumber = zone === 1 ? contact.whatsapp : POLI_WHATSAPP;
+  const contactName = 'Brenda';
+  const whatsappNumber = contact.whatsapp;
   const whatsappMessage = [
     `Hola ${contactName}! Calculé un presupuesto desde la página web de Brenda Cat Sitter.`,
     `• Zona de cobertura: Zona ${zone}`,
@@ -151,34 +151,12 @@ export const BudgetCalculatorSection: React.FC = () => {
               Máximo {MAX_TOTAL_DAYS} días.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
-              <DayInput
-                id="dias-semana"
-                label="Lunes a viernes"
-                value={weekdays}
-                onChange={setWeekdays}
-                isInvalid={exceedsDayLimit}
-              />
-              <DayInput
-                id="dias-sabado"
-                label="Sábados"
-                value={saturdays}
-                onChange={setSaturdays}
-                isInvalid={exceedsDayLimit}
-              />
-              <DayInput
-                id="dias-domingo"
-                label="Domingos y feriados"
-                value={sundaysAndHolidays}
-                onChange={setSundaysAndHolidays}
-                isInvalid={exceedsDayLimit}
-              />
+              <DayInput id="dias-semana" label="Lunes a viernes" value={weekdays} onChange={setWeekdays} isInvalid={exceedsDayLimit} />
+              <DayInput id="dias-sabado" label="Sábados" value={saturdays} onChange={setSaturdays} isInvalid={exceedsDayLimit} />
+              <DayInput id="dias-domingo" label="Domingos y feriados" value={sundaysAndHolidays} onChange={setSundaysAndHolidays} isInvalid={exceedsDayLimit} />
             </div>
             {exceedsDayLimit && (
-              <p
-                id="day-limit-error"
-                role="alert"
-                className="mt-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
-              >
+              <p id="day-limit-error" role="alert" className="mt-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
                 Podés calcular hasta {MAX_TOTAL_DAYS} días en total. Ingresaste {totalDays}.
               </p>
             )}
@@ -194,7 +172,7 @@ export const BudgetCalculatorSection: React.FC = () => {
             Zona {zone} · {totalDays} {totalDays === 1 ? 'día' : 'días'} · {cats} {cats === 1 ? 'gato' : 'gatos'}
           </p>
           <p className="mt-1 text-[11px] font-bold text-[#275240]/65">
-            Te responde {contactName} por WhatsApp.
+            Te responde Brenda por WhatsApp.
           </p>
           {!exceedsDayLimit && extraCats > 0 && (
             <p className="mt-1 text-[11px] font-semibold text-[#275240]/60">Incluye adicional por cantidad de gatos.</p>
@@ -206,12 +184,7 @@ export const BudgetCalculatorSection: React.FC = () => {
         </p>
 
         {exceedsDayLimit ? (
-          <button
-            type="button"
-            disabled
-            aria-describedby="day-limit-error"
-            className="mt-4 flex min-h-12 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-5 py-3 text-center text-sm font-bold text-white"
-          >
+          <button type="button" disabled aria-describedby="day-limit-error" className="mt-4 flex min-h-12 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-5 py-3 text-center text-sm font-bold text-white">
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
             Corregí la cantidad de días para continuar
           </button>
@@ -221,10 +194,10 @@ export const BudgetCalculatorSection: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#275240] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#1e3f32] focus:outline-none focus:ring-4 focus:ring-[#275240]/20"
-            aria-label={`Consultar disponibilidad con ${contactName} por WhatsApp`}
+            aria-label="Consultar disponibilidad con Brenda por WhatsApp"
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Consultar con {contactName} por WhatsApp
+            Consultar con Brenda por WhatsApp
           </a>
         )}
       </div>
@@ -256,9 +229,7 @@ const DayInput: React.FC<DayInputProps> = ({ id, label, value, onChange, isInval
       aria-invalid={isInvalid}
       onChange={(event) => onChange(safeDayCount(event.target.value))}
       className={`min-h-10 w-full rounded-xl border bg-white px-3 text-sm text-[#275240] outline-none transition focus:ring-2 ${
-        isInvalid
-          ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
-          : 'border-[#275240]/20 focus:border-[#275240] focus:ring-[#275240]/10'
+        isInvalid ? 'border-red-500 focus:border-red-500 focus:ring-red-100' : 'border-[#275240]/20 focus:border-[#275240] focus:ring-[#275240]/10'
       }`}
     />
   </div>
