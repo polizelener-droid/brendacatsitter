@@ -32,7 +32,7 @@ export const ServicesSection: React.FC = () => {
                   <strong className="font-display text-xl font-black text-[#275240]">{rates.interview}</strong>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-[#275240]/75">
-                  Visita presencial para conocernos, ver la rutina del gato y ubicar todo lo necesario.
+                  Voy a tu casa para conocernos, ver la rutina de tu gato y ubicar todo lo necesario antes de empezar.
                 </p>
                 <a
                   href={interviewUrl}
@@ -41,7 +41,7 @@ export const ServicesSection: React.FC = () => {
                   className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#275240] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#1f4033]"
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  Agendar por WhatsApp
+                  Coordiná conmigo por WhatsApp
                 </a>
               </div>
             </div>
@@ -60,7 +60,7 @@ export const ServicesSection: React.FC = () => {
                   </span>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-[#275240]/75">
-                  Videollamada de 15 minutos para conocernos y sacarte dudas antes de reservar.
+                  Podemos tener una videollamada de 15 minutos para conocernos y sacarte dudas antes de reservar.
                 </p>
                 <a
                   href={virtualMeetingUrl}
@@ -69,7 +69,7 @@ export const ServicesSection: React.FC = () => {
                   className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#275240] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#1f4033]"
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  Agendar por WhatsApp
+                  Coordiná conmigo por WhatsApp
                 </a>
               </div>
             </div>
@@ -78,7 +78,7 @@ export const ServicesSection: React.FC = () => {
 
         <details className="group mt-5 rounded-2xl border border-[#275240]/10 bg-white/85 shadow-sm">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-bold text-[#275240]">
-            Condiciones del servicio
+            Condiciones de mi servicio
             <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
           </summary>
 
@@ -88,7 +88,9 @@ export const ServicesSection: React.FC = () => {
                 <Key className="mt-0.5 h-4 w-4 shrink-0 text-[#275240]" aria-hidden="true" />
                 <div>
                   <h4 className="text-xs font-bold text-[#275240]">Entrega de llaves</h4>
-                  <p className="mt-1 text-xs leading-relaxed text-[#275240]/75">{rates.keyHandover}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-[#275240]/75">
+                    Podés entregarme y retirar las llaves en mi domicilio en Saavedra. También podés enviarlas por moto mensajería.
+                  </p>
                 </div>
               </div>
 
@@ -96,7 +98,9 @@ export const ServicesSection: React.FC = () => {
                 <CreditCard className="mt-0.5 h-4 w-4 shrink-0 text-[#275240]" aria-hidden="true" />
                 <div>
                   <h4 className="text-xs font-bold text-[#275240]">Pago</h4>
-                  <p className="mt-1 text-xs leading-relaxed text-[#275240]/75">{rates.paymentTerms}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-[#275240]/75">
+                    Para confirmar la reserva, se abona el 50% antes del viaje y el 50% restante el último día de visitas.
+                  </p>
                 </div>
               </div>
 
@@ -104,7 +108,9 @@ export const ServicesSection: React.FC = () => {
                 <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#275240]" aria-hidden="true" />
                 <div>
                   <h4 className="text-xs font-bold text-[#275240]">Cancelaciones</h4>
-                  <p className="mt-1 text-xs leading-relaxed text-[#275240]/75">{rates.cancellationPolicy}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-[#275240]/75">
+                    La seña solo se reintegra si yo no pudiera asistir por fuerza mayor; en ese caso siempre intento ofrecerte un reemplazo de confianza. Si decidís acortar el viaje o volver antes, no realizo reembolsos.
+                  </p>
                 </div>
               </div>
             </div>
@@ -112,7 +118,7 @@ export const ServicesSection: React.FC = () => {
             <div className="mt-5 flex gap-3 rounded-xl bg-[#f7f8f4] p-3.5">
               <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#275240]" aria-hidden="true" />
               <p className="text-xs leading-relaxed text-[#275240]/75">
-                La higiene del arenero está incluida en cada visita. Desde el 7.º día consecutivo se realiza además una limpieza profunda de la bandeja.
+                En cada visita limpio el arenero. Desde el 7.º día consecutivo hago además una limpieza profunda de la bandeja.
               </p>
             </div>
           </div>
