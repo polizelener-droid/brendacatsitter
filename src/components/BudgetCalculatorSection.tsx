@@ -39,7 +39,7 @@ const zoneButtonStyles: Record<CoverageZone, string> = {
 };
 
 export const BudgetCalculatorSection: React.FC = () => {
-  const { rates, contact } = useContent();
+  const { rates } = useContent();
   const [zone, setZone] = useState<CoverageZone>(1);
   const [cats, setCats] = useState(1);
   const [weekdays, setWeekdays] = useState(1);
@@ -65,9 +65,10 @@ export const BudgetCalculatorSection: React.FC = () => {
     saturdays * (prices.saturday + extraPerVisit) +
     sundaysAndHolidays * (prices.sundayHoliday + extraPerVisit);
 
-  const whatsappNumber = contact.whatsapp;
+  const whatsappNumber = zone === 1 ? '5491161386748' : '5491166906291';
+  const contactName = zone === 1 ? 'Bren' : 'Poli';
   const whatsappMessage = [
-    'Hola Brenda! Calculé un presupuesto desde tu página web.',
+    `Hola ${contactName}! Calculé un presupuesto desde la página web.`,
     `• Zona de cobertura: Zona ${zone}`,
     `• Cantidad de gatos: ${cats}`,
     `• Días de lunes a viernes: ${weekdays}`,
