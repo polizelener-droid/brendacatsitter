@@ -62,12 +62,14 @@ const zones = [
   },
   {
     key: 'zone2' as const,
-    name: 'Zona 2',
+    name: 'Zona 2 · Poli',
     prices: [
       ['Lunes a viernes', '$20.000'],
       ['Sábados', '$23.000'],
       ['Domingos y feriados', '$27.000'],
     ],
+    whatsappUrl:
+      'https://wa.me/5491166906291?text=Hola%20Poli%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%202.',
   },
 ];
 
@@ -156,6 +158,18 @@ export const CoveragePricingMap: React.FC = () => {
                   </div>
                 ))}
               </div>
+
+              {zone.whatsappUrl && (
+                <a
+                  href={zone.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#935b77] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#7e4c65]"
+                >
+                  <WhatsAppIcon className="h-5 w-5 fill-white text-white" />
+                  Hablar con Poli
+                </a>
+              )}
             </div>
           ))}
         </div>
