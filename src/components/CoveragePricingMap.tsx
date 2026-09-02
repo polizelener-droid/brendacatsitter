@@ -1,9 +1,7 @@
 import React from 'react';
-import { Clock3, MessageCircle, PawPrint } from 'lucide-react';
-import { useContent } from '../content/ContentContext';
+import { Clock3, PawPrint } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { BudgetCalculatorSection } from './BudgetCalculatorSection';
-import { buildWhatsAppUrl } from '../data/whatsappContacts';
 
 type ZoneKey = 'zone1' | 'zone2';
 
@@ -12,18 +10,20 @@ type NeighborhoodTile = {
   zone: ZoneKey;
 };
 
-const zoneStyles: Record<ZoneKey, { tile: string; dot: string; card: string; title: string }> = {
+const zoneStyles: Record<ZoneKey, { tile: string; dot: string; card: string; title: string; button: string }> = {
   zone1: {
     tile: 'border-[#a8c9df] bg-[#dff1fb] text-[#3e6f8f]',
     dot: 'bg-[#8fc1df]',
     card: 'border-[#a8c9df] bg-[#f4fbff]',
     title: 'text-[#4a7ea0]',
+    button: 'bg-[#4a7ea0] hover:bg-[#3e6f8f]',
   },
   zone2: {
     tile: 'border-[#dfb4c9] bg-[#f8ddea] text-[#935b77]',
     dot: 'bg-[#e4a9c6]',
     card: 'border-[#dfb4c9] bg-[#fff6fa]',
     title: 'text-[#a46a87]',
+    button: 'bg-[#935b77] hover:bg-[#7e4c65]',
   },
 };
 
@@ -53,12 +53,15 @@ const coverageTiles: NeighborhoodTile[] = [
 const zones = [
   {
     key: 'zone1' as const,
-    name: 'Zona 1',
+    name: 'Zona 1 · Bren',
     prices: [
       ['Lunes a viernes', '$18.000'],
       ['Sábados', '$21.000'],
       ['Domingos y feriados', '$25.000'],
     ],
+    contactName: 'Bren',
+    whatsappUrl:
+      'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%201.',
   },
   {
     key: 'zone2' as const,
@@ -68,6 +71,7 @@ const zones = [
       ['Sábados', '$23.000'],
       ['Domingos y feriados', '$27.000'],
     ],
+    contactName: 'Poli',
     whatsappUrl:
       'https://wa.me/5491166906291?text=Hola%20Poli%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%202.',
   },
@@ -82,9 +86,6 @@ const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => (
 );
 
 export const CoveragePricingMap: React.FC = () => {
-  const { contact } = useContent();
-  const brendaWhatsAppUrl = buildWhatsAppUrl(contact.whatsapp, contact.whatsappBaseMessage);
-
   return (
     <div id="zonas-presupuesto" className="mt-6 scroll-mt-24 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
       <h3 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">
@@ -114,30 +115,6 @@ export const CoveragePricingMap: React.FC = () => {
             </span>
           </div>
 
-          <div className="mt-5 rounded-3xl border border-[#275240]/10 bg-[#f7f8f4] p-4 sm:p-5">
-            <div className="flex items-center gap-2 text-[#275240]">
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              <h4 className="text-sm font-extrabold sm:text-base">¿Querés consultar disponibilidad?</h4>
-            </div>
-            <p className="mt-1 text-xs text-[#275240]/65">Escribime por WhatsApp.</p>
-
-            <a
-              href={brendaWhatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 flex min-h-16 items-center justify-between gap-3 rounded-2xl border border-[#b9d3bf] bg-[#f7fbf7] px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm"
-            >
-              <div className="text-left">
-                <span className="mb-1 flex items-center gap-2 text-xs font-bold text-[#275240]/75">
-                  <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone1.dot}`} />
-                  <span className={`h-2.5 w-2.5 rounded-full ${zoneStyles.zone2.dot}`} />
-                  Ambas zonas
-                </span>
-                <strong className="block text-base font-black text-[#275240]">Escribime por WhatsApp</strong>
-              </div>
-              <WhatsAppIcon className="h-7 w-7 shrink-0 fill-[#25D366] text-[#25D366]" />
-            </a>
-          </div>
         </div>
 
         <div className="space-y-3">
@@ -159,17 +136,15 @@ export const CoveragePricingMap: React.FC = () => {
                 ))}
               </div>
 
-              {zone.whatsappUrl && (
-                <a
-                  href={zone.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#935b77] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#7e4c65]"
-                >
-                  <WhatsAppIcon className="h-5 w-5 fill-white text-white" />
-                  Hablar con Poli
-                </a>
-              )}
+              <a
+                href={zone.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-4 flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition ${zoneStyles[zone.key].button}`}
+              >
+                <WhatsAppIcon className="h-5 w-5 fill-white text-white" />
+                Hablar con {zone.contactName}
+              </a>
             </div>
           ))}
         </div>
