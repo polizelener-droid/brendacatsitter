@@ -163,7 +163,7 @@ export const CoveragePricingMap: React.FC = () => {
 
       <div className="mt-5 flex flex-col gap-1.5 border-t border-[#275240]/10 pt-4 text-xs text-[#275240]/70 sm:flex-row sm:items-center sm:justify-between">
         <span className="inline-flex items-center gap-2 font-bold text-[#275240]">
-          <Clock3 className="h-4 w-4" aria-hidden="true" /> Mis tarifas son por visita de 45 minutos
+          <Clock3 className="h-4 w-4" aria-hidden="true" /> Mis tarifas son por visitas de 45 minutos
         </span>
         <span>Si tu barrio no aparece, consultame de todas formas.</span>
       </div>
