@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cat, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const Footer: React.FC = () => {
@@ -22,17 +22,9 @@ export const Footer: React.FC = () => {
     <footer className="bg-[#e2e8dc] py-10 text-[#275240] border-t border-[#275240]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[#275240]/10 text-center md:text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-[#275240] text-white flex items-center justify-center font-bold">
-              <Cat className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <span className="text-base font-bold text-[#275240] block leading-tight font-display">
-                Brenda <span className="font-serif italic">Cat Sitter</span>
-              </span>
-              <span className="text-[11px] text-[#275240]/70">Cuido a tu gato con amor y de forma personalizada</span>
-            </div>
-          </div>
+          <a href="#" onClick={(e) => handleNavClick(e, '#')} aria-label="Brenda Cat Sitter - Inicio" className="shrink-0 transition-transform hover:scale-[1.02]">
+            <img src="/brenda-logo.jpg" alt="Brenda Cat Sitter" className="h-24 w-24 rounded-full object-cover shadow-sm" />
+          </a>
 
           <div className="flex flex-wrap justify-center gap-6 text-xs font-bold text-[#275240] font-display">
             {footerLinks.map((link) => (
