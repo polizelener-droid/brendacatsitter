@@ -22,8 +22,14 @@ export const Footer: React.FC = () => {
     <footer className="bg-[#e2e8dc] py-10 text-[#275240] border-t border-[#275240]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[#275240]/10 text-center md:text-left">
-          <a href="#" onClick={(e) => handleNavClick(e, '#')} aria-label="Brenda Cat Sitter - Inicio" className="shrink-0 transition-transform hover:scale-[1.02]">
-            <img src="/brenda-logo.jpg" alt="Brenda Cat Sitter" className="h-24 w-24 rounded-full object-cover shadow-sm" />
+          <a
+            href="/brenda-logo.jpg"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Abrir logo de Brenda Cat Sitter"
+            className="shrink-0 transition-transform hover:scale-[1.03]"
+          >
+            <img src="/brenda-logo.jpg" alt="Brenda Cat Sitter" className="h-28 w-28 rounded-full object-cover shadow-sm" />
           </a>
 
           <div className="flex flex-wrap justify-center gap-6 text-xs font-bold text-[#275240] font-display">
