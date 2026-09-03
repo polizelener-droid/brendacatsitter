@@ -11,6 +11,7 @@ import { FaqSection } from '../components/FaqSection';
 import { ContactSection } from '../components/ContactSection';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 import { Footer } from '../components/Footer';
+import { LogoLightbox } from '../components/LogoLightbox';
 
 export const HomePage: React.FC = () => {
   useEffect(() => {
@@ -88,6 +89,7 @@ export const HomePage: React.FC = () => {
         <Footer />
       </div>
       <FloatingWhatsApp />
+      <LogoLightbox />
     </div>
   );
 };
