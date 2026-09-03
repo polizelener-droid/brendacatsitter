@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { openBrendaLogo } from './LogoLightbox';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const HeaderNav: React.FC = () => {
@@ -32,11 +31,7 @@ export const HeaderNav: React.FC = () => {
   return (
     <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isScrolled ? 'border-b border-[#275240]/10 bg-[#e2e8dc]/95 py-2 shadow-xs backdrop-blur-md' : 'bg-transparent py-2.5'}`}>
       <div className="mx-auto max-w-7xl px-5 sm:px-7 lg:px-9">
-        <div className="flex items-center justify-between gap-3">
-          <button type="button" onClick={openBrendaLogo} id="brand-logo-link" className="group shrink-0 rounded-full transition-transform hover:scale-[1.03]" aria-label="Abrir logo de Brenda Cat Sitter">
-            <img src="/brenda-logo.webp" alt="Brenda Cat Sitter" className="h-16 w-16 rounded-full object-cover shadow-sm sm:h-[4.5rem] sm:w-[4.5rem]" />
-          </button>
-
+        <div className="flex items-center justify-end gap-3">
           <nav className="hidden items-center gap-1 rounded-full border border-[#275240]/10 bg-white/85 px-3 py-1.5 shadow-2xs backdrop-blur-md lg:flex">
             {navLinks.map((link) => (
               <a key={link.name} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="rounded-full px-3 py-1.5 text-xs font-semibold text-[#275240] transition-colors hover:bg-[#e2e8dc]">{link.name}</a>
