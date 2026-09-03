@@ -15,11 +15,8 @@ export const HeaderNav: React.FC = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     scrollToHash(href);
-    if (href && href !== '#') {
-      history.replaceState(null, '', href);
-    } else {
-      history.replaceState(null, '', window.location.pathname);
-    }
+    if (href && href !== '#') history.replaceState(null, '', href);
+    else history.replaceState(null, '', window.location.pathname);
     setMobileMenuOpen(false);
   };
 
@@ -42,16 +39,17 @@ export const HeaderNav: React.FC = () => {
       <div className="mx-auto max-w-7xl px-5 sm:px-7 lg:px-9">
         <div className="flex items-center justify-between gap-3">
           <a
-            href="#"
+            href="/brenda-logo.jpg"
+            target="_blank"
+            rel="noreferrer"
             id="brand-logo-link"
-            onClick={(e) => handleNavClick(e, '#')}
-            className="group shrink-0 rounded-full transition-transform hover:scale-[1.02]"
-            aria-label="Brenda Cat Sitter - Inicio"
+            className="group shrink-0 rounded-full transition-transform hover:scale-[1.03]"
+            aria-label="Abrir logo de Brenda Cat Sitter"
           >
             <img
               src="/brenda-logo.jpg"
               alt="Brenda Cat Sitter"
-              className="h-14 w-14 rounded-full object-cover shadow-sm sm:h-16 sm:w-16"
+              className="h-16 w-16 rounded-full object-cover shadow-sm sm:h-[4.5rem] sm:w-[4.5rem]"
             />
           </a>
 
