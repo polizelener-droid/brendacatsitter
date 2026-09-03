@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { openBrendaLogo } from './LogoLightbox';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const HeaderNav: React.FC = () => {
@@ -38,10 +39,9 @@ export const HeaderNav: React.FC = () => {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-7 lg:px-9">
         <div className="flex items-center justify-between gap-3">
-          <a
-            href="/brenda-logo.jpg"
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={openBrendaLogo}
             id="brand-logo-link"
             className="group shrink-0 rounded-full transition-transform hover:scale-[1.03]"
             aria-label="Abrir logo de Brenda Cat Sitter"
@@ -51,7 +51,7 @@ export const HeaderNav: React.FC = () => {
               alt="Brenda Cat Sitter"
               className="h-16 w-16 rounded-full object-cover shadow-sm sm:h-[4.5rem] sm:w-[4.5rem]"
             />
-          </a>
+          </button>
 
           <nav className="hidden items-center gap-1 rounded-full border border-[#275240]/10 bg-white/85 px-3 py-1.5 shadow-2xs backdrop-blur-md lg:flex">
             {navLinks.map((link) => (
