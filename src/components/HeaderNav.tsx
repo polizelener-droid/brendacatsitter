@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Heart, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const HeaderNav: React.FC = () => {
@@ -35,8 +35,8 @@ export const HeaderNav: React.FC = () => {
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'border-b border-[#275240]/10 bg-[#e2e8dc]/95 py-2.5 shadow-xs backdrop-blur-md'
-          : 'bg-transparent py-4'
+          ? 'border-b border-[#275240]/10 bg-[#e2e8dc]/95 py-2 shadow-xs backdrop-blur-md'
+          : 'bg-transparent py-2.5'
       }`}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-7 lg:px-9">
@@ -45,15 +45,14 @@ export const HeaderNav: React.FC = () => {
             href="#"
             id="brand-logo-link"
             onClick={(e) => handleNavClick(e, '#')}
-            className="group min-w-0 py-0.5"
+            className="group shrink-0 rounded-full transition-transform hover:scale-[1.02]"
+            aria-label="Brenda Cat Sitter - Inicio"
           >
-            <span className="block whitespace-nowrap font-sans text-[15px] font-extrabold leading-none tracking-[-0.02em] text-[#275240] sm:text-base">
-              Brenda <span className="font-medium italic">Cat Sitter</span>
-            </span>
-            <span className="mt-1 flex items-center gap-1 text-[9px] font-semibold tracking-[0.01em] text-[#275240]/60 sm:text-[10px]">
-              <Heart className="h-2.5 w-2.5 shrink-0 fill-[#275240]/60" />
-              Cuidado a domicilio
-            </span>
+            <img
+              src="/brenda-logo.jpg"
+              alt="Brenda Cat Sitter"
+              className="h-14 w-14 rounded-full object-cover shadow-sm sm:h-16 sm:w-16"
+            />
           </a>
 
           <nav className="hidden items-center gap-1 rounded-full border border-[#275240]/10 bg-white/85 px-3 py-1.5 shadow-2xs backdrop-blur-md lg:flex">
