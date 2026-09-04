@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Calculator, CalendarDays, Cat, MapPin, MessageCircle } from 'lucide-react';
+import { Calculator, CalendarDays, Cat, ChevronLeft, ChevronRight, MapPin, MessageCircle } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
 import { buildWhatsAppUrl } from '../data/whatsappContacts';
 
@@ -14,6 +14,12 @@ const ZONE_SURCHARGE = {
 
 type CoverageZone = keyof typeof ZONE_SURCHARGE;
 
+type SelectedDate = {
+  year: number;
+  month: number;
+  day: number;
+};
+
 function parseArgentinePrice(value: string, fallback: number): number {
   const parsed = Number(value.replace(/\D/g, ''));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
@@ -25,12 +31,17 @@ function formatPesos(value: number): string {
   }).format(value)}`;
 }
 
-function safeDayCount(value: string): number {
-  return Math.min(MAX_TOTAL_DAYS, Math.max(0, Math.floor(Number(value) || 0)));
-}
-
 function safeCatCount(value: string): number {
   return Math.min(MAX_CATS, Math.max(1, Math.floor(Number(value) || 1)));
+}
+
+function dateKey(year: number, month: number, day: number): string {
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+function dateFromKey(key: string): Date {
+  const [year, month, day] = key.split('-').map(Number);
+  return new Date(year, month - 1, day);
 }
 
 const zoneButtonStyles: Record<CoverageZone, string> = {
@@ -40,11 +51,11 @@ const zoneButtonStyles: Record<CoverageZone, string> = {
 
 export const BudgetCalculatorSection: React.FC = () => {
   const { rates } = useContent();
+  const today = new Date();
   const [zone, setZone] = useState<CoverageZone>(1);
   const [cats, setCats] = useState(1);
-  const [weekdays, setWeekdays] = useState(1);
-  const [saturdays, setSaturdays] = useState(0);
-  const [sundaysAndHolidays, setSundaysAndHolidays] = useState(0);
+  const [viewDate, setViewDate] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
+  const [selectedDates, setSelectedDates] = useState<string[]>([]);
 
   const prices = useMemo(() => {
     const surcharge = ZONE_SURCHARGE[zone];
@@ -56,29 +67,72 @@ export const BudgetCalculatorSection: React.FC = () => {
     };
   }, [rates.weekday, rates.saturday, rates.sundayHoliday, zone]);
 
-  const totalDays = weekdays + saturdays + sundaysAndHolidays;
+  const selectedDateObjects = useMemo(
+    () => selectedDates.map(dateFromKey).sort((a, b) => a.getTime() - b.getTime()),
+    [selectedDates],
+  );
+
+  const counts = useMemo(() => {
+    return selectedDateObjects.reduce(
+      (acc, date) => {
+        const dayOfWeek = date.getDay();
+        if (dayOfWeek === 0) acc.sundaysAndHolidays += 1;
+        else if (dayOfWeek === 6) acc.saturdays += 1;
+        else acc.weekdays += 1;
+        return acc;
+      },
+      { weekdays: 0, saturdays: 0, sundaysAndHolidays: 0 },
+    );
+  }, [selectedDateObjects]);
+
+  const totalDays = selectedDates.length;
   const exceedsDayLimit = totalDays > MAX_TOTAL_DAYS;
   const extraCats = Math.max(0, cats - 3);
   const extraPerVisit = extraCats * EXTRA_CAT_RATE;
   const total =
-    weekdays * (prices.weekday + extraPerVisit) +
-    saturdays * (prices.saturday + extraPerVisit) +
-    sundaysAndHolidays * (prices.sundayHoliday + extraPerVisit);
+    counts.weekdays * (prices.weekday + extraPerVisit) +
+    counts.saturdays * (prices.saturday + extraPerVisit) +
+    counts.sundaysAndHolidays * (prices.sundayHoliday + extraPerVisit);
 
   const whatsappNumber = zone === 1 ? '5491161386748' : '5491166906291';
   const contactName = zone === 1 ? 'Bren' : 'Poli';
+  const selectedDatesText = selectedDateObjects.length
+    ? selectedDateObjects.map((date) => date.toLocaleDateString('es-AR')).join(', ')
+    : 'Todavía no seleccioné fechas';
   const whatsappMessage = [
     `Hola ${contactName}! Calculé un presupuesto desde la página web.`,
     `• Zona de cobertura: Zona ${zone}`,
     `• Cantidad de gatos: ${cats}`,
-    `• Días de lunes a viernes: ${weekdays}`,
-    `• Sábados: ${saturdays}`,
-    `• Domingos y feriados: ${sundaysAndHolidays}`,
+    `• Fechas elegidas: ${selectedDatesText}`,
     `• Presupuesto estimado desde: ${formatPesos(total)}`,
     'Quería consultar disponibilidad y confirmar el valor final.',
   ].join('\n');
 
   const whatsappUrl = buildWhatsAppUrl(whatsappNumber, whatsappMessage);
+
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const firstDay = new Date(year, month, 1);
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const mondayFirstOffset = (firstDay.getDay() + 6) % 7;
+  const calendarCells = Array.from({ length: mondayFirstOffset + daysInMonth }, (_, index) => {
+    if (index < mondayFirstOffset) return null;
+    return index - mondayFirstOffset + 1;
+  });
+
+  const monthLabel = viewDate.toLocaleDateString('es-AR', { month: 'long', year: 'numeric' });
+  const todayKey = dateKey(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const toggleDate = (day: number) => {
+    const key = dateKey(year, month, day);
+    setSelectedDates((current) => {
+      if (current.includes(key)) return current.filter((item) => item !== key);
+      if (current.length >= MAX_TOTAL_DAYS) return current;
+      return [...current, key];
+    });
+  };
+
+  const canGoPreviousMonth = year > today.getFullYear() || month > today.getMonth() || false;
 
   return (
     <div id="presupuesto" className="mt-6 border-t border-[#275240]/10 pt-6 sm:mt-7 sm:pt-7">
@@ -91,7 +145,7 @@ export const BudgetCalculatorSection: React.FC = () => {
             Calculá tu presupuesto
           </h3>
           <p className="mt-1.5 text-xs text-[#275240]/65 sm:text-sm">
-            Elegí tu zona, cantidad de gatos y días para obtener un estimado de mi servicio.
+            Elegí tu zona, cantidad de gatos y las fechas de tus visitas para obtener un estimado.
           </p>
         </div>
 
@@ -145,19 +199,91 @@ export const BudgetCalculatorSection: React.FC = () => {
           <fieldset aria-describedby="day-limit-help day-limit-error">
             <legend className="mb-1 flex items-center gap-2 text-sm font-bold text-[#275240]">
               <CalendarDays className="h-4 w-4" aria-hidden="true" />
-              ¿Qué días necesitás que vaya?
+              Elegí las fechas de tus visitas
             </legend>
-            <p id="day-limit-help" className="mb-2 text-[11px] text-[#275240]/50">
-              Máximo {MAX_TOTAL_DAYS} días.
+            <p id="day-limit-help" className="mb-3 text-[11px] text-[#275240]/50">
+              Tocá cada fecha que necesitás. Podés seleccionar hasta {MAX_TOTAL_DAYS} días.
             </p>
-            <div className="grid gap-3 sm:grid-cols-3">
-              <DayInput id="dias-semana" label="Lunes a viernes" value={weekdays} onChange={setWeekdays} isInvalid={exceedsDayLimit} />
-              <DayInput id="dias-sabado" label="Sábados" value={saturdays} onChange={setSaturdays} isInvalid={exceedsDayLimit} />
-              <DayInput id="dias-domingo" label="Domingos y feriados" value={sundaysAndHolidays} onChange={setSundaysAndHolidays} isInvalid={exceedsDayLimit} />
+
+            <div className="rounded-2xl border border-[#275240]/10 bg-white p-3 sm:p-4">
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <button
+                  type="button"
+                  aria-label="Mes anterior"
+                  disabled={!canGoPreviousMonth}
+                  onClick={() => setViewDate(new Date(year, month - 1, 1))}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#275240]/15 text-[#275240] transition hover:bg-[#d7dfd2] disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <p className="text-sm font-extrabold capitalize text-[#275240] sm:text-base">{monthLabel}</p>
+                <button
+                  type="button"
+                  aria-label="Mes siguiente"
+                  onClick={() => setViewDate(new Date(year, month + 1, 1))}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#275240]/15 text-[#275240] transition hover:bg-[#d7dfd2]"
+                >
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-[#275240]/45 sm:text-xs">
+                {['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((dayLabel) => (
+                  <div key={dayLabel} className="py-1">{dayLabel}</div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-7 gap-1">
+                {calendarCells.map((day, index) => {
+                  if (day === null) return <div key={`empty-${index}`} className="aspect-square" aria-hidden="true" />;
+
+                  const key = dateKey(year, month, day);
+                  const selected = selectedDates.includes(key);
+                  const date = new Date(year, month, day);
+                  const isPast = key < todayKey;
+                  const isToday = key === todayKey;
+                  const dayOfWeek = date.getDay();
+                  const weekend = dayOfWeek === 0 || dayOfWeek === 6;
+                  const disabled = isPast || (!selected && totalDays >= MAX_TOTAL_DAYS);
+
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      disabled={disabled}
+                      aria-pressed={selected}
+                      aria-label={`${day} de ${monthLabel}`}
+                      onClick={() => toggleDate(day)}
+                      className={`relative flex aspect-square items-center justify-center rounded-xl text-xs font-bold transition sm:text-sm ${
+                        selected
+                          ? 'bg-[#275240] text-white shadow-sm'
+                          : weekend
+                            ? 'bg-[#f6e8ee] text-[#935b77] hover:bg-[#efd6e1]'
+                            : 'bg-[#f5f6f2] text-[#275240] hover:bg-[#d7dfd2]'
+                      } ${isToday && !selected ? 'ring-2 ring-[#275240]/25' : ''} ${disabled ? 'cursor-not-allowed opacity-35' : ''}`}
+                    >
+                      {day}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] text-[#275240]/50 sm:text-xs">
+                <span>Hoy</span>
+                <span>Fin de semana</span>
+                <span>Seleccionado</span>
+              </div>
             </div>
+
+            {totalDays > 0 && (
+              <div className="mt-3 rounded-xl bg-[#d7dfd2]/70 px-3 py-2 text-center text-xs font-semibold text-[#275240]">
+                {totalDays} {totalDays === 1 ? 'fecha seleccionada' : 'fechas seleccionadas'}
+              </div>
+            )}
+
             {exceedsDayLimit && (
               <p id="day-limit-error" role="alert" className="mt-2 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
-                Podés calcular hasta {MAX_TOTAL_DAYS} días en total. Ingresaste {totalDays}.
+                Podés calcular hasta {MAX_TOTAL_DAYS} días en total.
               </p>
             )}
           </fieldset>
@@ -166,11 +292,16 @@ export const BudgetCalculatorSection: React.FC = () => {
         <div className="mt-5 rounded-2xl bg-white p-4 text-center" aria-live="polite">
           <span className="text-xs font-semibold text-[#275240]/70">Presupuesto estimado desde</span>
           <strong className="mt-0.5 block font-display text-3xl font-black text-[#275240] sm:text-4xl">
-            {exceedsDayLimit ? '—' : formatPesos(total)}
+            {totalDays === 0 || exceedsDayLimit ? '—' : formatPesos(total)}
           </strong>
           <p className="mt-1 text-xs text-[#275240]/70">
             Zona {zone} · {totalDays} {totalDays === 1 ? 'día' : 'días'} · {cats} {cats === 1 ? 'gato' : 'gatos'}
           </p>
+          {totalDays > 0 && (
+            <p className="mt-1 text-[11px] text-[#275240]/55">
+              {counts.weekdays} de semana · {counts.saturdays} sábados · {counts.sundaysAndHolidays} domingos/feriados
+            </p>
+          )}
           <p className="mt-1 text-[11px] font-bold text-[#275240]/65">
             Te respondo por WhatsApp.
           </p>
@@ -183,10 +314,14 @@ export const BudgetCalculatorSection: React.FC = () => {
           La entrevista previa se calcula aparte. Desde el cuarto gato aplico un adicional por visita.
         </p>
 
-        {exceedsDayLimit ? (
-          <button type="button" disabled aria-describedby="day-limit-error" className="mt-4 flex min-h-12 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-5 py-3 text-center text-sm font-bold text-white">
+        {totalDays === 0 || exceedsDayLimit ? (
+          <button
+            type="button"
+            disabled
+            className="mt-4 flex min-h-12 w-full cursor-not-allowed items-center justify-center gap-2 rounded-full bg-[#275240]/45 px-5 py-3 text-center text-sm font-bold text-white"
+          >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Corregí la cantidad de días para continuar
+            Elegí al menos una fecha para continuar
           </button>
         ) : (
           <a
@@ -204,33 +339,3 @@ export const BudgetCalculatorSection: React.FC = () => {
     </div>
   );
 };
-
-type DayInputProps = {
-  id: string;
-  label: string;
-  value: number;
-  onChange: (value: number) => void;
-  isInvalid: boolean;
-};
-
-const DayInput: React.FC<DayInputProps> = ({ id, label, value, onChange, isInvalid }) => (
-  <div>
-    <label htmlFor={id} className="mb-1.5 block text-xs font-semibold leading-snug text-[#275240]">
-      {label}
-    </label>
-    <input
-      id={id}
-      type="number"
-      min="0"
-      max={MAX_TOTAL_DAYS}
-      step="1"
-      inputMode="numeric"
-      value={value}
-      aria-invalid={isInvalid}
-      onChange={(event) => onChange(safeDayCount(event.target.value))}
-      className={`min-h-10 w-full rounded-xl border bg-white px-3 text-sm text-[#275240] outline-none transition focus:ring-2 ${
-        isInvalid ? 'border-red-500 focus:border-red-500 focus:ring-red-100' : 'border-[#275240]/20 focus:border-[#275240] focus:ring-[#275240]/10'
-      }`}
-    />
-  </div>
-);
