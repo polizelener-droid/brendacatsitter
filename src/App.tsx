@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ContentProvider } from './content/ContentContext';
 import { AdminApp } from './admin/AdminApp';
 import { HomePage } from './pages/HomePage';
+import { BudgetPage } from './pages/BudgetPage';
 
 export default function App() {
   useEffect(() => {
@@ -19,6 +20,14 @@ export default function App() {
           element={
             <ContentProvider>
               <HomePage />
+            </ContentProvider>
+          }
+        />
+        <Route
+          path="/presupuesto"
+          element={
+            <ContentProvider>
+              <BudgetPage />
             </ContentProvider>
           }
         />
