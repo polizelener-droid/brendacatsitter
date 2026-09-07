@@ -1,6 +1,5 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
-import { openBrendaLogo } from './LogoLightbox';
 import { scrollToHash } from '../utils/smoothScroll';
 
 export const Footer: React.FC = () => {
@@ -22,10 +21,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-[#e2e8dc] py-10 text-[#275240] border-t border-[#275240]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[#275240]/10 text-center md:text-left">
-          <button type="button" onClick={openBrendaLogo} aria-label="Abrir logo de Brenda Cat Sitter" className="shrink-0 transition-transform hover:scale-[1.03]">
-            <img src="/brenda-logo.webp" alt="Brenda Cat Sitter" className="h-28 w-28 rounded-full object-cover shadow-sm" />
-          </button>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 pb-6 border-b border-[#275240]/10 text-center">
           <div className="flex flex-wrap justify-center gap-6 text-xs font-bold text-[#275240] font-display">
             {footerLinks.map((link) => <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="hover:opacity-70 transition-opacity">{link.name}</a>)}
           </div>
