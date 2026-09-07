@@ -49,6 +49,8 @@ const coverageTiles: NeighborhoodTile[] = [
   { name: 'Almagro', zone: 'zone2' },
   { name: 'Villa Real', zone: 'zone2' },
   { name: 'Caballito', zone: 'zone2' },
+  { name: 'San Isidro', zone: 'zone2' },
+  { name: 'La Lucila', zone: 'zone2' },
 ];
 
 const zones = [
@@ -115,7 +117,6 @@ export const CoveragePricingMap: React.FC = () => {
               <span className={`h-3 w-3 rounded-full ${zoneStyles.zone2.dot}`} /> Zona 2
             </span>
           </div>
-
         </div>
 
         <div className="space-y-3">
