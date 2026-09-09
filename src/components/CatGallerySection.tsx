@@ -19,6 +19,20 @@ export const CatGallerySection: React.FC = () => {
     const track = trackRef.current;
     if (!track) return;
     const amount = Math.max(280, track.clientWidth * 0.72);
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const atStart = track.scrollLeft <= 4;
+    const atEnd = track.scrollLeft >= maxScrollLeft - 4;
+
+    if (direction === 'left' && atStart) {
+      track.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+      return;
+    }
+
+    if (direction === 'right' && atEnd) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+      return;
+    }
+
     track.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
