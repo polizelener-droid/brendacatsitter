@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CAT_CLIENTS, type CatClient } from '../data/catData';
 import { useContent } from '../content/ContentContext';
 import { ChevronLeft, ChevronRight, Grid2X2, Images, X } from 'lucide-react';
@@ -12,25 +12,6 @@ export const CatGallerySection: React.FC = () => {
   const gridRef = useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = useState<GalleryView>('multiple');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (viewMode !== 'multiple' || selectedPhotoIndex !== null || cats.length <= 1) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const intervalId = window.setInterval(() => {
-      const track = trackRef.current;
-      if (!track) return;
-      const firstCard = track.firstElementChild as HTMLElement | null;
-      const styles = window.getComputedStyle(track);
-      const gap = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
-      const step = (firstCard?.getBoundingClientRect().width ?? Math.max(280, track.clientWidth * 0.25)) + gap;
-      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-      const atEnd = track.scrollLeft >= maxScroll - step * 0.5;
-      track.scrollTo({ left: atEnd ? 0 : Math.min(track.scrollLeft + step, maxScroll), behavior: 'smooth' });
-    }, 2000);
-
-    return () => window.clearInterval(intervalId);
-  }, [cats.length, selectedPhotoIndex, viewMode]);
 
   if (!cats.length) return null;
 
