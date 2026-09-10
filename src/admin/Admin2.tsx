@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Cat, ImagePlus, Save, Trash2, ArrowLeft } from 'lucide-react';
+import { Cat, ImagePlus, Save, Trash2, ArrowLeft, Lock } from 'lucide-react';
 import type { CatClient } from '../data/catData';
 import { CAT_CLIENTS } from '../data/catData';
 
@@ -20,17 +20,37 @@ export const Admin2: React.FC = () => {
   const [cats, setCats] = useState<StoredCat[]>([]);
   const [selected, setSelected] = useState<StoredCat>(emptyCat());
   const [password, setPassword] = useState('');
+  const [unlocked, setUnlocked] = useState(false);
   const [status, setStatus] = useState('');
   const [saving, setSaving] = useState(false);
 
   const localCats = useMemo(() => CAT_CLIENTS, []);
 
   useEffect(() => {
+    if (!unlocked) return;
     fetch('/cats.json', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : []))
       .then((data) => setCats(Array.isArray(data) ? data : []))
       .catch(() => setCats([]));
-  }, []);
+  }, [unlocked]);
+
+  const unlock = async () => {
+    if (!password) return setStatus('Ingresá la clave.');
+    setStatus('Verificando…');
+    try {
+      const response = await fetch('/api/cats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'auth', password }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.error || 'Clave incorrecta.');
+      setUnlocked(true);
+      setStatus('');
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : 'Clave incorrecta.');
+    }
+  };
 
   const editCat = (cat: StoredCat) => setSelected({ ...cat, personality: [...(cat.personality || [])] });
   const addNew = () => setSelected(emptyCat());
@@ -38,7 +58,7 @@ export const Admin2: React.FC = () => {
   const saveCat = async () => {
     if (!selected.name.trim()) return setStatus('Poné el nombre del gato.');
     if (!selected.image) return setStatus('Subí una foto antes de guardar.');
-    if (!password) return setStatus('Ingresá la clave del nuevo panel.');
+    if (!password) return setStatus('Ingresá la clave del panel.');
 
     setSaving(true);
     setStatus('Guardando…');
@@ -61,7 +81,7 @@ export const Admin2: React.FC = () => {
   };
 
   const deleteCat = async (id: string) => {
-    if (!password) return setStatus('Ingresá la clave del nuevo panel.');
+    if (!password) return setStatus('Ingresá la clave del panel.');
     if (!confirm('¿Eliminar este gato del nuevo catálogo?')) return;
     setSaving(true);
     try {
@@ -86,6 +106,29 @@ export const Admin2: React.FC = () => {
     reader.onload = () => setSelected((prev) => ({ ...prev, image: String(reader.result || '') }));
     reader.readAsDataURL(file);
   };
+
+  if (!unlocked) {
+    return (
+      <main className="min-h-screen bg-[#e2e8dc] flex items-center justify-center p-4 text-[#275240]">
+        <section className="w-full max-w-md bg-white rounded-2xl border border-[#d0dacb] p-7 shadow-sm">
+          <div className="w-12 h-12 rounded-full bg-[#275240] text-white flex items-center justify-center mx-auto mb-4"><Lock /></div>
+          <h1 className="text-2xl font-bold text-center mb-2">Panel de gatos</h1>
+          <p className="text-sm text-center opacity-70 mb-6">Ingresá la clave para acceder.</p>
+          <input
+            autoFocus
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && unlock()}
+            className="w-full mb-3 px-3 py-3 rounded-xl bg-[#e2e8dc] border-0"
+            placeholder="Clave"
+          />
+          {status && <p className="text-sm mb-3 rounded-xl bg-[#e2e8dc] px-3 py-2">{status}</p>}
+          <button onClick={unlock} className="w-full px-4 py-3 rounded-xl bg-[#275240] text-white font-bold">Entrar</button>
+        </section>
+      </main>
+    );
+  }
 
   const allVisible = [...localCats, ...cats];
 
@@ -130,8 +173,6 @@ export const Admin2: React.FC = () => {
             <input value={selected.favoriteActivity} onChange={(e) => setSelected({ ...selected, favoriteActivity: e.target.value })} className="w-full mb-3 px-3 py-2 rounded-xl bg-[#e2e8dc] border-0" />
             <label className="block text-xs font-bold mb-1">Personalidad (separada por comas)</label>
             <input value={selected.personality.join(', ')} onChange={(e) => setSelected({ ...selected, personality: e.target.value.split(',').map((x) => x.trim()).filter(Boolean) })} className="w-full mb-3 px-3 py-2 rounded-xl bg-[#e2e8dc] border-0" />
-            <label className="block text-xs font-bold mb-1">Clave del panel</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full mb-4 px-3 py-2 rounded-xl bg-[#e2e8dc] border-0" placeholder="La vas a configurar en Vercel" />
             {status && <p className="text-sm mb-3 rounded-xl bg-[#e2e8dc] px-3 py-2">{status}</p>}
             <div className="flex gap-2">
               <button disabled={saving} onClick={saveCat} className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#275240] text-white font-bold disabled:opacity-50"><Save size={17} /> {saving ? 'Guardando…' : 'Guardar gato'}</button>
