@@ -120,10 +120,17 @@ export async function fetchSiteContent(): Promise<SiteContent> {
       hoodsRes.data && hoodsRes.data.length > 0
         ? hoodsRes.data.map((r) => String(r.name))
         : DEFAULT_CONTENT.neighborhoods;
+
+    // Supabase is the source of truth only when it contains a complete gallery.
+    // If the remote table is empty or only partially populated, keep the local
+    // gallery intact so a transient/incomplete database state cannot hide cats.
     const remoteCats =
       catsRes.data && catsRes.data.length > 0 ? catsRes.data.map(mapCat) : [];
-    const catsWithImages = remoteCats.filter((c) => c.image);
-    const cats = catsWithImages.length > 0 ? catsWithImages : DEFAULT_CONTENT.cats;
+    const remoteCatsWithImages = remoteCats.filter((c) => c.image);
+    const hasCompleteRemoteGallery =
+      remoteCatsWithImages.length >= DEFAULT_CONTENT.cats.length;
+    const cats = hasCompleteRemoteGallery ? remoteCatsWithImages : DEFAULT_CONTENT.cats;
+
     const testimonials =
       testimonialsRes.data && testimonialsRes.data.length > 0
         ? testimonialsRes.data.map(mapTestimonial)
