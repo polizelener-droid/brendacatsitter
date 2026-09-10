@@ -33,6 +33,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const supplied = String(req.body?.password || '');
     if (!expected || supplied !== expected) return res.status(401).json({ error: 'Clave incorrecta.' });
 
+    // Used by the Admin2 login screen to verify the password without exposing it.
+    if (req.method === 'POST' && req.body?.action === 'auth') {
+      return res.status(200).json({ ok: true });
+    }
+
     const cats = await readCats();
 
     if (req.method === 'GET') return res.status(200).json({ cats });
