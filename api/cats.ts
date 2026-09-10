@@ -27,7 +27,14 @@ async function github(path: string, init?: RequestInit) {
 
 async function readCats() {
   const data = await github(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}?ref=${BRANCH}`);
-  return JSON.parse(Buffer.from(data.content, 'base64').toString('utf8'));
+  const encoded = String(data.content || '').trim();
+  if (!encoded) return [];
+  try {
+    const parsed = JSON.parse(Buffer.from(encoded, 'base64').toString('utf8'));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -59,7 +66,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const current = await github(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}?ref=${BRANCH}`);
       await github(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}`, {
         method: 'PUT',
-        body: JSON.stringify({ message: `Add cat ${cat.name}`, content: Buffer.from(JSON.stringify(next, null, 2) + '\n').toString('base64'), sha: current.sha, branch: BRANCH }),
+        body: JSON.stringify({ message: `Save cat ${cat.name}`, content: Buffer.from(JSON.stringify(next, null, 2) + '\n').toString('base64'), sha: current.sha, branch: BRANCH }),
       });
       return res.status(200).json({ cats: next });
     }
