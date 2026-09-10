@@ -18,7 +18,10 @@ async function github(path: string, init?: RequestInit) {
       ...(init?.headers || {}),
     },
   });
-  if (!response.ok) throw new Error(`GitHub: ${response.status}`);
+  if (!response.ok) {
+    if (response.status === 401) throw new Error('GITHUB_TOKEN inválido o vencido en Vercel.');
+    throw new Error(`GitHub: ${response.status}`);
+  }
   return response.json();
 }
 
@@ -33,18 +36,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const supplied = String(req.body?.password || '');
     if (!expected || supplied !== expected) return res.status(401).json({ error: 'Clave incorrecta.' });
 
-    // Used by the Admin2 login screen to verify the password without exposing it.
     if (req.method === 'POST' && req.body?.action === 'auth') {
       return res.status(200).json({ ok: true });
     }
 
     const cats = await readCats();
 
+    if (req.method === 'POST' && req.body?.action === 'list') {
+      return res.status(200).json({ cats });
+    }
+
     if (req.method === 'GET') return res.status(200).json({ cats });
 
     if (req.method === 'POST') {
       const cat = req.body?.cat;
-      if (!cat?.id || !cat?.name || !cat?.image) return res.status(400).json({ error: 'Faltan datos del gato.' });
+      if (!cat?.id || !cat?.name) return res.status(400).json({ error: 'Faltan datos del gato.' });
       const next = [...cats.filter((c: any) => c.id !== cat.id), cat];
       const current = await github(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}?ref=${BRANCH}`);
       await github(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}`, {
