@@ -32,7 +32,7 @@ async function readCats() {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    // The public website needs to read the catalog, while write operations stay protected.
+    // The public website needs to read the catalog; only changes require the admin password.
     if (req.method === 'GET') {
       const cats = await readCats();
       return res.status(200).json({ cats });
