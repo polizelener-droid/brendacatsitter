@@ -99,7 +99,7 @@ function mapService(row: Record<string, unknown>): ServiceItem {
   };
 }
 
-function mergeCats(baseCats: CatClient[]): CatClient[] {
+function mergeCats(baseCats: CatClient[], extraCats: CatClient[] = []): CatClient[] {
   const result = [...baseCats];
   const ids = new Set(result.map((cat) => cat.id));
   for (const recovered of RECOVERED_CATS) {
@@ -108,12 +108,30 @@ function mergeCats(baseCats: CatClient[]): CatClient[] {
       ids.add(recovered.id);
     }
   }
+  for (const extra of extraCats) {
+    if (!extra?.id || !extra?.name || ids.has(extra.id)) continue;
+    result.push(extra);
+    ids.add(extra.id);
+  }
   return result;
 }
 
+async function fetchAdminCats(): Promise<CatClient[]> {
+  try {
+    const response = await fetch('/api/cats', { cache: 'no-store' });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return Array.isArray(data?.cats) ? (data.cats as CatClient[]) : [];
+  } catch {
+    return [];
+  }
+}
+
 export async function fetchSiteContent(): Promise<SiteContent> {
+  const adminCats = await fetchAdminCats();
+
   if (!supabase || !isSupabaseConfigured) {
-    return { ...DEFAULT_CONTENT, cats: mergeCats(DEFAULT_CONTENT.cats) };
+    return { ...DEFAULT_CONTENT, cats: mergeCats(DEFAULT_CONTENT.cats, adminCats) };
   }
 
   try {
@@ -140,7 +158,7 @@ export async function fetchSiteContent(): Promise<SiteContent> {
     const hasCompleteRemoteGallery =
       remoteCatsWithImages.length >= DEFAULT_CONTENT.cats.length;
     const baseCats = hasCompleteRemoteGallery ? remoteCatsWithImages : DEFAULT_CONTENT.cats;
-    const cats = mergeCats(baseCats);
+    const cats = mergeCats(baseCats, adminCats);
 
     const testimonials =
       testimonialsRes.data && testimonialsRes.data.length > 0
@@ -161,6 +179,6 @@ export async function fetchSiteContent(): Promise<SiteContent> {
       source: 'remote',
     };
   } catch {
-    return { ...DEFAULT_CONTENT, cats: mergeCats(DEFAULT_CONTENT.cats) };
+    return { ...DEFAULT_CONTENT, cats: mergeCats(DEFAULT_CONTENT.cats, adminCats) };
   }
 }
