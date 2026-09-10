@@ -1,0 +1,1 @@
+Admin2 page added. Route wiring is pending.
