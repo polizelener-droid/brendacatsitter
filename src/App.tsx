@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ContentProvider } from './content/ContentContext';
-import { AdminApp } from './admin/AdminApp';
 import { Admin2Route } from './admin/Admin2Route';
 import { HomePage } from './pages/HomePage';
 import { BudgetPage } from './pages/BudgetPage';
@@ -18,7 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<ContentProvider><HomePage /></ContentProvider>} />
         <Route path="/presupuesto" element={<ContentProvider><BudgetPage /></ContentProvider>} />
-        <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/admin/*" element={<Admin2Route />} />
         <Route path="/admin2" element={<Admin2Route />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
