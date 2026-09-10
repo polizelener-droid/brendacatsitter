@@ -39,7 +39,6 @@ async function readCats() {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    // The public website needs to read the catalog; only changes require the admin password.
     if (req.method === 'GET') {
       const cats = await readCats();
       return res.status(200).json({ cats });
@@ -61,8 +60,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (req.method === 'POST') {
       const cat = req.body?.cat;
+      const catalog = Array.isArray(req.body?.catalog) ? req.body.catalog : [];
       if (!cat?.id || !cat?.name) return res.status(400).json({ error: 'Faltan datos del gato.' });
-      const next = [...cats.filter((c: any) => c.id !== cat.id), cat];
+
+      // If the persistent file is empty, seed it from the complete catalog currently
+      // shown in the admin. This lets legacy cats become editable without losing them.
+      const source = cats.length ? cats : catalog;
+      const next = [...source.filter((c: any) => c?.id && c.id !== cat.id), cat];
+
       const current = await github(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}?ref=${BRANCH}`);
       await github(`/repos/${OWNER}/${REPO}/contents/${DATA_PATH}`, {
         method: 'PUT',
