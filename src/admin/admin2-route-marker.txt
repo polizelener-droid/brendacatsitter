@@ -1,0 +1,1 @@
+admin2 route is configured in App.tsx
