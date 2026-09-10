@@ -100,19 +100,23 @@ function mapService(row: Record<string, unknown>): ServiceItem {
 }
 
 function mergeCats(baseCats: CatClient[], extraCats: CatClient[] = []): CatClient[] {
-  const result = [...baseCats];
+  const overrides = new Map(extraCats.filter((cat) => cat?.id && cat?.name).map((cat) => [cat.id, cat]));
+  const result = baseCats.map((cat) => overrides.get(cat.id) ?? cat);
   const ids = new Set(result.map((cat) => cat.id));
+
   for (const recovered of RECOVERED_CATS) {
     if (!ids.has(recovered.id)) {
-      result.push(recovered);
+      result.push(overrides.get(recovered.id) ?? recovered);
       ids.add(recovered.id);
     }
   }
+
   for (const extra of extraCats) {
     if (!extra?.id || !extra?.name || ids.has(extra.id)) continue;
     result.push(extra);
     ids.add(extra.id);
   }
+
   return result;
 }
 
