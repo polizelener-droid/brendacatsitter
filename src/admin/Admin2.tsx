@@ -60,7 +60,7 @@ export const Admin2: React.FC = () => {
     setSaving(true);
     setStatus('Guardando…');
     try {
-      const r = await fetch('/api/cats', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password, cat: selected }) });
+      const r = await fetch('/api/cats', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password, cat: selected, catalog: cats }) });
       const d = await r.json();
       if (!r.ok) throw new Error(d?.error || 'No se pudo guardar.');
       setCats(mergeAdminCats(d.cats || []));
