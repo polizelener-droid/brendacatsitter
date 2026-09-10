@@ -11,4 +11,5 @@ export const RECOVERED_CATS: CatClient[] = [
   { id: 'tita', name: 'Tita', owner: 'Familia Tita', image: `${RAW}cat_tita_1785293187138.jpg`, story: '', personality: [], favoriteActivity: '', visitsCount: 0 },
   { id: 'uli', name: 'Uli', owner: 'Familia Uli', image: `${RAW}cat_uli_photo_1785334346940.jpg`, story: '', personality: [], favoriteActivity: '', visitsCount: 0 },
   { id: 'una', name: 'Una', owner: 'Familia Una', image: `${RAW}cat_una_photo_1785332514378.jpg`, story: '', personality: [], favoriteActivity: '', visitsCount: 0 },
+  { id: 'platero', name: 'Platero', owner: 'Familia Platero', image: `${RAW}cat_platero_1785260516733.jpg`, story: '', personality: [], favoriteActivity: '', visitsCount: 0 },
 ];
