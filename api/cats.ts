@@ -32,6 +32,12 @@ async function readCats() {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
+    // The public website needs to read the catalog, while write operations stay protected.
+    if (req.method === 'GET') {
+      const cats = await readCats();
+      return res.status(200).json({ cats });
+    }
+
     const expected = process.env.ADMIN2_PASSWORD;
     const supplied = String(req.body?.password || '');
     if (!expected || supplied !== expected) return res.status(401).json({ error: 'Clave incorrecta.' });
@@ -45,8 +51,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method === 'POST' && req.body?.action === 'list') {
       return res.status(200).json({ cats });
     }
-
-    if (req.method === 'GET') return res.status(200).json({ cats });
 
     if (req.method === 'POST') {
       const cat = req.body?.cat;
