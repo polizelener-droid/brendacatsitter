@@ -13,6 +13,7 @@ import {
   SERVICES,
   TESTIMONIALS,
 } from '../data/catData';
+import { RECOVERED_CATS } from '../data/recoveredCats';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
 export type SiteContent = {
@@ -98,9 +99,21 @@ function mapService(row: Record<string, unknown>): ServiceItem {
   };
 }
 
+function mergeCats(baseCats: CatClient[]): CatClient[] {
+  const result = [...baseCats];
+  const ids = new Set(result.map((cat) => cat.id));
+  for (const recovered of RECOVERED_CATS) {
+    if (!ids.has(recovered.id)) {
+      result.push(recovered);
+      ids.add(recovered.id);
+    }
+  }
+  return result;
+}
+
 export async function fetchSiteContent(): Promise<SiteContent> {
   if (!supabase || !isSupabaseConfigured) {
-    return DEFAULT_CONTENT;
+    return { ...DEFAULT_CONTENT, cats: mergeCats(DEFAULT_CONTENT.cats) };
   }
 
   try {
@@ -121,15 +134,13 @@ export async function fetchSiteContent(): Promise<SiteContent> {
         ? hoodsRes.data.map((r) => String(r.name))
         : DEFAULT_CONTENT.neighborhoods;
 
-    // Supabase is the source of truth only when it contains a complete gallery.
-    // If the remote table is empty or only partially populated, keep the local
-    // gallery intact so a transient/incomplete database state cannot hide cats.
     const remoteCats =
       catsRes.data && catsRes.data.length > 0 ? catsRes.data.map(mapCat) : [];
     const remoteCatsWithImages = remoteCats.filter((c) => c.image);
     const hasCompleteRemoteGallery =
       remoteCatsWithImages.length >= DEFAULT_CONTENT.cats.length;
-    const cats = hasCompleteRemoteGallery ? remoteCatsWithImages : DEFAULT_CONTENT.cats;
+    const baseCats = hasCompleteRemoteGallery ? remoteCatsWithImages : DEFAULT_CONTENT.cats;
+    const cats = mergeCats(baseCats);
 
     const testimonials =
       testimonialsRes.data && testimonialsRes.data.length > 0
@@ -150,6 +161,6 @@ export async function fetchSiteContent(): Promise<SiteContent> {
       source: 'remote',
     };
   } catch {
-    return DEFAULT_CONTENT;
+    return { ...DEFAULT_CONTENT, cats: mergeCats(DEFAULT_CONTENT.cats) };
   }
 }
