@@ -5,7 +5,6 @@ import { AboutSection } from '../components/AboutSection';
 import { ServicesSection } from '../components/ServicesSection';
 import { WhyHomeCareSection } from '../components/WhyHomeCareSection';
 import { BookingStepsSection } from '../components/BookingStepsSection';
-import { CatGallerySection } from '../components/CatGallerySection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
 import { FaqSection } from '../components/FaqSection';
 import { ContactSection } from '../components/ContactSection';
@@ -71,9 +70,6 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
           <ServicesSection />
-        </div>
-        <div className="scroll-reveal" data-scroll-reveal>
-          <CatGallerySection />
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
           <TestimonialsSection />
