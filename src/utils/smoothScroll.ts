@@ -1,6 +1,6 @@
 let activeScroll: number | null = null;
 
-/** Responsive ease-out scroll — starts right away, soft landing */
+/** Smooth in-page scroll for clicks — slower ease-in-out, native wheel stays untouched */
 export function smoothScrollTo(targetY: number) {
   if (activeScroll !== null) {
     cancelAnimationFrame(activeScroll);
@@ -20,16 +20,16 @@ export function smoothScrollTo(targetY: number) {
     return;
   }
 
-  // Short jumps = quick; long jumps = a bit longer, still snappy
-  const duration = Math.min(380, Math.max(180, Math.abs(distance) * 0.28));
+  // Click jumps should feel unhurried; wheel scrolling stays native.
+  const duration = Math.min(1000, Math.max(560, Math.abs(distance) * 0.52));
   const startTime = performance.now();
 
-  // Ease-out cubic: moves immediately, decelerates at the end
-  const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+  const easeInOutCubic = (t: number) =>
+    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
   const step = (now: number) => {
     const progress = Math.min((now - startTime) / duration, 1);
-    window.scrollTo(0, startY + distance * easeOutCubic(progress));
+    window.scrollTo(0, startY + distance * easeInOutCubic(progress));
     if (progress < 1) {
       activeScroll = requestAnimationFrame(step);
     } else {
@@ -53,4 +53,14 @@ export function scrollToHash(hash: string, headerOffset = 88) {
 
   const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
   smoothScrollTo(Math.max(0, top));
+}
+
+export function handleHashLinkClick(
+  event: { preventDefault: () => void },
+  href: string,
+) {
+  event.preventDefault();
+  scrollToHash(href);
+  if (href && href !== '#') history.replaceState(null, '', href);
+  else history.replaceState(null, '', window.location.pathname);
 }

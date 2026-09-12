@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { CAT_CLIENTS, type CatClient } from '../data/catData';
 import { useContent } from '../content/ContentContext';
 import { ChevronLeft, ChevronRight, Grid2X2, Images, X } from 'lucide-react';
@@ -12,6 +13,29 @@ export const CatGallerySection: React.FC = () => {
   const gridRef = useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = useState<GalleryView>('multiple');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+
+  const selectedCat = selectedPhotoIndex === null ? null : cats[selectedPhotoIndex];
+
+  useEffect(() => {
+    if (selectedPhotoIndex === null) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedPhotoIndex(null);
+      if (event.key === 'ArrowLeft') {
+        setSelectedPhotoIndex((index) => (index === null ? index : (index - 1 + cats.length) % cats.length));
+      }
+      if (event.key === 'ArrowRight') {
+        setSelectedPhotoIndex((index) => (index === null ? index : (index + 1) % cats.length));
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [selectedPhotoIndex, cats.length]);
 
   if (!cats.length) return null;
 
@@ -91,16 +115,50 @@ export const CatGallerySection: React.FC = () => {
           )}
         </div>
 
-        {selectedPhotoIndex !== null && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm" onClick={() => setSelectedPhotoIndex(null)}>
-            <button type="button" onClick={() => setSelectedPhotoIndex(null)} aria-label="Cerrar imagen" className="absolute right-4 top-4 z-50 rounded-full bg-white/20 p-2.5 text-white transition hover:bg-white/30">
+        {selectedCat && createPortal(
+          <div
+            className="fixed inset-0 z-[120] flex h-dvh w-screen items-center justify-center bg-black/92 p-3 sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Foto de ${selectedCat.name}`}
+            onClick={() => setSelectedPhotoIndex(null)}
+          >
+            <button type="button" onClick={() => setSelectedPhotoIndex(null)} aria-label="Cerrar imagen" className="absolute right-4 top-4 z-10 rounded-full bg-white/15 p-2.5 text-white transition hover:bg-white/25">
               <X className="h-6 w-6" aria-hidden="true" />
             </button>
-            <div className="flex max-h-[88vh] max-w-3xl flex-col items-center" onClick={(event) => event.stopPropagation()}>
-              <img src={cats[selectedPhotoIndex].image} alt={cats[selectedPhotoIndex].name} referrerPolicy="no-referrer" className="max-h-[78vh] max-w-full rounded-2xl object-contain shadow-2xl" />
-              <h3 className="mt-3 font-display text-xl font-bold text-white">{cats[selectedPhotoIndex].name}</h3>
-            </div>
-          </div>
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setSelectedPhotoIndex((index) => (index === null ? index : (index - 1 + cats.length) % cats.length));
+              }}
+              aria-label="Foto anterior"
+              className="absolute left-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25 sm:flex"
+            >
+              <ChevronLeft className="h-6 w-6" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setSelectedPhotoIndex((index) => (index === null ? index : (index + 1) % cats.length));
+              }}
+              aria-label="Foto siguiente"
+              className="absolute right-3 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25 sm:flex"
+            >
+              <ChevronRight className="h-6 w-6" aria-hidden="true" />
+            </button>
+            <figure className="flex h-full w-full max-w-6xl flex-col items-center justify-center gap-3" onClick={(event) => event.stopPropagation()}>
+              <img
+                src={selectedCat.image}
+                alt={selectedCat.name}
+                referrerPolicy="no-referrer"
+                className="max-h-[min(86dvh,920px)] max-w-[min(96vw,1100px)] rounded-2xl object-contain shadow-2xl"
+              />
+              <figcaption className="font-display text-lg font-bold text-white sm:text-2xl">{selectedCat.name}</figcaption>
+            </figure>
+          </div>,
+          document.body,
         )}
       </div>
     </section>

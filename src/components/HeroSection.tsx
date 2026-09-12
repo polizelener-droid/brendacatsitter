@@ -1,5 +1,6 @@
 import React from 'react';
 import { Camera, Clock, Heart, MessageCircle, PawPrint } from 'lucide-react';
+import { handleHashLinkClick } from '../utils/smoothScroll';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -40,12 +41,14 @@ export const HeroSection: React.FC = () => {
         <div className="hero-intro-item hero-intro-5 mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <a
             href="#zonas-presupuesto"
+            onClick={(e) => handleHashLinkClick(e, '#zonas-presupuesto')}
             className="inline-flex items-center justify-center rounded-2xl bg-[#275240] px-5 py-3.5 text-sm font-extrabold text-white shadow-md transition-transform hover:-translate-y-0.5"
           >
             Ver zonas y presupuesto
           </a>
           <a
             href="#contacto"
+            onClick={(e) => handleHashLinkClick(e, '#contacto')}
             className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#275240]/15 bg-[#eef2eb] px-5 py-3.5 text-sm font-extrabold text-[#275240] shadow-sm transition-colors hover:bg-[#e5ebe1]"
           >
             Escribime por WhatsApp

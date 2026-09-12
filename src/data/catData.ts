@@ -79,9 +79,9 @@ export const CONTACT_INFO: ContactInfo = {
   email: 'brendacatsitter@gmail.com',
   instagram: 'brendacatsitter',
   instagramUrl: 'https://www.instagram.com/brendacatsitter/',
-  tiktok: 'brendanusynkier',
-  tiktokUrl: 'https://www.tiktok.com/@brendanusynkier?lang=es',
-  whatsappBaseMessage: 'Hola Brenda! Me gustaría consultar disponibilidad y tarifas para el cuidado de mi gato',
+  tiktok: 'brendacatsitter',
+  tiktokUrl: 'https://www.tiktok.com/@brendacatsitter?lang=es',
+  whatsappBaseMessage: 'Hola Brenda! Me gustaría consultar disponibilidad y tarifas para el cuidado de mi gato :)',
 };
 
 export const CAT_CLIENTS: CatClient[] = [
@@ -504,6 +504,19 @@ export const COVERAGE_NEIGHBORHOODS = [
   'Villa Urquiza',
   'Colegiales',
   'Vicente López',
+  'Florida',
+  'Villa Pueyrredón',
+  'Coghlan',
+  'Olivos',
+  'Puerto Madero',
+  'Villa Devoto',
+  'Villa Real',
+  'Villa Martelli',
+  'Almagro',
+  'Recoleta',
+  'Palermo',
+  'Villa Crespo',
+  'Sáenz Peña',
 ];
 
 export const FAQS: FaqItem[] = [

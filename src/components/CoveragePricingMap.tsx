@@ -51,6 +51,10 @@ const coverageTiles: NeighborhoodTile[] = [
   { name: 'Caballito', zone: 'zone2' },
   { name: 'San Isidro', zone: 'zone2' },
   { name: 'La Lucila', zone: 'zone2' },
+  { name: 'Olivos', zone: 'zone1' },
+  { name: 'Villa Martelli', zone: 'zone1' },
+  { name: 'Puerto Madero', zone: 'zone2' },
+  { name: 'Sáenz Peña', zone: 'zone2' },
 ];
 
 const zones = [

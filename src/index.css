@@ -2,42 +2,14 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
   }
 
   body {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     background-color: #d7dfd2;
     color: #275240;
-    overflow-x: hidden;
-    overflow-y: visible;
-  }
-
-  #root {
-    overflow: visible;
-  }
-
-  /* Hide any internal/page scrollbar and keep only the browser scrollbar */
-  body,
-  body * {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  body::-webkit-scrollbar,
-  body *::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+    overflow-x: clip;
   }
 
   h1, h2, h3, .font-display {
@@ -102,7 +74,6 @@
   transition:
     opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
 }
 
 .scroll-reveal-active .scroll-reveal.is-visible {

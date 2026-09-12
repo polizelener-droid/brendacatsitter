@@ -29,6 +29,10 @@ const neighborhoods: Neighborhood[] = [
   { name: 'La Paternal', zone: 'zone2' },
   { name: 'Almagro', zone: 'zone2' },
   { name: 'Villa Real', zone: 'zone2' },
+  { name: 'Olivos', zone: 'zone1' },
+  { name: 'Villa Martelli', zone: 'zone1' },
+  { name: 'Puerto Madero', zone: 'zone2' },
+  { name: 'Sáenz Peña', zone: 'zone2' },
 ];
 
 const zoneStyles: Record<ZoneKey, string> = {

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { HeaderNav } from '../components/HeaderNav';
 import { HeroSection } from '../components/HeroSection';
 import { AboutSection } from '../components/AboutSection';
+import { CatGallerySection } from '../components/CatGallerySection';
 import { ServicesSection } from '../components/ServicesSection';
 import { WhyHomeCareSection } from '../components/WhyHomeCareSection';
 import { BookingStepsSection } from '../components/BookingStepsSection';
@@ -61,6 +62,9 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
           <AboutSection />
+        </div>
+        <div className="scroll-reveal" data-scroll-reveal>
+          <CatGallerySection />
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
           <WhyHomeCareSection />

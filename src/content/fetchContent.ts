@@ -100,7 +100,10 @@ function mapService(row: Record<string, unknown>): ServiceItem {
 }
 
 function mergeCats(baseCats: CatClient[], extraCats: CatClient[] = []): CatClient[] {
-  const overrides = new Map(extraCats.filter((cat) => cat?.id && cat?.name).map((cat) => [cat.id, cat]));
+  const extras = extraCats.filter((cat) => cat?.id && cat?.name);
+  if (extras.filter((cat) => cat.image).length >= 20) return extras;
+
+  const overrides = new Map(extras.map((cat) => [cat.id, cat]));
   const result = baseCats.map((cat) => overrides.get(cat.id) ?? cat);
   const ids = new Set(result.map((cat) => cat.id));
 
@@ -111,8 +114,8 @@ function mergeCats(baseCats: CatClient[], extraCats: CatClient[] = []): CatClien
     }
   }
 
-  for (const extra of extraCats) {
-    if (!extra?.id || !extra?.name || ids.has(extra.id)) continue;
+  for (const extra of extras) {
+    if (ids.has(extra.id)) continue;
     result.push(extra);
     ids.add(extra.id);
   }
