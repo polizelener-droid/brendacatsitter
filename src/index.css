@@ -22,6 +22,12 @@
   background-color: #f1f4ed !important;
 }
 
+/* Cat grid: use the main page scroll instead of an inner scrolling box */
+#fotos .grid {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
 /* Clean first-load entrance: no full-screen splash */
 .hero-intro-item {
   opacity: 0;
