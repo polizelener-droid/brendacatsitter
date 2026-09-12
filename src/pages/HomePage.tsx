@@ -64,9 +64,6 @@ export const HomePage: React.FC = () => {
           <AboutSection />
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
-          <CatGallerySection />
-        </div>
-        <div className="scroll-reveal" data-scroll-reveal>
           <WhyHomeCareSection />
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
@@ -77,6 +74,9 @@ export const HomePage: React.FC = () => {
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
           <TestimonialsSection />
+        </div>
+        <div className="scroll-reveal" data-scroll-reveal>
+          <CatGallerySection />
         </div>
         <div className="scroll-reveal" data-scroll-reveal>
           <FaqSection />
