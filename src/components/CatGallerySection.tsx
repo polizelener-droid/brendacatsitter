@@ -5,16 +5,24 @@ import { useContent } from '../content/ContentContext';
 import { ChevronLeft, ChevronRight, Grid2X2, Images, X } from 'lucide-react';
 
 type GalleryView = 'multiple' | 'grid';
+const INITIAL_VISIBLE_CATS = 12;
+const CATS_PER_LOAD = 12;
 
 export const CatGallerySection: React.FC = () => {
   const { cats: remoteCats } = useContent();
   const cats = remoteCats?.length ? remoteCats : CAT_CLIENTS;
   const trackRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = useState<GalleryView>('multiple');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_CATS);
 
   const selectedCat = selectedPhotoIndex === null ? null : cats[selectedPhotoIndex];
+  const visibleCats = cats.slice(0, visibleCount);
+  const allCatsVisible = visibleCount >= cats.length;
+
+  useEffect(() => {
+    setVisibleCount(Math.min(INITIAL_VISIBLE_CATS, cats.length));
+  }, [cats.length]);
 
   useEffect(() => {
     if (selectedPhotoIndex === null) return;
@@ -109,9 +117,37 @@ export const CatGallerySection: React.FC = () => {
               <p className="mt-2 text-center text-[11px] text-[#275240]/45 sm:hidden">Deslizá para ver más</p>
             </div>
           ) : (
-            <div ref={gridRef} className="grid max-h-[540px] grid-cols-2 gap-3 overflow-y-auto pr-1 scroll-smooth scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:max-h-[620px] sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-              {cats.map((cat: CatClient, index: number) => <CatCard key={cat.id} cat={cat} index={index} />)}
-            </div>
+            <>
+              <div className="grid grid-cols-2 gap-3 pr-1 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+                {visibleCats.map((cat: CatClient, index: number) => <CatCard key={cat.id} cat={cat} index={index} />)}
+              </div>
+
+              {cats.length > INITIAL_VISIBLE_CATS && (
+                <div className="mt-6 flex flex-col items-center gap-2">
+                  {!allCatsVisible ? (
+                    <button
+                      type="button"
+                      onClick={() => setVisibleCount((count) => Math.min(count + CATS_PER_LOAD, cats.length))}
+                      className="rounded-full bg-[#275240] px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      Ver más michis 🐾
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setVisibleCount(INITIAL_VISIBLE_CATS);
+                        document.getElementById('fotos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
+                      className="rounded-full border border-[#275240]/20 bg-[#e2e8dc] px-6 py-3 text-sm font-bold text-[#275240] transition hover:bg-[#d7dfd2]"
+                    >
+                      Mostrar menos
+                    </button>
+                  )}
+                  <span className="text-[11px] text-[#275240]/50">Mostrando {Math.min(visibleCount, cats.length)} de {cats.length}</span>
+                </div>
+              )}
+            </>
           )}
         </div>
 
