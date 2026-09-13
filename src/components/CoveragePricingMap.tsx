@@ -20,7 +20,7 @@ const coverageTiles: NeighborhoodTile[] = [
   { name: 'Vicente López', zone: 'zone1' }, { name: 'Florida', zone: 'zone1' }, { name: 'Saavedra', zone: 'zone1' }, { name: 'Núñez', zone: 'zone1' }, { name: 'Belgrano', zone: 'zone1' }, { name: 'Villa Pueyrredón', zone: 'zone1' },
   { name: 'Villa Urquiza', zone: 'zone1' }, { name: 'Coghlan', zone: 'zone1' }, { name: 'Colegiales', zone: 'zone1' }, { name: 'Olivos', zone: 'zone1' }, { name: 'Villa Martelli', zone: 'zone1' },
   { name: 'Palermo', zone: 'zone2' }, { name: 'Sáenz Peña', zone: 'zone2' }, { name: 'Recoleta', zone: 'zone2' }, { name: 'Villa Ortúzar', zone: 'zone2' }, { name: 'Villa Crespo', zone: 'zone2' }, { name: 'Chacarita', zone: 'zone2' }, { name: 'Villa Devoto', zone: 'zone2' },
-  { name: 'Parque Chas', zone: 'zone2' }, { name: 'Agronomía', zone: 'zone2' }, { name: 'La Paternal', zone: 'zone2' }, { name: 'Almagro', zone: 'zone2' }, { name: 'Villa Real', zone: 'zone2' }, { name: 'Caballito', zone: 'zone2' }, { name: 'San Isidro', zone: 'zone2' }, { name: 'La Lucila', zone: 'zone2' }, { name: 'Puerto Madero', zone: 'zone2' },
+  { name: 'Parque Chas', zone: 'zone2' }, { name: 'Agronomía', zone: 'zone2' }, { name: 'La Paternal', zone: 'zone2' }, { name: 'Almagro', zone: 'zone2' }, { name: 'Villa Real', zone: 'zone2' }, { name: 'Caballito', zone: 'zone2' }, { name: 'San Isidro', zone: 'zone2' }, { name: 'La Lucila', zone: 'zone2' }, { name: 'Santos Lugares', zone: 'zone2' }, { name: 'Puerto Madero', zone: 'zone2' },
 ];
 
 const zones = [
