@@ -24,6 +24,7 @@ export const HeaderNav: React.FC = () => {
     { name: 'Qué incluye', href: '#incluye' },
     { name: 'Cómo reservar', href: '#como-reservar' },
     { name: 'Zonas y presupuesto', href: '#zonas-presupuesto' },
+    { name: 'Michis cuidados', href: '#fotos' },
     { name: 'Reseñas', href: '#resenas' },
     { name: 'Contacto', href: '#contacto' },
   ];
