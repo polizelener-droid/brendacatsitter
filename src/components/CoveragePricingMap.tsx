@@ -24,7 +24,7 @@ const coverageTiles: NeighborhoodTile[] = [
 ];
 
 const zones = [
-  { key: 'zone1' as const, name: 'Zona 1 · Bren', prices: [['Lunes a viernes', '$18.000'], ['Sábados', '$21.000'], ['Domingos y feriados', '$25.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%201.' },
+  { key: 'zone1' as const, name: 'Zona 1 · Bren', prices: [['Lunes a viernes', '$20.000'], ['Sábados', '$24.000'], ['Domingos y feriados', '$28.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%201.' },
   { key: 'zone2' as const, name: 'Zona 2 · Poli', prices: [['Lunes a viernes', '$20.000'], ['Sábados', '$23.000'], ['Domingos y feriados', '$27.000']], contactName: 'Poli', whatsappUrl: 'https://wa.me/5491166906291?text=Hola%20Poli%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%202.' },
 ];
 
