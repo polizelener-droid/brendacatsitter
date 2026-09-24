@@ -26,10 +26,10 @@ export const BudgetCalculatorSection: React.FC = () => {
   const [viewDate, setViewDate] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
 
-  const prices = useMemo(() => {
+  const getPriceForDate = (date: Date) => {
     const surcharge = ZONE_SURCHARGE[zone];
     const pricingStart = new Date(2026, 10, 1);
-    const isNovemberOrLater = today >= pricingStart;
+    const isNovemberOrLater = date >= pricingStart;
     const base = isNovemberOrLater
       ? { weekday: 20_000, saturday: 24_000, sundayHoliday: 28_000 }
       : {
@@ -42,14 +42,25 @@ export const BudgetCalculatorSection: React.FC = () => {
       saturday: base.saturday + surcharge,
       sundayHoliday: base.sundayHoliday + surcharge,
     };
-  }, [rates.weekday, rates.saturday, rates.sundayHoliday, zone, today.getTime()]);
+  };
+
+  const prices = useMemo(() => getPriceForDate(today), [rates.weekday, rates.saturday, rates.sundayHoliday, zone, today.getTime()]);
   const selectedDateObjects = useMemo(() => selectedDates.map(dateFromKey).sort((a, b) => a.getTime() - b.getTime()), [selectedDates]);
   const counts = useMemo(() => selectedDateObjects.reduce((acc, date) => { const key = dateKey(date.getFullYear(), date.getMonth(), date.getDate()); const dayOfWeek = date.getDay(); if (dayOfWeek === 0 || ARGENTINA_HOLIDAYS_2026[key]) acc.sundaysAndHolidays += 1; else if (dayOfWeek === 6) acc.saturdays += 1; else acc.weekdays += 1; return acc; }, { weekdays: 0, saturdays: 0, sundaysAndHolidays: 0 }), [selectedDateObjects]);
   const totalDays = selectedDates.length;
   const exceedsDayLimit = totalDays > MAX_TOTAL_DAYS;
   const extraCats = Math.max(0, cats - 3);
   const extraPerVisit = extraCats * EXTRA_CAT_RATE;
-  const total = counts.weekdays * (prices.weekday + extraPerVisit) + counts.saturdays * (prices.saturday + extraPerVisit) + counts.sundaysAndHolidays * (prices.sundayHoliday + extraPerVisit);
+  const total = selectedDateObjects.reduce((sum, date) => {
+    const datePrices = getPriceForDate(date);
+    const dayOfWeek = date.getDay();
+    const price = dayOfWeek === 0 || ARGENTINA_HOLIDAYS_2026[dateKey(date.getFullYear(), date.getMonth(), date.getDate())]
+      ? datePrices.sundayHoliday
+      : dayOfWeek === 6
+        ? datePrices.saturday
+        : datePrices.weekday;
+    return sum + price + extraPerVisit;
+  }, 0);
   const whatsappNumber = zone === 1 ? '5491161386748' : '5491166906291';
   const contactName = zone === 1 ? 'Bren' : 'Poli';
   const selectedDatesText = selectedDateObjects.length ? selectedDateObjects.map((date) => date.toLocaleDateString('es-AR')).join(', ') : 'Todavía no seleccioné fechas';
