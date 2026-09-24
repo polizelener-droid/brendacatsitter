@@ -64,7 +64,7 @@ export const BudgetCalculatorSection: React.FC = () => {
   const whatsappNumber = zone === 1 ? '5491161386748' : '5491166906291';
   const contactName = zone === 1 ? 'Bren' : 'Poli';
   const selectedDatesText = selectedDateObjects.length ? selectedDateObjects.map((date) => date.toLocaleDateString('es-AR')).join(', ') : 'Todavía no seleccioné fechas';
-  const whatsappMessage = [`Hola ${contactName}! Calculé un presupuesto desde la página web.`, `• Zona de cobertura: Zona ${zone}`, `• Cantidad de gatos: ${cats}`, `• Fechas elegidas: ${selectedDatesText}`, `• Presupuesto estimado desde: ${formatPesos(total)}`, 'Quería consultar disponibilidad y confirmar el valor final.'].join('\n');
+  const whatsappMessage = [`Hola ${contactName}! Calculé un presupuesto desde la página web.`, `• Zona de cobertura: Zona ${zone}`, `• Cantidad de gatos: ${cats}`, `• Fechas elegidas: ${selectedDatesText}`, `• Presupuesto estimado: ${formatPesos(total)}`, 'Quería consultar disponibilidad y confirmar el valor final.'].join('\n');
   const whatsappUrl = buildWhatsAppUrl(whatsappNumber, whatsappMessage);
   const year = viewDate.getFullYear(); const month = viewDate.getMonth(); const firstDay = new Date(year, month, 1); const daysInMonth = new Date(year, month + 1, 0).getDate(); const mondayFirstOffset = (firstDay.getDay() + 6) % 7;
   const calendarCells = Array.from({ length: mondayFirstOffset + daysInMonth }, (_, index) => index < mondayFirstOffset ? null : index - mondayFirstOffset + 1);
