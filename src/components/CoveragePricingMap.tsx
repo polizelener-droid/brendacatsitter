@@ -24,8 +24,8 @@ const coverageTiles: NeighborhoodTile[] = [
 ];
 
 const zones = [
-  { key: 'zone1' as const, name: 'Zona 1 · Bren · desde noviembre', prices: [['Lunes a viernes', '$20.000'], ['Sábados', '$24.000'], ['Domingos y feriados', '$28.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%201.' },
-  { key: 'zone2' as const, name: 'Zona 2 · Bren · desde noviembre', prices: [['Lunes a viernes', '$22.000'], ['Sábados', '$26.000'], ['Domingos y feriados', '$30.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%202.' },
+  { key: 'zone1' as const, name: 'Zona 1 · Bren', prices: [['Lunes a viernes', '$18.000'], ['Sábados', '$21.000'], ['Domingos y feriados', '$25.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%201.' },
+  { key: 'zone2' as const, name: 'Zona 2 · Bren', prices: [['Lunes a viernes', '$20.000'], ['Sábados', '$23.000'], ['Domingos y feriados', '$27.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%202.' },
 ];
 
 const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => <div className={`inline-flex min-h-10 items-center justify-center rounded-2xl border px-3.5 py-2 text-center text-[11px] font-extrabold leading-tight sm:text-xs ${zoneStyles[tile.zone].tile}`}>{tile.name}</div>;
@@ -54,7 +54,7 @@ export const CoveragePricingMap: React.FC = () => {
           </div>)}
         </div>
       </div>
-      <div className="mt-5 flex flex-col gap-1.5 border-t border-[#275240]/10 pt-4 text-xs text-[#275240]/70 sm:flex-row sm:items-center sm:justify-between"><span className="inline-flex items-center gap-2 font-bold text-[#275240]"><Clock3 className="h-4 w-4" aria-hidden="true" /> Mis tarifas son por visitas de 45 minutos</span><span>Si tu barrio no aparece, consultame de todas formas.</span></div>
+      <div className="mt-5 flex flex-col gap-1.5 border-t border-[#275240]/10 pt-4 text-xs text-[#275240]/70 sm:flex-row sm:items-center sm:justify-between"><span className="inline-flex items-center gap-2 font-bold text-[#275240]"><Clock3 className="h-4 w-4" aria-hidden="true" /> Mis tarifas son por visitas de 45 minutos</span><span>Si tu barrio no aparece, consultame de todas formas.</span><span className="font-bold text-[#275240]">Desde noviembre cambian las tarifas.</span></div>
       <BudgetCalculatorSection />
     </div>
   );
