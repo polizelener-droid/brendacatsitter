@@ -24,8 +24,8 @@ const coverageTiles: NeighborhoodTile[] = [
 ];
 
 const zones = [
-  { key: 'zone1' as const, name: 'Zona 1 · Bren', prices: [['Lunes a viernes', '$20.000'], ['Sábados', '$24.000'], ['Domingos y feriados', '$28.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%201.' },
-  { key: 'zone2' as const, name: 'Zona 2 · Poli', prices: [['Lunes a viernes', '$20.000'], ['Sábados', '$24.000'], ['Domingos y feriados', '$28.000']], contactName: 'Poli', whatsappUrl: 'https://wa.me/5491166906291?text=Hola%20Poli%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%202.' },
+  { key: 'zone1' as const, name: 'Zona 1 · Bren · desde noviembre', prices: [['Lunes a viernes', '$20.000'], ['Sábados', '$24.000'], ['Domingos y feriados', '$28.000']], contactName: 'Bren', whatsappUrl: 'https://wa.me/5491161386748?text=Hola%20Bren%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%201.' },
+  { key: 'zone2' as const, name: 'Zona 2 · Poli · desde noviembre', prices: [['Lunes a viernes', '$22.000'], ['Sábados', '$26.000'], ['Domingos y feriados', '$30.000']], contactName: 'Poli', whatsappUrl: 'https://wa.me/5491166906291?text=Hola%20Poli%2C%20quer%C3%ADa%20consultar%20disponibilidad%20para%20la%20Zona%202.' },
 ];
 
 const Tile: React.FC<{ tile: NeighborhoodTile }> = ({ tile }) => <div className={`inline-flex min-h-10 items-center justify-center rounded-2xl border px-3.5 py-2 text-center text-[11px] font-extrabold leading-tight sm:text-xs ${zoneStyles[tile.zone].tile}`}>{tile.name}</div>;
@@ -34,7 +34,7 @@ export const CoveragePricingMap: React.FC = () => {
   return (
     <div id="zonas-presupuesto" className="mt-6 scroll-mt-24 rounded-[2rem] border border-[#275240]/12 bg-white p-5 shadow-sm sm:p-7">
       <h3 className="font-display text-2xl font-extrabold text-[#275240] sm:text-3xl">Zonas, tarifas y presupuesto</h3>
-      <p className="mt-1.5 text-xs text-[#275240]/60 sm:text-sm">Buscá tu zona, revisá mi tarifa por visita de 45 minutos y calculá un valor estimado para tu servicio.</p>
+      <p className="mt-1.5 text-xs text-[#275240]/60 sm:text-sm">Buscá tu zona, revisá las tarifas por visita de 45 minutos y calculá un valor estimado para tu servicio.</p>
       <div className="mt-5 grid items-start gap-5 lg:grid-cols-[1.3fr_1fr]">
         <div>
           <div className="relative overflow-hidden rounded-3xl border border-[#275240]/10 bg-[#f7f7f3] p-4">
