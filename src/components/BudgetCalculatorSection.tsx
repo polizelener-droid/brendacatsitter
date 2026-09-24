@@ -26,7 +26,23 @@ export const BudgetCalculatorSection: React.FC = () => {
   const [viewDate, setViewDate] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
 
-  const prices = useMemo(() => { const surcharge = ZONE_SURCHARGE[zone]; return { weekday: parseArgentinePrice(rates.weekday, 18_000) + surcharge, saturday: parseArgentinePrice(rates.saturday, 21_000) + surcharge, sundayHoliday: parseArgentinePrice(rates.sundayHoliday, 25_000) + surcharge }; }, [rates.weekday, rates.saturday, rates.sundayHoliday, zone]);
+  const prices = useMemo(() => {
+    const surcharge = ZONE_SURCHARGE[zone];
+    const pricingStart = new Date(2026, 10, 1);
+    const isNovemberOrLater = today >= pricingStart;
+    const base = isNovemberOrLater
+      ? { weekday: 20_000, saturday: 24_000, sundayHoliday: 28_000 }
+      : {
+          weekday: parseArgentinePrice(rates.weekday, 18_000),
+          saturday: parseArgentinePrice(rates.saturday, 21_000),
+          sundayHoliday: parseArgentinePrice(rates.sundayHoliday, 25_000),
+        };
+    return {
+      weekday: base.weekday + surcharge,
+      saturday: base.saturday + surcharge,
+      sundayHoliday: base.sundayHoliday + surcharge,
+    };
+  }, [rates.weekday, rates.saturday, rates.sundayHoliday, zone, today.getTime()]);
   const selectedDateObjects = useMemo(() => selectedDates.map(dateFromKey).sort((a, b) => a.getTime() - b.getTime()), [selectedDates]);
   const counts = useMemo(() => selectedDateObjects.reduce((acc, date) => { const key = dateKey(date.getFullYear(), date.getMonth(), date.getDate()); const dayOfWeek = date.getDay(); if (dayOfWeek === 0 || ARGENTINA_HOLIDAYS_2026[key]) acc.sundaysAndHolidays += 1; else if (dayOfWeek === 6) acc.saturdays += 1; else acc.weekdays += 1; return acc; }, { weekdays: 0, saturdays: 0, sundaysAndHolidays: 0 }), [selectedDateObjects]);
   const totalDays = selectedDates.length;
