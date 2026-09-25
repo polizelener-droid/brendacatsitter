@@ -10,7 +10,7 @@ const CATS_PER_LOAD = 20;
 
 export const CatGallerySection: React.FC = () => {
   const { cats: remoteCats } = useContent();
-  const cats = remoteCats?.length ? remoteCats : CAT_CLIENTS;
+  const cats = [...(remoteCats?.length ? remoteCats : CAT_CLIENTS)].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
   const trackRef = useRef<HTMLDivElement>(null);
   const [viewMode, setViewMode] = useState<GalleryView>('multiple');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
