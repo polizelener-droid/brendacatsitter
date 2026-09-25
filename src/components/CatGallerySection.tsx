@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CAT_CLIENTS, type CatClient } from '../data/catData';
 import { useContent } from '../content/ContentContext';
-import { ChevronLeft, ChevronRight, Grid2X2, Images, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Grid2X2, Images, Search, X } from 'lucide-react';
 
 type GalleryView = 'multiple' | 'grid';
 const INITIAL_VISIBLE_CATS = 12;
@@ -15,14 +15,23 @@ export const CatGallerySection: React.FC = () => {
   const [viewMode, setViewMode] = useState<GalleryView>('multiple');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_CATS);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const selectedCat = selectedPhotoIndex === null ? null : cats[selectedPhotoIndex];
-  const visibleCats = cats.slice(0, visibleCount);
-  const allCatsVisible = visibleCount >= cats.length;
+  const normalizeText = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const normalizedQuery = normalizeText(searchQuery.trim());
+  const filteredCats = normalizedQuery ? cats.filter((cat) => normalizeText(cat.name).includes(normalizedQuery)) : cats;
+  const visibleCats = filteredCats.slice(0, visibleCount);
+  const allCatsVisible = visibleCount >= filteredCats.length;
 
   useEffect(() => {
     setVisibleCount(Math.min(INITIAL_VISIBLE_CATS, cats.length));
+    setSearchQuery('');
   }, [cats.length]);
+
+  useEffect(() => {
+    setVisibleCount(Math.min(INITIAL_VISIBLE_CATS, filteredCats.length));
+  }, [normalizedQuery, filteredCats.length]);
 
   useEffect(() => {
     if (selectedPhotoIndex === null) return;
@@ -103,13 +112,28 @@ export const CatGallerySection: React.FC = () => {
             </div>
           </div>
 
+          <div className="mb-5 max-w-xl">
+            <label htmlFor="cat-search" className="mb-2 block text-xs font-bold text-[#275240] sm:text-sm">Buscá a tu gatito</label>
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#275240]/50" aria-hidden="true" />
+              <input
+                id="cat-search"
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Escribí el nombre de tu gato..."
+                className="w-full rounded-full border border-[#275240]/15 bg-[#e2e8dc]/45 py-3 pl-10 pr-4 text-sm text-[#275240] outline-none transition placeholder:text-[#275240]/40 focus:border-[#275240]/35 focus:bg-white focus:ring-2 focus:ring-[#275240]/10"
+              />
+            </div>
+          </div>
+
           {viewMode === 'multiple' ? (
             <div className="relative">
               <button type="button" onClick={() => scrollCards('left')} aria-label="Ver michis anteriores" className="absolute -left-2 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#275240]/15 bg-white text-[#275240] shadow-sm transition hover:bg-[#e2e8dc] sm:flex">
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
               </button>
               <div ref={trackRef} className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 pr-5 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-4 sm:px-5 sm:pr-5">
-                {cats.map((cat: CatClient, index: number) => <CatCard key={cat.id} cat={cat} index={index} compact />)}
+                {filteredCats.map((cat: CatClient) => <CatCard key={cat.id} cat={cat} index={cats.indexOf(cat)} compact />)}
               </div>
               <button type="button" onClick={() => scrollCards('right')} aria-label="Ver más michis" className="absolute -right-2 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#275240]/15 bg-white text-[#275240] shadow-sm transition hover:bg-[#e2e8dc] sm:flex">
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
@@ -119,15 +143,15 @@ export const CatGallerySection: React.FC = () => {
           ) : (
             <>
               <div className="grid grid-cols-2 gap-3 pr-1 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-                {visibleCats.map((cat: CatClient, index: number) => <CatCard key={cat.id} cat={cat} index={index} />)}
+                {visibleCats.map((cat: CatClient) => <CatCard key={cat.id} cat={cat} index={cats.indexOf(cat)} />)}
               </div>
 
-              {cats.length > INITIAL_VISIBLE_CATS && (
+              {filteredCats.length > INITIAL_VISIBLE_CATS && (
                 <div className="mt-6 flex flex-col items-center gap-2">
                   {!allCatsVisible ? (
                     <button
                       type="button"
-                      onClick={() => setVisibleCount((count) => Math.min(count + CATS_PER_LOAD, cats.length))}
+                      onClick={() => setVisibleCount((count) => Math.min(count + CATS_PER_LOAD, filteredCats.length))}
                       className="rounded-full bg-[#275240] px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                     >
                       Ver más michis 🐾
@@ -144,10 +168,14 @@ export const CatGallerySection: React.FC = () => {
                       Mostrar menos
                     </button>
                   )}
-                  <span className="text-[11px] text-[#275240]/50">Mostrando {Math.min(visibleCount, cats.length)} de {cats.length}</span>
+                  <span className="text-[11px] text-[#275240]/50">Mostrando {Math.min(visibleCount, filteredCats.length)} de {filteredCats.length}</span>
                 </div>
               )}
             </>
+          )}
+
+          {normalizedQuery && filteredCats.length === 0 && (
+            <p className="py-8 text-center text-sm font-semibold text-[#275240]/60">No encontramos a ese gatito 🐱</p>
           )}
         </div>
 
