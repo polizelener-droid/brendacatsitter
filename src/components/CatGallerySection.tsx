@@ -5,8 +5,8 @@ import { useContent } from '../content/ContentContext';
 import { ChevronLeft, ChevronRight, Grid2X2, Images, Search, X } from 'lucide-react';
 
 type GalleryView = 'multiple' | 'grid';
-const INITIAL_VISIBLE_CATS = 10;
-const CATS_PER_LOAD = 10;
+const INITIAL_VISIBLE_CATS = 20;
+const CATS_PER_LOAD = 20;
 
 export const CatGallerySection: React.FC = () => {
   const { cats: remoteCats } = useContent();
