@@ -142,7 +142,7 @@ export const CatGallerySection: React.FC = () => {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-3 gap-2 pr-1 sm:grid-cols-4 sm:gap-3 lg:grid-cols-6 xl:grid-cols-12">
+              <div className="grid grid-cols-3 gap-2 pr-1 sm:grid-cols-4 sm:gap-3 lg:grid-cols-5">
                 {visibleCats.map((cat: CatClient) => <CatCard key={cat.id} cat={cat} index={cats.indexOf(cat)} />)}
               </div>
 
