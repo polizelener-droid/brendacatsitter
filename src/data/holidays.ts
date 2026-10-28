@@ -14,7 +14,7 @@ export const ARGENTINA_HOLIDAYS_2026: Record<string, string> = {
   '2026-10-12': 'Día del Respeto a la Diversidad Cultural',
   '2026-11-09': 'Feriado',
   '2026-11-10': 'Feriado',
-  '2026-11-20': 'Día de la Soberanía Nacional',
+  '2026-11-23': 'Día de la Soberanía Nacional',
   '2026-12-08': 'Inmaculada Concepción de María',
   '2026-12-25': 'Navidad',
 };
