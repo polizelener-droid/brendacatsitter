@@ -31,7 +31,7 @@ export const BudgetCalculatorSection: React.FC = () => {
     const isNovemberOrLater = date >= pricingStart;
     if (isNovemberOrLater) {
       return zone === 1
-        ? { weekday: 20_000, saturday: 23_000, sundayHoliday: 27_000 }
+        ? { weekday: 20_000, saturday: 25_000, sundayHoliday: 30_000 }
         : { weekday: 22_000, saturday: 25_000, sundayHoliday: 29_000 };
     }
     const surcharge = ZONE_SURCHARGE[zone];
