@@ -27,20 +27,18 @@ export const BudgetCalculatorSection: React.FC = () => {
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
 
   const getPriceForDate = (date: Date) => {
-    const surcharge = ZONE_SURCHARGE[zone];
     const pricingStart = new Date(2026, 10, 1);
     const isNovemberOrLater = date >= pricingStart;
-    const base = isNovemberOrLater
-      ? { weekday: 20_000, saturday: 24_000, sundayHoliday: 28_000 }
-      : {
-          weekday: parseArgentinePrice(rates.weekday, 18_000),
-          saturday: parseArgentinePrice(rates.saturday, 21_000),
-          sundayHoliday: parseArgentinePrice(rates.sundayHoliday, 25_000),
-        };
+    if (isNovemberOrLater) {
+      return zone === 1
+        ? { weekday: 20_000, saturday: 23_000, sundayHoliday: 27_000 }
+        : { weekday: 22_000, saturday: 25_000, sundayHoliday: 29_000 };
+    }
+    const surcharge = ZONE_SURCHARGE[zone];
     return {
-      weekday: base.weekday + surcharge,
-      saturday: base.saturday + surcharge,
-      sundayHoliday: base.sundayHoliday + surcharge,
+      weekday: parseArgentinePrice(rates.weekday, 18_000) + surcharge,
+      saturday: parseArgentinePrice(rates.saturday, 21_000) + surcharge,
+      sundayHoliday: parseArgentinePrice(rates.sundayHoliday, 25_000) + surcharge,
     };
   };
 
