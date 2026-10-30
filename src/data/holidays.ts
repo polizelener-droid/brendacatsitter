@@ -17,5 +17,6 @@ export const ARGENTINA_HOLIDAYS_2026: Record<string, string> = {
   '2026-11-23': 'Día de la Soberanía Nacional',
   '2026-11-24': 'Feriado',
   '2026-12-08': 'Inmaculada Concepción de María',
+  '2026-12-24': 'Feriado',
   '2026-12-25': 'Navidad',
 };
