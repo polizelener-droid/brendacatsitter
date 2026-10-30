@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Calculator, CalendarDays, Cat, ChevronLeft, ChevronRight, MapPin, MessageCircle } from 'lucide-react';
 import { useContent } from '../content/ContentContext';
 import { buildWhatsAppUrl } from '../data/whatsappContacts';
-import { ARGENTINA_HOLIDAYS_2026 } from '../data/holidays';
+import { ARGENTINA_HOLIDAYS_2026, ARGENTINA_NON_WORKING_DAYS_2026 } from '../data/holidays';
 
 const EXTRA_CAT_RATE = 5_000;
 const MAX_TOTAL_DAYS = 90;
@@ -44,7 +44,7 @@ export const BudgetCalculatorSection: React.FC = () => {
 
   const prices = useMemo(() => getPriceForDate(today), [rates.weekday, rates.saturday, rates.sundayHoliday, zone, today.getTime()]);
   const selectedDateObjects = useMemo(() => selectedDates.map(dateFromKey).sort((a, b) => a.getTime() - b.getTime()), [selectedDates]);
-  const counts = useMemo(() => selectedDateObjects.reduce((acc, date) => { const key = dateKey(date.getFullYear(), date.getMonth(), date.getDate()); const dayOfWeek = date.getDay(); if (dayOfWeek === 0 || ARGENTINA_HOLIDAYS_2026[key]) acc.sundaysAndHolidays += 1; else if (dayOfWeek === 6) acc.saturdays += 1; else acc.weekdays += 1; return acc; }, { weekdays: 0, saturdays: 0, sundaysAndHolidays: 0 }), [selectedDateObjects]);
+  const counts = useMemo(() => selectedDateObjects.reduce((acc, date) => { const key = dateKey(date.getFullYear(), date.getMonth(), date.getDate()); const dayOfWeek = date.getDay(); if (dayOfWeek === 0 || ARGENTINA_HOLIDAYS_2026[key]) acc.sundaysAndHolidays += 1; else if (dayOfWeek === 6 || ARGENTINA_NON_WORKING_DAYS_2026[key]) acc.saturdays += 1; else acc.weekdays += 1; return acc; }, { weekdays: 0, saturdays: 0, sundaysAndHolidays: 0 }), [selectedDateObjects]);
   const totalDays = selectedDates.length;
   const exceedsDayLimit = totalDays > MAX_TOTAL_DAYS;
   const extraCats = Math.max(0, cats - 3);
@@ -54,7 +54,7 @@ export const BudgetCalculatorSection: React.FC = () => {
     const dayOfWeek = date.getDay();
     const price = dayOfWeek === 0 || ARGENTINA_HOLIDAYS_2026[dateKey(date.getFullYear(), date.getMonth(), date.getDate())]
       ? datePrices.sundayHoliday
-      : dayOfWeek === 6
+      : dayOfWeek === 6 || ARGENTINA_NON_WORKING_DAYS_2026[dateKey(date.getFullYear(), date.getMonth(), date.getDate())]
         ? datePrices.saturday
         : datePrices.weekday;
     return sum + price + extraPerVisit;
@@ -83,7 +83,7 @@ export const BudgetCalculatorSection: React.FC = () => {
             <div className="mx-auto max-w-[480px] rounded-2xl border border-[#275240]/10 bg-white p-2 sm:p-2.5">
               <div className="mb-2 flex items-center justify-between gap-2"><button type="button" aria-label="Mes anterior" disabled={!canGoPreviousMonth} onClick={()=>setViewDate(new Date(year,month-1,1))} className="flex h-7 w-7 items-center justify-center rounded-full border border-[#275240]/15 text-[#275240] transition hover:bg-[#d7dfd2] disabled:cursor-not-allowed disabled:opacity-30"><ChevronLeft className="h-3.5 w-3.5" /></button><p className="text-sm font-extrabold capitalize text-[#275240]">{monthLabel}</p><button type="button" aria-label="Mes siguiente" onClick={()=>setViewDate(new Date(year,month+1,1))} className="flex h-7 w-7 items-center justify-center rounded-full border border-[#275240]/15 text-[#275240] transition hover:bg-[#d7dfd2]"> <ChevronRight className="h-3.5 w-3.5" /></button></div>
               <div className="grid grid-cols-7 gap-0.5 text-center text-[9px] font-bold text-[#275240]/45 sm:text-[10px]">{['L','M','X','J','V','S','D'].map((dayLabel)=><div key={dayLabel} className="py-0.5">{dayLabel}</div>)}</div>
-              <div className="grid grid-cols-7 gap-0.5">{calendarCells.map((day,index)=>{ if(day===null)return <div key={`empty-${index}`} className="aspect-square" />; const key=dateKey(year,month,day); const selected=selectedDates.includes(key); const date=new Date(year,month,day); const holidayName=ARGENTINA_HOLIDAYS_2026[key]; const isHoliday=Boolean(holidayName); const isPast=key<todayKey; const isToday=key===todayKey; const disabled=isPast||(!selected&&totalDays>=MAX_TOTAL_DAYS); return <button key={key} type="button" disabled={disabled} aria-pressed={selected} aria-label={`${day} de ${monthLabel}${holidayName ? ` — feriado: ${holidayName}` : ''}`} title={holidayName || undefined} onClick={()=>toggleDate(day)} className={`relative flex aspect-square items-center justify-center rounded-md text-[10px] font-bold transition sm:text-[11px] ${selected?'bg-[#275240] text-white shadow-sm':isHoliday?'bg-[#f3e8ee] text-[#935b77] hover:bg-[#ecd8e2]':'bg-[#f5f6f2] text-[#275240] hover:bg-[#d7dfd2]'} ${isToday&&!selected?'ring-2 ring-[#275240]/25':''} ${disabled?'cursor-not-allowed opacity-35':''}`}>{day}{isHoliday&&<span aria-hidden="true" className={`absolute bottom-0.5 h-1 w-1 rounded-full ${selected?'bg-white':'bg-[#935b77]'}`} />}</button>; })}</div>
+              <div className="grid grid-cols-7 gap-0.5">{calendarCells.map((day,index)=>{ if(day===null)return <div key={`empty-${index}`} className="aspect-square" />; const key=dateKey(year,month,day); const selected=selectedDates.includes(key); const date=new Date(year,month,day); const holidayName=ARGENTINA_HOLIDAYS_2026[key] || ARGENTINA_NON_WORKING_DAYS_2026[key]; const isHoliday=Boolean(ARGENTINA_HOLIDAYS_2026[key]); const isNonWorking=Boolean(ARGENTINA_NON_WORKING_DAYS_2026[key]); const isPast=key<todayKey; const isToday=key===todayKey; const disabled=isPast||(!selected&&totalDays>=MAX_TOTAL_DAYS); return <button key={key} type="button" disabled={disabled} aria-pressed={selected} aria-label={`${day} de ${monthLabel}${ARGENTINA_HOLIDAYS_2026[key] ? ` — feriado: ${ARGENTINA_HOLIDAYS_2026[key]}` : isNonWorking ? ' — no laborable' : ''}`} title={holidayName || undefined} onClick={()=>toggleDate(day)} className={`relative flex aspect-square items-center justify-center rounded-md text-[10px] font-bold transition sm:text-[11px] ${selected?'bg-[#275240] text-white shadow-sm':(isHoliday||isNonWorking)?'bg-[#f3e8ee] text-[#935b77] hover:bg-[#ecd8e2]':'bg-[#f5f6f2] text-[#275240] hover:bg-[#d7dfd2]'} ${isToday&&!selected?'ring-2 ring-[#275240]/25':''} ${disabled?'cursor-not-allowed opacity-35':''}`}>{day}{(isHoliday||isNonWorking)&&<span aria-hidden="true" className={`absolute bottom-0.5 h-1 w-1 rounded-full ${selected?'bg-white':'bg-[#935b77]'}`} />}</button>; })}</div>
               <div className="mt-2 flex items-center justify-center gap-3 text-[8px] text-[#275240]/55 sm:text-[9px]"><span className="inline-flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#935b77]" /> Feriado</span><span>Los sábados, domingos y feriados se calculan automáticamente con su tarifa correspondiente.</span></div>
             </div>
             {totalDays>0&&<div className="mt-3 rounded-xl bg-[#d7dfd2]/70 px-3 py-2 text-center text-xs font-semibold text-[#275240]">{totalDays} {totalDays===1?'fecha seleccionada':'fechas seleccionadas'}</div>}
