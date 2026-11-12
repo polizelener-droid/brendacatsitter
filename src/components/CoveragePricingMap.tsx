@@ -22,7 +22,7 @@ const coverageTiles: NeighborhoodTile[] = [
   { name: 'Villa Urquiza', zone: 'zone1' }, { name: 'Coghlan', zone: 'zone1' }, { name: 'Colegiales', zone: 'zone1' }, { name: 'Villa Martelli', zone: 'zone1' },
   { name: 'Palermo', zone: 'zone2' }, { name: 'Recoleta', zone: 'zone2' }, { name: 'Villa Crespo', zone: 'zone2' }, { name: 'Chacarita', zone: 'zone2' },
   { name: 'Parque Chas', zone: 'zone2' }, { name: 'Almagro', zone: 'zone2' }, { name: 'Caballito', zone: 'zone2' }, { name: 'Flores', zone: 'zone2' },
-  { name: 'San Isidro', zone: 'zone2' }, { name: 'La Lucila', zone: 'zone2' }, { name: 'Puerto Madero', zone: 'zone2' },
+  { name: 'San Isidro', zone: 'zone2' }, { name: 'La Lucila', zone: 'zone2' }, { name: 'Olivos', zone: 'zone2' }, { name: 'Puerto Madero', zone: 'zone2' },
 ];
 
 const zones = [
