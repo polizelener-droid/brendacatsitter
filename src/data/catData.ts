@@ -522,6 +522,7 @@ export const COVERAGE_NEIGHBORHOODS = [
   'Flores',
   'San Isidro',
   'La Lucila',
+  'Olivos',
   'Puerto Madero',
 ];
 
