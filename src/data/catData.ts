@@ -412,7 +412,7 @@ export const SERVICE_RATES: ServiceRates = {
   weekday: '$20.000',
   saturday: '$21.000',
   sundayHoliday: '$25.000',
-  interview: '$18.000',
+  interview: '$20.000',
   interviewDesc: 'Es ideal coordinar una primera visita a tu domicilio para conocernos, conocer a tu gato y saber dónde están todos sus elementos y cómo es su rutina.',
   keyHandover: 'La entrega y retiro de llaves quedan a cargo del cliente en el domicilio de Brenda en Saavedra (se pueden enviar por moto mensajería).',
   paymentTerms: '50% para congelar la reserva previo al viaje y 50% el último día de visitas.',
@@ -457,7 +457,7 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     id: 'home-interview',
-    title: 'Entrevista Previa en Tu Casa ($18.000)',
+    title: 'Entrevista Previa en Tu Casa ($20.000)',
     description: 'Es ideal coordinar una primera visita a tu domicilio para conocernos, conocer a tu gato y saber dónde están todos sus elementos y cómo es su rutina.',
     iconName: 'Home',
     highlight: 'Coordinación y prueba de confianza',
