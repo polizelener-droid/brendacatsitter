@@ -101,8 +101,6 @@ function mapService(row: Record<string, unknown>): ServiceItem {
 
 function mergeCats(baseCats: CatClient[], extraCats: CatClient[] = []): CatClient[] {
   const extras = extraCats.filter((cat) => cat?.id && cat?.name);
-  if (extras.filter((cat) => cat.image).length >= 20) return extras;
-
   const overrides = new Map(extras.map((cat) => [cat.id, cat]));
   const result = baseCats.map((cat) => overrides.get(cat.id) ?? cat);
   const ids = new Set(result.map((cat) => cat.id));
