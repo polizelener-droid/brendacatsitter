@@ -101,21 +101,33 @@ function mapService(row: Record<string, unknown>): ServiceItem {
 
 function mergeCats(baseCats: CatClient[], extraCats: CatClient[] = []): CatClient[] {
   const extras = extraCats.filter((cat) => cat?.id && cat?.name);
-  const overrides = new Map(extras.map((cat) => [cat.id, cat]));
-  const result = baseCats.map((cat) => overrides.get(cat.id) ?? cat);
-  const ids = new Set(result.map((cat) => cat.id));
+  const normalizeName = (name: string) => name.trim().toLocaleLowerCase('es');
+  const overridesById = new Map(extras.map((cat) => [cat.id, cat]));
+  const overridesByName = new Map(extras.map((cat) => [normalizeName(cat.name), cat]));
+  const result: CatClient[] = [];
+  const seenNames = new Set<string>();
+
+  for (const cat of baseCats) {
+    const nameKey = normalizeName(cat.name);
+    if (seenNames.has(nameKey)) continue;
+    const preferred = overridesById.get(cat.id) ?? overridesByName.get(nameKey) ?? cat;
+    result.push(preferred);
+    seenNames.add(nameKey);
+  }
 
   for (const recovered of RECOVERED_CATS) {
-    if (!ids.has(recovered.id)) {
-      result.push(overrides.get(recovered.id) ?? recovered);
-      ids.add(recovered.id);
-    }
+    const nameKey = normalizeName(recovered.name);
+    if (seenNames.has(nameKey)) continue;
+    const preferred = overridesById.get(recovered.id) ?? overridesByName.get(nameKey) ?? recovered;
+    result.push(preferred);
+    seenNames.add(nameKey);
   }
 
   for (const extra of extras) {
-    if (ids.has(extra.id)) continue;
+    const nameKey = normalizeName(extra.name);
+    if (seenNames.has(nameKey)) continue;
     result.push(extra);
-    ids.add(extra.id);
+    seenNames.add(nameKey);
   }
 
   return result;
