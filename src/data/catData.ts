@@ -409,7 +409,7 @@ export const TESTIMONIALS: Testimonial[] = [
 export const SERVICE_RATES: ServiceRates = {
   duration: '45 minutos de visita dedicada',
   periodNotice: 'Tarifas por visita — vigentes hasta fin de octubre',
-  weekday: '$18.000',
+  weekday: '$20.000',
   saturday: '$21.000',
   sundayHoliday: '$25.000',
   interview: '$18.000',
