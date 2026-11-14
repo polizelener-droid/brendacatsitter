@@ -166,16 +166,6 @@ export const CAT_CLIENTS: CatClient[] = [
     visitsCount: 21,
   },
   {
-    id: 'ariel',
-    name: 'Ariel',
-    owner: 'Familia Ariel',
-    image: arielImg,
-    story: '',
-    personality: ['Juguetón', 'Divertido', 'Atigrado', 'Travieso', 'Cariñoso'],
-    favoriteActivity: 'Morder la cuerda',
-    visitsCount: 12,
-  },
-  {
     id: 'uguria-y-agatha',
     name: 'Uguria y Agatha',
     owner: 'Familia Uguria y Agatha',
