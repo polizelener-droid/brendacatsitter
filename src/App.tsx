@@ -18,6 +18,7 @@ export default function App() {
         <Route path="/" element={<ContentProvider><HomePage /></ContentProvider>} />
         <Route path="/presupuesto" element={<ContentProvider><BudgetPage /></ContentProvider>} />
         <Route path="/admin/*" element={<Admin2Route />} />
+        <Route path="/fotos/*" element={<Admin2Route />} />
         <Route path="/admin2" element={<Admin2Route />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
