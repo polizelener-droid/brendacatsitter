@@ -65,13 +65,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
       // Photos are stored as separate files in public/cats; cats.json only keeps their URL.
       if (typeof cat.image === 'string' && cat.image.startsWith('data:')) {
-        const match = cat.image.match(/^data:(image\\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=]+)$/);
-        if (!match) return res.status(400).json({ error: 'Formato de foto no válido. Usá JPG, PNG o WEBP.' });
+        const match = /^data:([^;]+);base64,([A-Za-z0-9+/=]+)$/.exec(cat.image);
+        if (!match || !['image/jpeg', 'image/png', 'image/webp'].includes(match[1])) {
+          return res.status(400).json({ error: 'Formato de foto no válido. Usá JPG, PNG o WEBP.' });
+        }
         const imageBuffer = Buffer.from(match[2], 'base64');
         if (imageBuffer.length > 4 * 1024 * 1024) return res.status(413).json({ error: 'La foto pesa demasiado. Probá con otra imagen.' });
         const ext = match[1] === 'image/png' ? 'png' : match[1] === 'image/webp' ? 'webp' : 'jpg';
         const safeId = String(cat.id).replace(/[^a-zA-Z0-9-]/g, '').slice(0, 36) || Date.now().toString();
-        const safeName = String(cat.name).normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 32) || 'gato';
+        const safeName = String(cat.name).normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 32) || 'gato';
         const imagePath = `public/cats/${safeName}-${safeId.slice(0, 8)}.${ext}`;
         await github(`/repos/${OWNER}/${REPO}/contents/${imagePath}`, {
           method: 'PUT',
