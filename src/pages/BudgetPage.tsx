@@ -12,7 +12,7 @@ const neighborhoods: Neighborhood[] = [
   { name: 'Santos Lugares', zone: 'zone1' },
   { name: 'Villa Devoto', zone: 'zone1' },
   { name: 'Agronomía', zone: 'zone1' },
-  { name: 'La Paternal', zone: 'zone1' },
+  { name: 'La Paternal', zone: 'zone2' },
   { name: 'Villa Real', zone: 'zone1' },
   { name: 'Vicente López', zone: 'zone1' },
   { name: 'Saavedra', zone: 'zone1' },
