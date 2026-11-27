@@ -23,7 +23,7 @@ const neighborhoods: Neighborhood[] = [
   { name: 'Villa Ortúzar', zone: 'zone2' },
   { name: 'Villa Crespo', zone: 'zone2' },
   { name: 'Chacarita', zone: 'zone2' },
-  { name: 'Villa Devoto', zone: 'zone2' },
+  { name: 'Villa Devoto', zone: 'zone1' },
   { name: 'Parque Chas', zone: 'zone2' },
   { name: 'Agronomía', zone: 'zone2' },
   { name: 'La Paternal', zone: 'zone2' },
